@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Georgia County Risk Dashboard · Common Cause Georgia</title>
+  <meta name="description" content="Coalition data dashboard tracking county-level immigration enforcement risk across Georgia: 287(g) agreements, surveillance infrastructure, demographics, and observed arrests." />
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231d3557'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='system-ui' font-weight='800' font-size='16' fill='white'%3EG%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 6l9 4 9-4-9-4-9 4z" />
+            <path d="M3 6v8c0 1 9 4 9 4s9-3 9-4V6" opacity="0.6" />
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="name">GA County Risk Dashboard</span>
+          <span class="sub">Common Cause Georgia · Coalition data</span>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button class="btn-icon" data-theme-toggle aria-label="Toggle dark mode">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="hero">
+      <h1>Tracking immigration enforcement risk across all 159 Georgia counties.</h1>
+      <p class="lede">A working dashboard for coalition partners. Combines public 287(g) agreements, license-plate surveillance networks (Flock), demographic data, HB 1105 status, and observed enforcement activity into a comparable risk score for every Georgia county. Use it to prioritize where to send legal observers, hotline capacity, and rapid-response volunteers.</p>
+      <div class="meta" id="meta-line">
+        <span><span class="dot"></span> v3 risk model · May 2026</span>
+        <span>159 counties</span>
+        <span>Updated quarterly</span>
+        <span>Coalition link share only</span>
+      </div>
+    </section>
+
+    <!-- KPIs -->
+    <section class="section" aria-label="Key indicators">
+      <div class="kpi-grid" id="kpi-grid"></div>
+    </section>
+
+    <!-- Map + detail -->
+    <section class="section" aria-labelledby="map-h">
+      <div class="section-head">
+        <div>
+          <h2 id="map-h">Risk map · click any county</h2>
+          <p class="desc">Counties shaded by composite risk score (v3). Score combines 287(g) participation, immigrant population share, ICE infrastructure proximity, observed arrests, and surveillance mesh density.</p>
+        </div>
+        <div class="controls">
+          <div class="toggle-group" id="map-mode">
+            <button data-mode="risk_tier_v3" class="active">Risk tier</button>
+            <button data-mode="287g_status">287(g)</button>
+            <button data-mode="has_flock">Flock</button>
+            <button data-mode="fb_pct">% Foreign-born</button>
+          </div>
+        </div>
+      </div>
+      <div class="map-wrap">
+        <div class="map-card">
+          <svg id="map" class="map-svg" viewBox="0 0 700 720" role="img" aria-label="Georgia county risk map"></svg>
+          <div class="legend" id="map-legend"></div>
+        </div>
+        <aside class="panel-card" id="detail-panel" aria-live="polite">
+          <div class="empty" id="detail-empty">
+            <p>Click a county on the map (or pick from the table below) to see its risk profile, demographics, 287(g) participation, and surveillance footprint.</p>
+          </div>
+          <div id="detail-content" class="hidden"></div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Risk distribution + 287(g) network -->
+    <section class="section">
+      <div class="chart-row">
+        <div class="chart-card">
+          <div class="section-head" style="margin-bottom: var(--space-4);">
+            <div>
+              <h2>Risk tier distribution</h2>
+              <p class="desc">How counties stack across the four tiers, with their share of GA's foreign-born population and observed arrests.</p>
+            </div>
+          </div>
+          <div id="tier-bars"></div>
+          <p class="notes">Critical and High tier counties contain a disproportionate share of GA's immigrant population. Direct legal observer and hotline capacity here first.</p>
+        </div>
+        <div class="chart-card">
+          <div class="section-head" style="margin-bottom: var(--space-4);">
+            <div>
+              <h2>287(g) participation by model</h2>
+              <p class="desc">Counts of GA local agencies under each 287(g) model. Task Force Model (TFM) re-authorized 2025; allows street-level enforcement.</p>
+            </div>
+          </div>
+          <div id="287g-bars"></div>
+          <p class="notes">Sources: <a href="https://www.ice.gov/identify-and-arrest/287g" target="_blank" rel="noopener">ICE 287(g) program list</a>; cross-checked against county sheriff and city PD announcements.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Surveillance mesh + Flock counties -->
+    <section class="section">
+      <div class="chart-row">
+        <div class="chart-card">
+          <div class="section-head" style="margin-bottom: var(--space-4);">
+            <div>
+              <h2>Surveillance mesh · top 12 counties</h2>
+              <p class="desc">Composite score of license-plate reader (Flock) deployment, APD data sharing, FUSUS connection, and documented ICE queries through these networks.</p>
+            </div>
+          </div>
+          <div id="surv-bars"></div>
+          <p class="notes">Mesh score weights: Flock deployed (1) + shares with APD (1) + FUSUS-connected (1) + documented ICE query (2). Cap 5.</p>
+        </div>
+        <div class="chart-card">
+          <div class="section-head" style="margin-bottom: var(--space-4);">
+            <div>
+              <h2>What drives a county's score</h2>
+              <p class="desc">Methodology in plain language.</p>
+            </div>
+          </div>
+          <div class="methodology">
+            <div class="score-bar-row"><span class="lab">287(g) status</span><div class="track"><div class="fill" style="width: 25%; background: var(--color-primary);"></div></div><span class="num">25</span></div>
+            <div class="score-bar-row"><span class="lab">Foreign-born %</span><div class="track"><div class="fill" style="width: 25%; background: var(--color-primary);"></div></div><span class="num">25</span></div>
+            <div class="score-bar-row"><span class="lab">Hispanic %</span><div class="track"><div class="fill" style="width: 25%; background: var(--color-primary);"></div></div><span class="num">25</span></div>
+            <div class="score-bar-row"><span class="lab">ICE infra</span><div class="track"><div class="fill" style="width: 25%; background: var(--color-primary);"></div></div><span class="num">25</span></div>
+            <div class="score-bar-row"><span class="lab">HB 1105 base</span><div class="track"><div class="fill" style="width: 5%; background: var(--color-accent);"></div></div><span class="num">5</span></div>
+            <div class="score-bar-row"><span class="lab">Observed arrests</span><div class="track"><div class="fill" style="width: 20%; background: var(--color-accent);"></div></div><span class="num">~20</span></div>
+            <div class="score-bar-row"><span class="lab">Surveillance mesh</span><div class="track"><div class="fill" style="width: 10%; background: var(--color-accent);"></div></div><span class="num">~10</span></div>
+            <p class="notes" style="margin-top: var(--space-4);">Tiers: Critical &ge; 100; High 70 to 99; Medium 40 to 69; Low &lt; 40. v3 model adds observed arrests and surveillance mesh on top of the v2 demographic base. The model is directional, not predictive: a county scoring "Medium" is not safe; it just has fewer of the indicators we can track from public sources.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Filterable county table -->
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h2>All counties · search, sort, export</h2>
+          <p class="desc">Sort by any column. Click a row to load the county into the detail panel above.</p>
+        </div>
+        <div class="controls">
+          <button class="toggle-group" id="export-csv" style="padding: var(--space-2) var(--space-4); border-radius: var(--radius-md); background: var(--color-primary); color: var(--color-text-inverse); font-weight: 600; font-size: var(--text-sm);">Export CSV</button>
+        </div>
+      </div>
+      <div class="filter-bar">
+        <input id="search" type="search" placeholder="Search counties..." aria-label="Search counties" />
+        <select id="filter-tier" aria-label="Filter by risk tier">
+          <option value="">All tiers</option>
+          <option value="Critical">Critical only</option>
+          <option value="High">High only</option>
+          <option value="Medium">Medium only</option>
+          <option value="Low">Low only</option>
+        </select>
+        <select id="filter-287g" aria-label="Filter by 287(g)">
+          <option value="">All 287(g)</option>
+          <option value="active">Active 287(g)</option>
+          <option value="inactive">No 287(g)</option>
+        </select>
+        <select id="filter-region" aria-label="Filter by region">
+          <option value="">All Georgia</option>
+          <option value="metro">Metro Atlanta</option>
+          <option value="non-metro">Outside Metro Atlanta</option>
+        </select>
+      </div>
+      <div class="table-wrap">
+        <table class="county-table" id="county-table">
+          <thead>
+            <tr>
+              <th data-sort="county">County</th>
+              <th data-sort="risk_total_v3" class="num">Score</th>
+              <th data-sort="risk_tier_v3">Tier</th>
+              <th data-sort="287g_status">287(g)</th>
+              <th data-sort="has_flock">Flock</th>
+              <th data-sort="fb_pct" class="num">FB %</th>
+              <th data-sort="hisp_pct" class="num">Hisp %</th>
+              <th data-sort="observed_arrests" class="num">Arrests</th>
+              <th data-sort="surveillance_mesh_score" class="num">Mesh</th>
+            </tr>
+          </thead>
+          <tbody id="county-tbody"></tbody>
+        </table>
+      </div>
+      <p class="notes">Demographics: <a href="https://data.census.gov" target="_blank" rel="noopener">U.S. Census ACS 5-year, 2018 to 2022</a>. 287(g): ICE program list. Surveillance: <a href="https://www.flocksafety.com/" target="_blank" rel="noopener">Flock Safety</a> deployment records cross-referenced against EFF and local reporting. Observed arrests: aggregated coalition incident reports.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="inner">
+      <div>
+        <p><strong>Common Cause Georgia · Coalition data dashboard.</strong> This page combines public records into a comparable risk score for coalition planning. Strategic and personnel data (sheriff contacts, observer rosters, attorney triggers) are intentionally excluded from this view.</p>
+        <p style="margin-top: var(--space-2);">Questions, corrections, or data updates: <a href="mailto:rosario@palacios.community">rosario@palacios.community</a></p>
+      </div>
+      <div>
+        <p class="cite">v3 model · build <span id="build-date"></span></p>
+        <p style="margin-top: var(--space-2);">Built for coalition partners. Not for public press distribution.</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="tooltip" id="tooltip" role="tooltip"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
+  <script src="./app.js" defer></script>
+</body>
+</html>

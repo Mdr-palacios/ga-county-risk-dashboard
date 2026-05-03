@@ -1,0 +1,15 @@
+{
+  "total_counties": 159,
+  "tier_counts": {
+    "Critical": 3,
+    "High": 14,
+    "Medium": 50,
+    "Low": 92
+  },
+  "287g_active_count": 40,
+  "flock_county_count": 34,
+  "ice_query_documented_count": 10,
+  "metro_atlanta_count": 29,
+  "total_foreign_born": 1172488,
+  "total_observed_arrests": 4857
+}
