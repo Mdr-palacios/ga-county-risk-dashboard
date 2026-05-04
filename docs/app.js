@@ -1,4 +1,4 @@
-// GA County Risk Dashboard — Common Cause Georgia
+// GA County Risk Dashboard; Common Cause Georgia
 // Data is read-only; no backend.
 
 // ---------- THEME TOGGLE ----------
@@ -51,10 +51,13 @@ Promise.all([
   fetch('./data/counties.json').then(r => r.json()),
   fetch('./data/ga-counties.json').then(r => r.json()),
   fetch('./data/summary.json').then(r => r.json()),
-]).then(([counties, topo, summary]) => {
+  fetch('./data/cameras.json').then(r => r.json()).catch(() => ({ cameras: [], count: 0, flock_count: 0 })),
+]).then(([counties, topo, summary, cams]) => {
   DATA.counties = counties;
   DATA.topo = topo;
   DATA.summary = summary;
+  DATA.cameras = cams.cameras || [];
+  DATA.cameraTotals = { total: cams.count || 0, flock: cams.flock_count || 0 };
   DATA.byFips = Object.fromEntries(counties.map(c => [fipsKey(c), c]));
   init();
 }).catch(err => {
@@ -79,11 +82,12 @@ function init() {
 function renderKPIs() {
   const s = DATA.summary;
   const arrestsCount = DATA.counties.filter(c => c.observed_arrests > 0).length;
+  const camTotal = DATA.cameraTotals.total;
   const cards = [
     { label: 'Counties tracked', value: s.total_counties, sub: 'All Georgia counties', accent: 'var(--color-primary)' },
     { label: 'Critical · High tier', value: s.tier_counts.Critical + s.tier_counts.High, sub: `${s.tier_counts.Critical} Critical · ${s.tier_counts.High} High`, accent: 'var(--risk-critical)' },
     { label: '287(g) agreements', value: s['287g_active_count'], sub: 'Active local agency partnerships', accent: 'var(--risk-high)' },
-    { label: 'Flock-network counties', value: s.flock_county_count, sub: `${s.ice_query_documented_count} with documented ICE queries`, accent: 'var(--color-accent)' },
+    { label: 'ALPR cameras mapped', value: fmt(camTotal), sub: `${fmt(DATA.cameraTotals.flock)} confirmed Flock; ${s.counties_with_cameras || s.flock_county_count} counties`, accent: 'var(--color-accent)' },
     { label: 'Foreign-born residents', value: fmt(s.total_foreign_born), sub: 'Across the state', accent: 'var(--color-primary)' },
     { label: 'Observed arrests', value: fmt(s.total_observed_arrests), sub: `Across ${arrestsCount} counties; coalition-aggregated`, accent: 'var(--risk-medium)' },
   ];
@@ -98,13 +102,14 @@ function renderKPIs() {
 }
 
 // ---------- MAP ----------
+let PROJECTION = null;
 function renderMap() {
   const svg = d3.select('#map');
   svg.selectAll('*').remove();
   const W = 700, H = 720;
   const counties = topojson.feature(DATA.topo, DATA.topo.objects.counties);
-  const projection = d3.geoMercator().fitSize([W, H], counties);
-  const path = d3.geoPath(projection);
+  PROJECTION = d3.geoMercator().fitSize([W, H], counties);
+  const path = d3.geoPath(PROJECTION);
 
   const g = svg.append('g');
 
@@ -120,11 +125,41 @@ function renderMap() {
     .on('mouseleave', hideTip)
     .on('click', (e, d) => selectCounty(d.id));
 
+  // Cameras layer (above counties, below selected outline)
+  svg.append('g').attr('id', 'camera-layer').attr('pointer-events', 'none');
+
   // selected outline overlay
-  g.append('path').attr('id', 'selected-outline').attr('fill', 'none').attr('stroke', cssVar('--color-text')).attr('stroke-width', 2).attr('pointer-events', 'none');
+  svg.append('path').attr('id', 'selected-outline').attr('fill', 'none').attr('stroke', cssVar('--color-text')).attr('stroke-width', 2).attr('pointer-events', 'none');
 
   drawLegend();
+  drawCameras();
   if (SELECTED_FIPS) updateSelectedOutline();
+}
+
+function drawCameras() {
+  const layer = d3.select('#camera-layer');
+  layer.selectAll('*').remove();
+  const checkbox = document.getElementById('show-cameras');
+  if (!checkbox || !checkbox.checked || !PROJECTION || !DATA.cameras.length) return;
+  // Filter to selected county if any (otherwise show all)
+  const cams = SELECTED_FIPS
+    ? DATA.cameras.filter(c => c.f === SELECTED_FIPS)
+    : DATA.cameras;
+  // Project once
+  const proj = PROJECTION;
+  const flockColor = cssVar('--risk-critical');
+  const otherColor = cssVar('--color-primary');
+  layer.selectAll('circle.cam')
+    .data(cams)
+    .join('circle')
+    .attr('class', 'cam')
+    .attr('cx', d => proj([d.lon, d.lat])[0])
+    .attr('cy', d => proj([d.lon, d.lat])[1])
+    .attr('r', SELECTED_FIPS ? 3 : 1.5)
+    .attr('fill', d => d.flk ? flockColor : otherColor)
+    .attr('fill-opacity', SELECTED_FIPS ? 0.9 : 0.55)
+    .attr('stroke', SELECTED_FIPS ? cssVar('--color-surface') : 'none')
+    .attr('stroke-width', 0.6);
 }
 window.__renderMap = renderMap;
 
@@ -143,6 +178,13 @@ function fillForFeature(d) {
     if (row.shares_with_apd || row.has_fusus_connect) return cssVar('--risk-high');
     if (row.has_flock) return cssVar('--risk-medium');
     return cssVar('--color-divider');
+  }
+  if (MAP_MODE === 'camera_count') {
+    const max = d3.max(DATA.counties, c => c.camera_count) || 1;
+    if (!row.camera_count) return cssVar('--color-surface-offset');
+    // Log scale to handle Fulton (895) vs small counties (1-2)
+    const t = Math.log(row.camera_count + 1) / Math.log(max + 1);
+    return d3.interpolateRgb(cssVar('--color-surface-offset'), cssVar('--risk-critical'))(t);
   }
   if (MAP_MODE === 'fb_pct') {
     const max = d3.max(DATA.counties, c => c.fb_pct) || 1;
@@ -171,6 +213,11 @@ function drawLegend() {
       { label: 'Has Flock', color: cssVar('--risk-medium') },
       { label: 'No Flock', color: cssVar('--color-divider') },
     ];
+  } else if (MAP_MODE === 'camera_count') {
+    items = [
+      { label: 'Fewer cameras', color: cssVar('--color-surface-offset') },
+      { label: 'More cameras (log scale)', color: cssVar('--risk-critical') },
+    ];
   } else if (MAP_MODE === 'fb_pct') {
     items = [
       { label: 'Lower %', color: cssVar('--color-surface-offset') },
@@ -188,11 +235,12 @@ function bindModeToggle() {
       document.querySelectorAll('#map-mode button').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       MAP_MODE = btn.dataset.mode;
-      // re-fill paths in place
       d3.select('#map').selectAll('path.county-shape').attr('fill', d => fillForFeature(d));
       drawLegend();
     });
   });
+  const cb = document.getElementById('show-cameras');
+  if (cb) cb.addEventListener('change', drawCameras);
 }
 
 // ---------- TOOLTIP ----------
@@ -222,6 +270,7 @@ function selectCounty(fips5) {
   SELECTED_FIPS = fips5;
   d3.selectAll('path.county-shape').classed('selected', d => d.id === fips5);
   updateSelectedOutline();
+  drawCameras();
   renderDetail(DATA.byFips[fips5]);
   // Smooth scroll to top of section if mobile
   if (window.innerWidth < 980) {
@@ -249,8 +298,8 @@ function renderDetail(c) {
   const tags = [];
   if (c.metro_atlanta) tags.push({ t: 'Metro Atlanta', cls: '' });
   if (c['287g_count'] > 0) tags.push({ t: `${c['287g_count']} × 287(g)`, cls: 'warn' });
+  if (c.camera_count > 0) tags.push({ t: `${fmt(c.camera_count)} ALPR cameras`, cls: c.camera_count >= 100 ? 'danger' : 'warn' });
   if (c.documented_ice_query) tags.push({ t: 'ICE query documented', cls: 'danger' });
-  else if (c.has_flock) tags.push({ t: 'Flock deployed', cls: 'warn' });
   if (c.shares_with_apd) tags.push({ t: 'Shares with APD', cls: 'warn' });
   if (c.has_fusus_connect) tags.push({ t: 'FUSUS-connected', cls: 'warn' });
   if (c.observed_arrests > 0) tags.push({ t: `${c.observed_arrests} observed arrests`, cls: 'danger' });
@@ -287,6 +336,8 @@ function renderDetail(c) {
       <div class="row"><span class="l">Hispanic</span><span class="v">${fmt(c.hispanic)} <span style="color: var(--color-text-muted); font-weight: 500;">(${fmtPct(c.hisp_pct)})</span></span></div>
       <div class="row"><span class="l">287(g) status</span><span class="v" style="font-size: var(--text-sm); font-family: var(--font-body); font-weight: 600;">${c['287g_status'] === 'None' ? 'Not participating' : c['287g_status']}</span></div>
       <div class="row"><span class="l">HB 1105</span><span class="v" style="font-size: var(--text-sm); font-family: var(--font-body); font-weight: 600;">${c.hb1105_status}</span></div>
+      <div class="row"><span class="l">ALPR cameras</span><span class="v">${fmt(c.camera_count || 0)}${c.flock_camera_count ? ` <span style="color: var(--color-text-muted); font-weight: 500;">(${fmt(c.flock_camera_count)} Flock)</span>` : ''}</span></div>
+      <div class="row"><span class="l">Cameras per 100k</span><span class="v">${c.cameras_per_100k || 0}</span></div>
     </div>
 
     ${c['287g_agencies'] ? `<p style="font-size: var(--text-xs); color: var(--color-text-muted); margin-bottom: var(--space-3);"><strong style="color: var(--color-text);">287(g) agencies:</strong> ${c['287g_agencies']}</p>` : ''}

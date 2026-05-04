@@ -303,6 +303,10 @@ input, select { font: inherit; color: inherit; }
 }
 .toggle-group button:last-child { border-right: none; }
 .toggle-group button.active { background: var(--color-primary); color: var(--color-text-inverse); }
+.camera-toggle { display: inline-flex; align-items: center; gap: var(--space-2); padding: var(--space-2) var(--space-3); border: 1px solid var(--color-border); border-radius: var(--radius-md); font-size: var(--text-sm); color: var(--color-text-muted); font-weight: 600; cursor: pointer; user-select: none; background: var(--color-surface); }
+.camera-toggle input { accent-color: var(--color-primary); margin: 0; }
+.camera-toggle:hover { color: var(--color-text); border-color: var(--color-primary); }
+.cam { transition: r 0.2s ease; }
 
 /* Table */
 .table-wrap { overflow-x: auto; border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-surface); }

@@ -64,8 +64,13 @@
             <button data-mode="risk_tier_v3" class="active">Risk tier</button>
             <button data-mode="287g_status">287(g)</button>
             <button data-mode="has_flock">Flock</button>
+            <button data-mode="camera_count">Cameras</button>
             <button data-mode="fb_pct">% Foreign-born</button>
           </div>
+          <label class="camera-toggle">
+            <input type="checkbox" id="show-cameras" />
+            <span>Show cameras</span>
+          </label>
         </div>
       </div>
       <div class="map-wrap">
@@ -204,6 +209,7 @@
       <div>
         <p class="cite">v3 model · build <span id="build-date"></span></p>
         <p style="margin-top: var(--space-2);">Built for coalition partners. Not for public press distribution.</p>
+        <p style="margin-top: var(--space-2);">Camera locations © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a>; aggregated by <a href="https://deflock.me" target="_blank" rel="noopener">DeFlock</a>.</p>
       </div>
     </div>
   </footer>

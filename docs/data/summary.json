@@ -11,5 +11,8 @@
   "ice_query_documented_count": 10,
   "metro_atlanta_count": 29,
   "total_foreign_born": 1172488,
-  "total_observed_arrests": 4857
+  "total_observed_arrests": 4857,
+  "camera_total": 6268,
+  "camera_flock_confirmed": 5930,
+  "counties_with_cameras": 132
 }
