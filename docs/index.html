@@ -147,17 +147,18 @@
       </div>
     </section>
 
-    <!-- Filterable county table -->
+    <!-- Filterable county table (collapsible) -->
     <section class="section">
-      <div class="section-head">
-        <div>
-          <h2>All counties · search, sort, export</h2>
-          <p class="desc">Sort by any column. Click a row to load the county into the detail panel above.</p>
-        </div>
-        <div class="controls">
-          <button class="toggle-group" id="export-csv" style="padding: var(--space-2) var(--space-4); border-radius: var(--radius-md); background: var(--color-primary); color: var(--color-text-inverse); font-weight: 600; font-size: var(--text-sm);">Export CSV</button>
-        </div>
-      </div>
+      <details class="county-details" id="county-details">
+        <summary>
+          <span class="summary-text">
+            <span class="summary-h">All counties</span>
+            <span class="summary-sub">Search, sort, and click a row to load it above. <span id="county-count-pill">159 counties</span></span>
+          </span>
+          <span class="summary-chev" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </span>
+        </summary>
       <div class="filter-bar">
         <input id="search" type="search" placeholder="Search counties..." aria-label="Search counties" />
         <select id="filter-tier" aria-label="Filter by risk tier">
@@ -197,6 +198,7 @@
         </table>
       </div>
       <p class="notes">Demographics: <a href="https://data.census.gov" target="_blank" rel="noopener">U.S. Census ACS 5-year, 2018 to 2022</a>. 287(g): ICE program list. Surveillance: <a href="https://www.flocksafety.com/" target="_blank" rel="noopener">Flock Safety</a> deployment records cross-referenced against EFF and local reporting. Observed arrests: aggregated coalition incident reports.</p>
+      </details>
     </section>
   </main>
 

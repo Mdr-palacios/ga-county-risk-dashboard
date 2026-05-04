@@ -75,7 +75,7 @@ function init() {
   renderTable();
   bindFilters();
   bindModeToggle();
-  bindExport();
+  // bindExport(); // removed per coalition request
 }
 
 // ---------- KPIs ----------
@@ -240,7 +240,10 @@ function bindModeToggle() {
     });
   });
   const cb = document.getElementById('show-cameras');
-  if (cb) cb.addEventListener('change', drawCameras);
+  if (cb) cb.addEventListener('change', () => {
+    drawCameras();
+    if (SELECTED_FIPS && DATA.byFips[SELECTED_FIPS]) renderCountyZoom(DATA.byFips[SELECTED_FIPS]);
+  });
 }
 
 // ---------- TOOLTIP ----------
@@ -323,6 +326,7 @@ function renderDetail(c) {
     </div>` : '';
 
   el.innerHTML = `
+    <div id="county-zoom-slot"></div>
     <div class="panel-head">
       <div>
         <h3>${c.county} County</h3>
@@ -360,6 +364,47 @@ function renderDetail(c) {
     ${c.flock_agencies ? `<p style="font-size: var(--text-xs); color: var(--color-text-muted); margin-top: var(--space-4); line-height: 1.55;"><strong style="color: var(--color-text);">Flock agencies:</strong> ${c.flock_agencies}</p>` : ''}
     ${c.surveillance_flags ? `<p style="font-size: var(--text-xs); color: var(--color-text-muted); margin-top: var(--space-2); line-height: 1.55;"><strong style="color: var(--color-text);">Surveillance flags:</strong> ${c.surveillance_flags}</p>` : ''}
   `;
+  renderCountyZoom(c);
+}
+
+// ---------- COUNTY ZOOM (mini-map) ----------
+function renderCountyZoom(c) {
+  const slot = document.getElementById('county-zoom-slot');
+  if (!slot) return;
+  const cb = document.getElementById('show-cameras');
+  if (!cb || !cb.checked) { slot.innerHTML = ''; return; }
+  const fips5 = fipsKey(c);
+  const feature = (DATA.topo && DATA.topo.objects && DATA.topo.objects.counties)
+    ? topojson.feature(DATA.topo, DATA.topo.objects.counties).features.find(f => f.id === fips5)
+    : null;
+  if (!feature) { slot.innerHTML = ''; return; }
+  const cams = (DATA.cameras || []).filter(cm => cm.f === fips5);
+  const W = 300, H = 300, PAD = 14;
+  const proj = d3.geoMercator().fitExtent([[PAD, PAD], [W - PAD, H - PAD]], feature);
+  const path = d3.geoPath(proj);
+  const flockColor = cssVar('--risk-critical');
+  const otherColor = cssVar('--color-primary');
+  const flockCount = cams.filter(c2 => c2.flk).length;
+  const otherCount = cams.length - flockCount;
+  slot.innerHTML = `
+    <div class="county-zoom">
+      <div class="county-zoom-head">
+        <h4>${c.county} County: camera footprint</h4>
+        <span class="county-zoom-stat"><strong>${fmt(cams.length)}</strong> cameras; <strong>${c.cameras_per_100k || 0}</strong> per 100k</span>
+      </div>
+      <svg class="county-zoom-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="${c.county} County camera positions">
+        <path class="zoom-county" d="${path(feature)}" fill="${cssVar('--color-surface')}" stroke="${cssVar('--color-text')}" stroke-width="1.5" stroke-linejoin="round"/>
+        ${cams.map(cm => {
+          const p = proj([cm.lon, cm.lat]);
+          if (!p) return '';
+          return `<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="2.6" fill="${cm.flk ? flockColor : otherColor}" fill-opacity="0.85" stroke="${cssVar('--color-surface')}" stroke-width="0.5"/>`;
+        }).join('')}
+      </svg>
+      <div class="county-zoom-legend">
+        <span><span class="swatch" style="background:${flockColor}"></span>Flock confirmed (${fmt(flockCount)})</span>
+        ${otherCount > 0 ? `<span><span class="swatch" style="background:${otherColor}"></span>Other ALPR (${fmt(otherCount)})</span>` : ''}
+      </div>
+    </div>`;
 }
 
 function tierColorForScore(val, max) {
@@ -544,8 +589,8 @@ function bindFilters() {
   });
 }
 
-function bindExport() {
-  document.getElementById('export-csv').addEventListener('click', () => {
+function bindExport_REMOVED() {
+  document.getElementById('export-csv')?.addEventListener('click', () => {
     const rows = filterRows();
     const cols = ['county','fips','total_pop','foreign_born','fb_pct','hispanic','hisp_pct','metro_atlanta','hb1105_status','287g_status','287g_count','287g_agencies','ice_infrastructure','observed_arrests','has_flock','flock_agencies','shares_with_apd','has_fusus_connect','documented_ice_query','surveillance_mesh_score','surveillance_flags','risk_total_v3','risk_tier_v3'];
     const esc = (v) => {
