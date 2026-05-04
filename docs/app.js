@@ -52,11 +52,15 @@ Promise.all([
   fetch('./data/ga-counties.json').then(r => r.json()),
   fetch('./data/summary.json').then(r => r.json()),
   fetch('./data/cameras.json').then(r => r.json()).catch(() => ({ cameras: [], count: 0, flock_count: 0 })),
-]).then(([counties, topo, summary, cams]) => {
+  fetch('./data/roads.json').then(r => r.json()).catch(() => ({ interstates: [] })),
+  fetch('./data/places.json').then(r => r.json()).catch(() => ({ places: [] })),
+]).then(([counties, topo, summary, cams, roads, places]) => {
   DATA.counties = counties;
   DATA.topo = topo;
   DATA.summary = summary;
   DATA.cameras = cams.cameras || [];
+  DATA.roads = roads.interstates || [];
+  DATA.places = places.places || [];
   DATA.cameraTotals = { total: cams.count || 0, flock: cams.flock_count || 0 };
   DATA.byFips = Object.fromEntries(counties.map(c => [fipsKey(c), c]));
   init();
@@ -384,8 +388,55 @@ function renderCountyZoom(c) {
   const path = d3.geoPath(proj);
   const flockColor = cssVar('--risk-critical');
   const otherColor = cssVar('--color-primary');
+  const roadColor = cssVar('--color-text-muted');
+  const placeColor = cssVar('--color-text');
   const flockCount = cams.filter(c2 => c2.flk).length;
   const otherCount = cams.length - flockCount;
+
+  // County bbox in lon/lat for filtering roads + places
+  const bbox = d3.geoBounds(feature); // [[w,s],[e,n]]
+  const w = bbox[0][0], s = bbox[0][1], e = bbox[1][0], n = bbox[1][1];
+  const pad = Math.max((e - w), (n - s)) * 0.08; // small padding to show context
+  const inBox = (lon, lat) => lon >= w - pad && lon <= e + pad && lat >= s - pad && lat <= n + pad;
+
+  // Roads: keep interstate segments where ANY vertex falls in expanded bbox
+  const roadPaths = [];
+  const roadLabels = []; // {x,y,name}
+  (DATA.roads || []).forEach(road => {
+    road.segments.forEach(seg => {
+      const visible = seg.some(([lo, la]) => inBox(lo, la));
+      if (!visible) return;
+      const projected = seg.map(([lo, la]) => proj([lo, la])).filter(Boolean);
+      if (projected.length < 2) return;
+      const d = projected.map((p, i) => `${i ? 'L' : 'M'}${p[0].toFixed(1)},${p[1].toFixed(1)}`).join('');
+      roadPaths.push(d);
+      // Label at vertex closest to viewBox center (and inside bounds)
+      let best = null, bestDist = Infinity;
+      for (const p of projected) {
+        if (p[0] < PAD || p[0] > W - PAD || p[1] < PAD || p[1] > H - PAD) continue;
+        const dx = p[0] - W/2, dy = p[1] - H/2;
+        const d2 = dx*dx + dy*dy;
+        if (d2 < bestDist) { bestDist = d2; best = p; }
+      }
+      if (best) roadLabels.push({ x: best[0], y: best[1], name: road.name, ref: road.ref });
+    });
+  });
+  // Dedupe road labels by ref (keep one closest to center)
+  const labelByRef = {};
+  roadLabels.forEach(l => {
+    const cur = labelByRef[l.ref];
+    const dist = (l.x - W/2)**2 + (l.y - H/2)**2;
+    if (!cur || dist < cur._dist) labelByRef[l.ref] = { ...l, _dist: dist };
+  });
+  const finalRoadLabels = Object.values(labelByRef);
+
+  // Places: inside bbox; cap at 6 by population descending
+  const placesInBox = (DATA.places || [])
+    .filter(p => inBox(p.lon, p.lat))
+    .slice(0, 6)
+    .map(p => ({ ...p, xy: proj([p.lon, p.lat]) }))
+    .filter(p => p.xy && p.xy[0] >= 0 && p.xy[0] <= W && p.xy[1] >= 0 && p.xy[1] <= H);
+
   slot.innerHTML = `
     <div class="county-zoom">
       <div class="county-zoom-head">
@@ -393,16 +444,34 @@ function renderCountyZoom(c) {
         <span class="county-zoom-stat"><strong>${fmt(cams.length)}</strong> cameras; <strong>${c.cameras_per_100k || 0}</strong> per 100k</span>
       </div>
       <svg class="county-zoom-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="${c.county} County camera positions">
-        <path class="zoom-county" d="${path(feature)}" fill="${cssVar('--color-surface')}" stroke="${cssVar('--color-text')}" stroke-width="1.5" stroke-linejoin="round"/>
-        ${cams.map(cm => {
-          const p = proj([cm.lon, cm.lat]);
-          if (!p) return '';
-          return `<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="2.6" fill="${cm.flk ? flockColor : otherColor}" fill-opacity="0.85" stroke="${cssVar('--color-surface')}" stroke-width="0.5"/>`;
-        }).join('')}
+        <defs>
+          <clipPath id="zoom-clip-${fips5}"><rect x="0" y="0" width="${W}" height="${H}"/></clipPath>
+        </defs>
+        <g clip-path="url(#zoom-clip-${fips5})">
+          <path class="zoom-county" d="${path(feature)}" fill="${cssVar('--color-surface')}" stroke="${cssVar('--color-text')}" stroke-width="1.5" stroke-linejoin="round"/>
+          ${roadPaths.map(d => `<path d="${d}" fill="none" stroke="${roadColor}" stroke-width="2" stroke-opacity="0.55" stroke-linecap="round" stroke-linejoin="round"/>`).join('')}
+          ${cams.map(cm => {
+            const p = proj([cm.lon, cm.lat]);
+            if (!p) return '';
+            return `<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="2.6" fill="${cm.flk ? flockColor : otherColor}" fill-opacity="0.85" stroke="${cssVar('--color-surface')}" stroke-width="0.5"/>`;
+          }).join('')}
+          ${finalRoadLabels.map(l => `
+            <g class="zoom-road-label" transform="translate(${l.x.toFixed(1)},${l.y.toFixed(1)})">
+              <rect x="-12" y="-7" width="24" height="14" rx="3" fill="${cssVar('--color-surface')}" fill-opacity="0.92" stroke="${roadColor}" stroke-width="0.8"/>
+              <text text-anchor="middle" dy="3.5" font-size="9" font-weight="700" fill="${cssVar('--color-text')}">${l.name}</text>
+            </g>`).join('')}
+          ${placesInBox.map(p => `
+            <g class="zoom-place" transform="translate(${p.xy[0].toFixed(1)},${p.xy[1].toFixed(1)})">
+              <circle r="3" fill="${placeColor}" stroke="${cssVar('--color-surface')}" stroke-width="1.2"/>
+              <text x="5" y="3.5" font-size="10" font-weight="600" fill="${cssVar('--color-text')}" stroke="${cssVar('--color-surface')}" stroke-width="3" paint-order="stroke" stroke-linejoin="round">${p.n}</text>
+            </g>`).join('')}
+        </g>
       </svg>
       <div class="county-zoom-legend">
-        <span><span class="swatch" style="background:${flockColor}"></span>Flock confirmed (${fmt(flockCount)})</span>
+        <span><span class="swatch" style="background:${flockColor}"></span>Flock (${fmt(flockCount)})</span>
         ${otherCount > 0 ? `<span><span class="swatch" style="background:${otherColor}"></span>Other ALPR (${fmt(otherCount)})</span>` : ''}
+        ${finalRoadLabels.length ? `<span><span class="swatch line" style="background:${roadColor}"></span>Interstates</span>` : ''}
+        ${placesInBox.length ? `<span><span class="swatch" style="background:${placeColor}"></span>Cities and towns</span>` : ''}
       </div>
     </div>`;
 }
