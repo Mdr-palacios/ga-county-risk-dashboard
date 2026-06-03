@@ -1,6 +1,6 @@
-/* GA County Risk Dashboard — civic data viz */
+/* GA County Risk Dashboard : civic data viz */
 :root, [data-theme="light"] {
-  /* Surfaces — cool slate paper */
+  /* Surfaces : cool slate paper */
   --color-bg: #f4f5f7;
   --color-surface: #ffffff;
   --color-surface-2: #fafbfc;
@@ -14,16 +14,16 @@
   --color-text-faint: #8b95a3;
   --color-text-inverse: #f7f9fc;
 
-  /* Primary — civic navy */
+  /* Primary : civic navy */
   --color-primary: #1d3557;
   --color-primary-hover: #142540;
   --color-primary-active: #0a1628;
   --color-primary-highlight: #d6e0ee;
 
-  /* Accent — desaturated teal */
+  /* Accent : desaturated teal */
   --color-accent: #2f6f7a;
 
-  /* Risk gradient (sequential — perceptually ordered) */
+  /* Risk gradient (sequential : perceptually ordered) */
   --risk-low: #4a8a6f;       /* moss green */
   --risk-medium: #d6a23c;    /* amber gold */
   --risk-high: #c66a2e;      /* burnt orange */
@@ -341,6 +341,13 @@ input, select { font: inherit; color: inherit; }
 .btn-pill:hover { background: var(--color-primary); border-color: var(--color-primary); color: var(--color-text-inverse); }
 .btn-pill svg { flex-shrink: 0; }
 @media (max-width: 720px) { .btn-pill span { display: none; } .btn-pill { padding: var(--space-2); } }
+
+/* Language switch */
+.lang-switch { display: inline-flex; gap: 2px; padding: 3px; border: 1px solid var(--color-border); border-radius: 999px; background: var(--color-surface); }
+.lang-btn { appearance: none; border: 0; background: transparent; color: var(--color-text-muted); font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.04em; padding: 4px 8px; border-radius: 999px; cursor: pointer; transition: all 0.15s ease; min-width: 28px; }
+.lang-btn:hover { color: var(--color-text); }
+.lang-btn.active { background: var(--color-text); color: var(--color-surface); }
+@media (max-width: 720px) { .lang-switch { padding: 2px; } .lang-btn { padding: 3px 6px; min-width: 24px; font-size: 10px; } }
 
 /* Partnership banner (sticky bottom) */
 .partnership-banner { position: sticky; bottom: 0; z-index: 80; background: var(--color-text); color: var(--color-text-inverse); border-top: 1px solid rgba(255,255,255,0.1); box-shadow: 0 -4px 20px rgba(0,0,0,0.15); }

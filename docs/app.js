@@ -63,6 +63,7 @@ Promise.all([
   DATA.places = places.places || [];
   DATA.cameraTotals = { total: cams.count || 0, flock: cams.flock_count || 0 };
   DATA.byFips = Object.fromEntries(counties.map(c => [fipsKey(c), c]));
+  window.DATA = DATA;
   init();
 }).catch(err => {
   console.error('Data load failed', err);
@@ -88,12 +89,12 @@ function renderKPIs() {
   const arrestsCount = DATA.counties.filter(c => c.observed_arrests > 0).length;
   const camTotal = DATA.cameraTotals.total;
   const cards = [
-    { label: 'Counties tracked', value: s.total_counties, sub: 'All Georgia counties', accent: 'var(--color-primary)' },
-    { label: 'Critical · High tier', value: s.tier_counts.Critical + s.tier_counts.High, sub: `${s.tier_counts.Critical} Critical · ${s.tier_counts.High} High`, accent: 'var(--risk-critical)' },
-    { label: '287(g) agreements', value: s['287g_active_count'], sub: 'Active local agency partnerships', accent: 'var(--risk-high)' },
-    { label: 'ALPR cameras mapped', value: fmt(camTotal), sub: `${fmt(DATA.cameraTotals.flock)} confirmed Flock; ${s.counties_with_cameras || s.flock_county_count} counties`, accent: 'var(--color-accent)' },
-    { label: 'Foreign-born residents', value: fmt(s.total_foreign_born), sub: 'Across the state', accent: 'var(--color-primary)' },
-    { label: 'Observed arrests', value: fmt(s.total_observed_arrests), sub: `Across ${arrestsCount} counties; coalition-aggregated`, accent: 'var(--risk-medium)' },
+    { label: t('kpi.counties_tracked'), value: s.total_counties, sub: t('kpi.counties_tracked.sub'), accent: 'var(--color-primary)' },
+    { label: t('kpi.critical_high'), value: s.tier_counts.Critical + s.tier_counts.High, sub: t('kpi.critical_high.sub', { critical: s.tier_counts.Critical, high: s.tier_counts.High }), accent: 'var(--risk-critical)' },
+    { label: t('kpi.287g'), value: s['287g_active_count'], sub: t('kpi.287g.sub'), accent: 'var(--risk-high)' },
+    { label: t('kpi.cameras'), value: fmt(camTotal), sub: t('kpi.cameras.sub', { flock: fmt(DATA.cameraTotals.flock), counties: s.counties_with_cameras || s.flock_county_count }), accent: 'var(--color-accent)' },
+    { label: t('kpi.fb'), value: fmt(s.total_foreign_born), sub: t('kpi.fb.sub'), accent: 'var(--color-primary)' },
+    { label: t('kpi.arrests'), value: fmt(s.total_observed_arrests), sub: t('kpi.arrests.sub', { n: arrestsCount }), accent: 'var(--risk-medium)' },
   ];
   const grid = document.getElementById('kpi-grid');
   grid.innerHTML = cards.map(c => `
@@ -203,29 +204,29 @@ function drawLegend() {
   const el = document.getElementById('map-legend');
   let items = [];
   if (MAP_MODE === 'risk_tier_v3') {
-    items = TIERS.map(t => ({ label: t, color: TIER_COLORS[t]() }));
+    items = TIERS.map(tier => ({ label: t('tier.' + tier.toLowerCase()), color: TIER_COLORS[tier]() }));
   } else if (MAP_MODE === '287g_status') {
     items = [
-      { label: 'Multiple agencies', color: cssVar('--risk-critical') },
-      { label: 'One agency', color: cssVar('--risk-high') },
-      { label: 'No 287(g)', color: cssVar('--color-divider') },
+      { label: t('legend.multiple_agencies'), color: cssVar('--risk-critical') },
+      { label: t('legend.one_agency'), color: cssVar('--risk-high') },
+      { label: t('legend.no_287g'), color: cssVar('--color-divider') },
     ];
   } else if (MAP_MODE === 'has_flock') {
     items = [
-      { label: 'Documented ICE query', color: cssVar('--risk-critical') },
-      { label: 'Shares with APD or FUSUS', color: cssVar('--risk-high') },
-      { label: 'Has Flock', color: cssVar('--risk-medium') },
-      { label: 'No Flock', color: cssVar('--color-divider') },
+      { label: t('legend.ice_query'), color: cssVar('--risk-critical') },
+      { label: t('legend.shares_apd'), color: cssVar('--risk-high') },
+      { label: t('legend.has_flock'), color: cssVar('--risk-medium') },
+      { label: t('legend.no_flock'), color: cssVar('--color-divider') },
     ];
   } else if (MAP_MODE === 'camera_count') {
     items = [
-      { label: 'Fewer cameras', color: cssVar('--color-surface-offset') },
-      { label: 'More cameras (log scale)', color: cssVar('--risk-critical') },
+      { label: t('legend.fewer_cameras'), color: cssVar('--color-surface-offset') },
+      { label: t('legend.more_cameras'), color: cssVar('--risk-critical') },
     ];
   } else if (MAP_MODE === 'fb_pct') {
     items = [
-      { label: 'Lower %', color: cssVar('--color-surface-offset') },
-      { label: 'Higher %', color: cssVar('--risk-critical') },
+      { label: t('legend.lower_pct'), color: cssVar('--color-surface-offset') },
+      { label: t('legend.higher_pct'), color: cssVar('--risk-critical') },
     ];
   }
   el.innerHTML = items.map(i =>
@@ -255,8 +256,9 @@ const tip = document.getElementById('tooltip');
 function showTip(e, d) {
   const row = DATA.byFips[d.id];
   if (!row) return;
-  const ag = row['287g_status'] === 'None' ? 'no 287(g)' : row['287g_status'];
-  tip.innerHTML = `<div class="t-name">${row.county} County</div><div class="t-meta">${row.risk_tier_v3} · score ${row.risk_total_v3} · ${ag}${row.has_flock ? ' · Flock' : ''}</div>`;
+  const ag = row['287g_status'] === 'None' ? t('tip.no_287g') : row['287g_status'];
+  const tierLabel = t('tier.' + row.risk_tier_v3.toLowerCase());
+  tip.innerHTML = `<div class="t-name">${row.county} ${t('detail.county_suffix')}</div><div class="t-meta">${tierLabel} · ${t('tip.score')} ${row.risk_total_v3} · ${ag}${row.has_flock ? ' · Flock' : ''}</div>`;
   tip.classList.add('show');
   moveTip(e);
 }
@@ -276,6 +278,7 @@ function hideTip() { tip.classList.remove('show'); }
 function selectCounty(fips5) {
   const isNewSelection = SELECTED_FIPS !== fips5;
   SELECTED_FIPS = fips5;
+  window.SELECTED_FIPS = SELECTED_FIPS;
   d3.selectAll('path.county-shape').classed('selected', d => d.id === fips5);
   updateSelectedOutline();
   drawCameras();
@@ -305,55 +308,57 @@ function renderDetail(c) {
   el.classList.remove('hidden');
 
   const tags = [];
-  if (c.metro_atlanta) tags.push({ t: 'Metro Atlanta', cls: '' });
-  if (c['287g_count'] > 0) tags.push({ t: `${c['287g_count']} × 287(g)`, cls: 'warn' });
-  if (c.camera_count > 0) tags.push({ t: `${fmt(c.camera_count)} ALPR cameras`, cls: c.camera_count >= 100 ? 'danger' : 'warn' });
-  if (c.documented_ice_query) tags.push({ t: 'ICE query documented', cls: 'danger' });
-  if (c.shares_with_apd) tags.push({ t: 'Shares with APD', cls: 'warn' });
-  if (c.has_fusus_connect) tags.push({ t: 'FUSUS-connected', cls: 'warn' });
-  if (c.observed_arrests > 0) tags.push({ t: `${c.observed_arrests} observed arrests`, cls: 'danger' });
-  if (tags.length === 0) tags.push({ t: 'No tracked indicators', cls: 'ok' });
+  if (c.metro_atlanta) tags.push({ t: t('detail.metro'), cls: '' });
+  if (c['287g_count'] > 0) tags.push({ t: t('detail.tags.287g_count', { n: c['287g_count'] }), cls: 'warn' });
+  if (c.camera_count > 0) tags.push({ t: t('detail.tags.alpr_cameras', { n: fmt(c.camera_count) }), cls: c.camera_count >= 100 ? 'danger' : 'warn' });
+  if (c.documented_ice_query) tags.push({ t: t('detail.tags.ice_query'), cls: 'danger' });
+  if (c.shares_with_apd) tags.push({ t: t('detail.tags.shares_apd'), cls: 'warn' });
+  if (c.has_fusus_connect) tags.push({ t: t('detail.tags.fusus'), cls: 'warn' });
+  if (c.observed_arrests > 0) tags.push({ t: t('detail.tags.arrests', { n: c.observed_arrests }), cls: 'danger' });
+  if (tags.length === 0) tags.push({ t: t('detail.tags.none'), cls: 'ok' });
 
   // score breakdown bars (each scaled to its max possible weight)
   const maxBars = [
-    { label: '287(g)', val: c.score_287g, max: 25 },
-    { label: 'Foreign-born', val: c.score_foreign_born, max: 25 },
-    { label: 'Hispanic %', val: c.score_hispanic, max: 25 },
-    { label: 'ICE infra', val: c.score_ice_infra, max: 25 },
-    { label: 'HB 1105 base', val: c.score_hb1105_base, max: 5 },
-    { label: 'Surveillance', val: c.surveillance_mesh_score * 2, max: 10 },
+    { label: t('detail.score.287g'), val: c.score_287g, max: 25 },
+    { label: t('detail.score.fb'), val: c.score_foreign_born, max: 25 },
+    { label: t('detail.score.hisp'), val: c.score_hispanic, max: 25 },
+    { label: t('detail.score.ice_infra'), val: c.score_ice_infra, max: 25 },
+    { label: t('detail.score.hb1105'), val: c.score_hb1105_base, max: 5 },
+    { label: t('detail.score.surv'), val: c.surveillance_mesh_score * 2, max: 10 },
   ];
 
   const arrestsBar = c.observed_arrests > 0 ? `
     <div class="score-bar-row" style="margin-top: var(--space-2);">
-      <span class="lab">Observed arrests</span>
+      <span class="lab">${t('detail.score.arrests')}</span>
       <div class="track"><div class="fill" style="width: ${Math.min(100, c.observed_arrests / 5)}%; background: var(--risk-high);"></div></div>
       <span class="num">${c.observed_arrests}</span>
     </div>` : '';
+
+  const tierLabel = t('tier.' + c.risk_tier_v3.toLowerCase());
 
   el.innerHTML = `
     <div id="county-zoom-slot"></div>
     <div class="panel-head">
       <div>
-        <h3>${c.county} County</h3>
-        <p class="sub">FIPS 13${pad3(c.fips)} · ${c.metro_atlanta ? 'Metro Atlanta' : 'Outside Metro Atlanta'} · pop ${fmt(c.total_pop)}</p>
+        <h3>${c.county} ${t('detail.county_suffix')}</h3>
+        <p class="sub">${t('detail.fips')} 13${pad3(c.fips)} · ${c.metro_atlanta ? t('detail.metro') : t('detail.nonmetro')} · ${t('detail.pop')} ${fmt(c.total_pop)}</p>
       </div>
-      <span class="tier-badge tier-${c.risk_tier_v3}">${c.risk_tier_v3} · ${c.risk_total_v3}</span>
+      <span class="tier-badge tier-${c.risk_tier_v3}">${tierLabel} · ${c.risk_total_v3}</span>
     </div>
 
     <div class="stat-grid">
-      <div class="row"><span class="l">Foreign-born</span><span class="v">${fmt(c.foreign_born)} <span style="color: var(--color-text-muted); font-weight: 500;">(${fmtPct(c.fb_pct)})</span></span></div>
-      <div class="row"><span class="l">Hispanic</span><span class="v">${fmt(c.hispanic)} <span style="color: var(--color-text-muted); font-weight: 500;">(${fmtPct(c.hisp_pct)})</span></span></div>
-      <div class="row"><span class="l">287(g) status</span><span class="v" style="font-size: var(--text-sm); font-family: var(--font-body); font-weight: 600;">${c['287g_status'] === 'None' ? 'Not participating' : c['287g_status']}</span></div>
-      <div class="row"><span class="l">HB 1105</span><span class="v" style="font-size: var(--text-sm); font-family: var(--font-body); font-weight: 600;">${c.hb1105_status}</span></div>
-      <div class="row"><span class="l">ALPR cameras</span><span class="v">${fmt(c.camera_count || 0)}${c.flock_camera_count ? ` <span style="color: var(--color-text-muted); font-weight: 500;">(${fmt(c.flock_camera_count)} Flock)</span>` : ''}</span></div>
-      <div class="row"><span class="l">Cameras per 100k</span><span class="v">${c.cameras_per_100k || 0}</span></div>
+      <div class="row"><span class="l">${t('detail.stat.fb')}</span><span class="v">${fmt(c.foreign_born)} <span style="color: var(--color-text-muted); font-weight: 500;">(${fmtPct(c.fb_pct)})</span></span></div>
+      <div class="row"><span class="l">${t('detail.stat.hisp')}</span><span class="v">${fmt(c.hispanic)} <span style="color: var(--color-text-muted); font-weight: 500;">(${fmtPct(c.hisp_pct)})</span></span></div>
+      <div class="row"><span class="l">${t('detail.stat.287g')}</span><span class="v" style="font-size: var(--text-sm); font-family: var(--font-body); font-weight: 600;">${c['287g_status'] === 'None' ? t('detail.stat.not_participating') : c['287g_status']}</span></div>
+      <div class="row"><span class="l">${t('detail.stat.hb1105')}</span><span class="v" style="font-size: var(--text-sm); font-family: var(--font-body); font-weight: 600;">${c.hb1105_status}</span></div>
+      <div class="row"><span class="l">${t('detail.stat.cameras')}</span><span class="v">${fmt(c.camera_count || 0)}${c.flock_camera_count ? ` <span style="color: var(--color-text-muted); font-weight: 500;">(${fmt(c.flock_camera_count)} Flock)</span>` : ''}</span></div>
+      <div class="row"><span class="l">${t('detail.stat.cam_per_100k')}</span><span class="v">${c.cameras_per_100k || 0}</span></div>
     </div>
 
-    ${c['287g_agencies'] ? `<p style="font-size: var(--text-xs); color: var(--color-text-muted); margin-bottom: var(--space-3);"><strong style="color: var(--color-text);">287(g) agencies:</strong> ${c['287g_agencies']}</p>` : ''}
-    ${c.ice_infrastructure ? `<p style="font-size: var(--text-xs); color: var(--color-text-muted); margin-bottom: var(--space-4);"><strong style="color: var(--color-text);">ICE infrastructure:</strong> ${c.ice_infrastructure}</p>` : ''}
+    ${c['287g_agencies'] ? `<p style="font-size: var(--text-xs); color: var(--color-text-muted); margin-bottom: var(--space-3);"><strong style="color: var(--color-text);">${t('detail.287g_agencies')}</strong> ${c['287g_agencies']}</p>` : ''}
+    ${c.ice_infrastructure ? `<p style="font-size: var(--text-xs); color: var(--color-text-muted); margin-bottom: var(--space-4);"><strong style="color: var(--color-text);">${t('detail.ice_infra')}</strong> ${c.ice_infrastructure}</p>` : ''}
 
-    <h4 style="font-size: var(--text-sm); font-weight: 700; margin: var(--space-4) 0 var(--space-3); letter-spacing: -0.01em;">Score breakdown</h4>
+    <h4 style="font-size: var(--text-sm); font-weight: 700; margin: var(--space-4) 0 var(--space-3); letter-spacing: -0.01em;">${t('detail.score_breakdown')}</h4>
     ${maxBars.map(b => `
       <div class="score-bar-row">
         <span class="lab">${b.label}</span>
@@ -367,8 +372,8 @@ function renderDetail(c) {
       ${tags.map(t => `<span class="tag ${t.cls}">${t.t}</span>`).join('')}
     </div>
 
-    ${c.flock_agencies ? `<p style="font-size: var(--text-xs); color: var(--color-text-muted); margin-top: var(--space-4); line-height: 1.55;"><strong style="color: var(--color-text);">Flock agencies:</strong> ${c.flock_agencies}</p>` : ''}
-    ${c.surveillance_flags ? `<p style="font-size: var(--text-xs); color: var(--color-text-muted); margin-top: var(--space-2); line-height: 1.55;"><strong style="color: var(--color-text);">Surveillance flags:</strong> ${c.surveillance_flags}</p>` : ''}
+    ${c.flock_agencies ? `<p style="font-size: var(--text-xs); color: var(--color-text-muted); margin-top: var(--space-4); line-height: 1.55;"><strong style="color: var(--color-text);">${t('detail.flock_agencies')}</strong> ${c.flock_agencies}</p>` : ''}
+    ${c.surveillance_flags ? `<p style="font-size: var(--text-xs); color: var(--color-text-muted); margin-top: var(--space-2); line-height: 1.55;"><strong style="color: var(--color-text);">${t('detail.surv_flags')}</strong> ${c.surveillance_flags}</p>` : ''}
   `;
   renderCountyZoom(c);
 }
@@ -442,10 +447,10 @@ function renderCountyZoom(c) {
   slot.innerHTML = `
     <div class="county-zoom">
       <div class="county-zoom-head">
-        <h4>${c.county} County: camera footprint</h4>
-        <span class="county-zoom-stat"><strong>${fmt(cams.length)}</strong> cameras; <strong>${c.cameras_per_100k || 0}</strong> per 100k</span>
+        <h4>${t('detail.zoom.h4', { county: c.county })}</h4>
+        <span class="county-zoom-stat">${t('detail.zoom.stat', { cams: fmt(cams.length), per: c.cameras_per_100k || 0 })}</span>
       </div>
-      <svg class="county-zoom-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="${c.county} County camera positions">
+      <svg class="county-zoom-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="${t('detail.zoom.aria', { county: c.county })}">
         <defs>
           <clipPath id="zoom-clip-${fips5}"><rect x="0" y="0" width="${W}" height="${H}"/></clipPath>
         </defs>
@@ -470,10 +475,10 @@ function renderCountyZoom(c) {
         </g>
       </svg>
       <div class="county-zoom-legend">
-        <span><span class="swatch" style="background:${flockColor}"></span>Flock (${fmt(flockCount)})</span>
-        ${otherCount > 0 ? `<span><span class="swatch" style="background:${otherColor}"></span>Other ALPR (${fmt(otherCount)})</span>` : ''}
-        ${finalRoadLabels.length ? `<span><span class="swatch line" style="background:${roadColor}"></span>Interstates</span>` : ''}
-        ${placesInBox.length ? `<span><span class="swatch" style="background:${placeColor}"></span>Cities and towns</span>` : ''}
+        <span><span class="swatch" style="background:${flockColor}"></span>${t('detail.flock_count')} (${fmt(flockCount)})</span>
+        ${otherCount > 0 ? `<span><span class="swatch" style="background:${otherColor}"></span>${t('detail.other_alpr')} (${fmt(otherCount)})</span>` : ''}
+        ${finalRoadLabels.length ? `<span><span class="swatch line" style="background:${roadColor}"></span>${t('detail.interstates')}</span>` : ''}
+        ${placesInBox.length ? `<span><span class="swatch" style="background:${placeColor}"></span>${t('detail.cities_towns')}</span>` : ''}
       </div>
     </div>`;
 }
@@ -503,20 +508,20 @@ function renderTierBars() {
   const totalFB = d3.sum(tiers, t => t.fb);
   const totalArr = d3.sum(tiers, t => t.arrests);
   const el = document.getElementById('tier-bars');
-  el.innerHTML = tiers.map(t => `
+  el.innerHTML = tiers.map(tt => `
     <div class="bar-row">
-      <span class="lab">${t.tier}</span>
-      <div class="track"><div class="fill" style="width: ${(t.count / max) * 100}%; background: ${t.color};">${t.count}</div></div>
+      <span class="lab">${t('tier.' + tt.tier.toLowerCase())}</span>
+      <div class="track"><div class="fill" style="width: ${(tt.count / max) * 100}%; background: ${tt.color};">${tt.count}</div></div>
     </div>
   `).join('') + `
     <div style="margin-top: var(--space-5); display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); padding-top: var(--space-4); border-top: 1px solid var(--color-divider);">
       <div>
-        <div style="font-size: var(--text-xs); font-weight: 600; color: var(--color-text-muted); letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: var(--space-2);">Foreign-born share by tier</div>
-        ${tiers.map(t => `<div style="display:flex;align-items:center;gap:var(--space-2);font-size:var(--text-xs);margin-bottom:4px;"><div style="width:8px;height:8px;border-radius:2px;background:${t.color}"></div><span style="width:60px">${t.tier}</span><span style="font-family:var(--font-mono);font-weight:600;">${(t.fb / totalFB * 100).toFixed(0)}%</span></div>`).join('')}
+        <div style="font-size: var(--text-xs); font-weight: 600; color: var(--color-text-muted); letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: var(--space-2);">${t('tier.fb_share')}</div>
+        ${tiers.map(tt => `<div style="display:flex;align-items:center;gap:var(--space-2);font-size:var(--text-xs);margin-bottom:4px;"><div style="width:8px;height:8px;border-radius:2px;background:${tt.color}"></div><span style="width:60px">${t('tier.' + tt.tier.toLowerCase())}</span><span style="font-family:var(--font-mono);font-weight:600;">${(tt.fb / totalFB * 100).toFixed(0)}%</span></div>`).join('')}
       </div>
       <div>
-        <div style="font-size: var(--text-xs); font-weight: 600; color: var(--color-text-muted); letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: var(--space-2);">Observed arrests by tier</div>
-        ${tiers.map(t => `<div style="display:flex;align-items:center;gap:var(--space-2);font-size:var(--text-xs);margin-bottom:4px;"><div style="width:8px;height:8px;border-radius:2px;background:${t.color}"></div><span style="width:60px">${t.tier}</span><span style="font-family:var(--font-mono);font-weight:600;">${totalArr ? (t.arrests / totalArr * 100).toFixed(0) : 0}%</span></div>`).join('')}
+        <div style="font-size: var(--text-xs); font-weight: 600; color: var(--color-text-muted); letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: var(--space-2);">${t('tier.arrests_by_tier')}</div>
+        ${tiers.map(tt => `<div style="display:flex;align-items:center;gap:var(--space-2);font-size:var(--text-xs);margin-bottom:4px;"><div style="width:8px;height:8px;border-radius:2px;background:${tt.color}"></div><span style="width:60px">${t('tier.' + tt.tier.toLowerCase())}</span><span style="font-family:var(--font-mono);font-weight:600;">${totalArr ? (tt.arrests / totalArr * 100).toFixed(0) : 0}%</span></div>`).join('')}
       </div>
     </div>
   `;
@@ -542,12 +547,14 @@ function render287gBars() {
     'No 287(g)': cssVar('--color-divider'),
   };
   const el = document.getElementById('287g-bars');
-  el.innerHTML = groups.map(g => `
+  el.innerHTML = groups.map(g => {
+    const label = g.k === 'No 287(g)' ? t('p287g.bar.none') : g.k;
+    return `
     <div class="bar-row">
-      <span class="lab" style="width: 168px; font-size: var(--text-xs);">${g.k}</span>
+      <span class="lab" style="width: 168px; font-size: var(--text-xs);">${label}</span>
       <div class="track"><div class="fill" style="width: ${(g.v / max) * 100}%; background: ${colors[g.k] || cssVar('--color-primary')}; color: ${g.k === 'No 287(g)' ? 'var(--color-text)' : 'white'};">${g.v}</div></div>
     </div>
-  `).join('');
+  `; }).join('');
 }
 
 // ---------- SURVEILLANCE BARS ----------
@@ -576,9 +583,9 @@ function renderTable() {
   const tbody = document.getElementById('county-tbody');
   tbody.innerHTML = rows.map(c => `
     <tr data-fips="${fipsKey(c)}">
-      <td><strong>${c.county}</strong>${c.metro_atlanta ? ' <span style="color:var(--color-text-faint);font-weight:400;font-size:var(--text-xs);">· Metro</span>' : ''}</td>
+      <td><strong>${c.county}</strong>${c.metro_atlanta ? ` <span style="color:var(--color-text-faint);font-weight:400;font-size:var(--text-xs);">· ${t('detail.metro')}</span>` : ''}</td>
       <td class="num"><strong>${c.risk_total_v3}</strong></td>
-      <td><span class="tier-badge tier-${c.risk_tier_v3}" style="padding:2px 8px;font-size:11px;">${c.risk_tier_v3}</span></td>
+      <td><span class="tier-badge tier-${c.risk_tier_v3}" style="padding:2px 8px;font-size:11px;">${t('tier.' + c.risk_tier_v3.toLowerCase())}</span></td>
       <td>${c['287g_count'] > 0 && c['287g_status'] !== 'None' ? `<span class="tag warn" style="padding:2px 6px;font-size:11px;">${c['287g_status']}</span>` : '<span class="dash">·</span>'}</td>
       <td>${c.has_flock ? `<span class="check">●</span>${c.documented_ice_query ? ' <span class="tag danger" style="padding:1px 5px;font-size:10px;">ICE</span>' : ''}` : '<span class="dash">·</span>'}</td>
       <td class="num">${fmtPct(c.fb_pct)}</td>
@@ -736,6 +743,13 @@ function bindExport_REMOVED() {
       });
     }
   }
+
+  // Language switch buttons
+  document.querySelectorAll('[data-lang-btn]').forEach(b => {
+    b.addEventListener('click', () => {
+      if (typeof window.setLang === 'function') window.setLang(b.dataset.langBtn);
+    });
+  });
 
   // Expose trigger so selectCounty can call it
   window.maybeTriggerSignup = function () {
