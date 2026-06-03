@@ -28,6 +28,10 @@
         </div>
       </div>
       <div class="header-actions">
+        <button class="btn-pill" data-open-modal="partnership">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+          <span>Want one for your state?</span>
+        </button>
         <button class="btn-icon" data-theme-toggle aria-label="Toggle dark mode">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
         </button>
@@ -215,6 +219,48 @@
       </div>
     </div>
   </footer>
+
+  <!-- Persistent partnership callout -->
+  <aside class="partnership-banner" id="partnership-banner">
+    <div class="inner">
+      <div class="copy">
+        <strong>From another state?</strong>
+        <span>If you're working on immigration enforcement, voter access, or civil-rights coalition work, I can partner with you to research and build a county-level risk dashboard for your state.</span>
+      </div>
+      <button class="btn-primary" data-open-modal="partnership">Start a conversation</button>
+    </div>
+  </aside>
+
+  <!-- Engagement modal (signup) -->
+  <div class="modal-backdrop" id="modal-signup" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="signup-title">
+    <div class="modal">
+      <button class="modal-close" data-close-modal aria-label="Close">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6l-12 12"/></svg>
+      </button>
+      <div class="modal-head">
+        <h3 id="signup-title">Quick check-in before you keep exploring</h3>
+        <p>This dashboard is an independent analysis. If you'd like occasional updates as new data is added, drop your email; either choice keeps the dashboard open.</p>
+      </div>
+      <iframe id="signup-frame" data-form-id="261534821207048" title="Stay in the loop" allowtransparency="true" allow="geolocation; microphone; camera; fullscreen" frameborder="0" style="width:100%;" loading="lazy"></iframe>
+      <div class="modal-foot">
+        <button class="btn-ghost" data-close-modal data-dismiss-signup>Skip for now</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Partnership modal -->
+  <div class="modal-backdrop" id="modal-partnership" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="partnership-title">
+    <div class="modal">
+      <button class="modal-close" data-close-modal aria-label="Close">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6l-12 12"/></svg>
+      </button>
+      <div class="modal-head">
+        <h3 id="partnership-title">Build this for your state</h3>
+        <p>Tell me about the state you'd want to assess and the problem you're trying to solve. I'll be in touch within a few days.</p>
+      </div>
+      <iframe id="partnership-frame" data-form-id="261535151874055" title="Build this for your state" allowtransparency="true" allow="geolocation; microphone; camera; fullscreen" frameborder="0" style="width:100%;" loading="lazy"></iframe>
+    </div>
+  </div>
 
   <div class="tooltip" id="tooltip" role="tooltip"></div>
 

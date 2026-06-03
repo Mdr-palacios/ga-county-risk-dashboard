@@ -274,11 +274,13 @@ function hideTip() { tip.classList.remove('show'); }
 
 // ---------- SELECT COUNTY ----------
 function selectCounty(fips5) {
+  const isNewSelection = SELECTED_FIPS !== fips5;
   SELECTED_FIPS = fips5;
   d3.selectAll('path.county-shape').classed('selected', d => d.id === fips5);
   updateSelectedOutline();
   drawCameras();
   renderDetail(DATA.byFips[fips5]);
+  if (isNewSelection && typeof window.maybeTriggerSignup === 'function') window.maybeTriggerSignup();
   // Smooth scroll to top of section if mobile
   if (window.innerWidth < 980) {
     document.getElementById('detail-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -676,3 +678,72 @@ function bindExport_REMOVED() {
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   });
 }
+
+// ---------- MODALS + ENGAGEMENT GATE ----------
+(function () {
+  const SIGNUP_KEY = 'ga-dash-signup-dismissed';
+  const COUNT_KEY = 'ga-dash-county-clicks';
+  const BANNER_KEY = 'ga-dash-banner-dismissed';
+
+  function openModal(name) {
+    const m = document.getElementById('modal-' + name);
+    if (!m) return;
+    const iframe = m.querySelector('iframe');
+    if (iframe && !iframe.src && iframe.dataset.formId) {
+      iframe.src = 'https://form.jotform.com/' + iframe.dataset.formId;
+    }
+    m.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open');
+  }
+  function closeModal(m) {
+    if (!m) return;
+    m.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('modal-open');
+  }
+
+  document.querySelectorAll('[data-open-modal]').forEach(btn => {
+    btn.addEventListener('click', () => openModal(btn.dataset.openModal));
+  });
+  document.querySelectorAll('[data-close-modal]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const m = e.currentTarget.closest('.modal-backdrop');
+      if (btn.hasAttribute('data-dismiss-signup')) {
+        try { localStorage.setItem(SIGNUP_KEY, '1'); } catch (_) {}
+      }
+      closeModal(m);
+    });
+  });
+  document.querySelectorAll('.modal-backdrop').forEach(b => {
+    b.addEventListener('click', (e) => { if (e.target === b) closeModal(b); });
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-backdrop[aria-hidden="false"]').forEach(closeModal);
+    }
+  });
+
+  // Banner dismiss (close X if present)
+  const banner = document.getElementById('partnership-banner');
+  if (banner) {
+    try {
+      if (localStorage.getItem(BANNER_KEY)) banner.style.display = 'none';
+    } catch (_) {}
+    const x = banner.querySelector('[data-dismiss-banner]');
+    if (x) {
+      x.addEventListener('click', () => {
+        banner.style.display = 'none';
+        try { localStorage.setItem(BANNER_KEY, '1'); } catch (_) {}
+      });
+    }
+  }
+
+  // Expose trigger so selectCounty can call it
+  window.maybeTriggerSignup = function () {
+    try {
+      if (localStorage.getItem(SIGNUP_KEY)) return;
+      const n = (parseInt(localStorage.getItem(COUNT_KEY) || '0', 10)) + 1;
+      localStorage.setItem(COUNT_KEY, String(n));
+      if (n === 3) setTimeout(() => openModal('signup'), 400);
+    } catch (_) {}
+  };
+})();
