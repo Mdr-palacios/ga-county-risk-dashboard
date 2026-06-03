@@ -29,10 +29,13 @@ window.I18N = {
     'kpi.counties_tracked.sub': 'All Georgia counties',
     'kpi.critical_high': 'Critical · High tier',
     'kpi.critical_high.sub': '{critical} Critical · {high} High',
+    'kpi.critical_high.donut_lab': 'of counties',
     'kpi.287g': '287(g) agreements',
     'kpi.287g.sub': 'Active local agency partnerships',
     'kpi.cameras': 'ALPR cameras mapped',
     'kpi.cameras.sub': '{flock} confirmed Flock; {counties} counties',
+    'kpi.cameras.flock': 'Flock',
+    'kpi.cameras.other': 'Other ALPR',
     'kpi.fb': 'Foreign-born residents',
     'kpi.fb.sub': 'Across the state',
     'kpi.arrests': 'Observed arrests',
@@ -192,7 +195,7 @@ window.I18N = {
 
     // Partnership banner
     'banner.strong': 'From another state?',
-    'banner.body': "If you're an #AbolishICE organizer or coalition working on immigration enforcement, voter access, or civil-rights work, I can partner with you to research and build a county-level risk dashboard for your state.",
+    'banner.body': "If you're an #AbolishICE organizer or coalition working on immigrant rights, voter access, or civil-rights work, I can partner with you to research and build a county-level risk dashboard for your state.",
     'banner.cta': 'Start a conversation',
 
     // Modals
@@ -227,10 +230,13 @@ window.I18N = {
     'kpi.counties_tracked.sub': 'Todos los condados de Georgia',
     'kpi.critical_high': 'Nivel Crítico · Alto',
     'kpi.critical_high.sub': '{critical} Crítico · {high} Alto',
+    'kpi.critical_high.donut_lab': 'de los condados',
     'kpi.287g': 'Acuerdos 287(g)',
     'kpi.287g.sub': 'Alianzas activas con agencias locales',
     'kpi.cameras': 'Cámaras ALPR mapeadas',
     'kpi.cameras.sub': '{flock} Flock confirmadas; {counties} condados',
+    'kpi.cameras.flock': 'Flock',
+    'kpi.cameras.other': 'Otros ALPR',
     'kpi.fb': 'Residentes nacidos en el extranjero',
     'kpi.fb.sub': 'En todo el estado',
     'kpi.arrests': 'Arrestos observados',
@@ -380,7 +386,7 @@ window.I18N = {
     'footer.cameras_deflock': 'DeFlock',
 
     'banner.strong': '¿De otro estado?',
-    'banner.body': 'Si organizas con #AbolirICE o una coalición que trabaja en aplicación migratoria, acceso al voto, o derechos civiles, puedo colaborar contigo para investigar y construir un tablero de riesgo a nivel de condado para tu estado.',
+    'banner.body': 'Si organizas con #AbolirICE o una coalición que trabaja en derechos de las personas inmigrantes, acceso al voto, o derechos civiles, puedo colaborar contigo para investigar y construir un tablero de riesgo a nivel de condado para tu estado.',
     'banner.cta': 'Empecemos a conversar',
 
     'modal.signup.h3': 'Un momentito antes de seguir explorando',
@@ -414,10 +420,13 @@ window.I18N = {
     'kpi.counties_tracked.sub': 'Tất cả các quận của Georgia',
     'kpi.critical_high': 'Mức Nghiêm trọng · Cao',
     'kpi.critical_high.sub': '{critical} Nghiêm trọng · {high} Cao',
+    'kpi.critical_high.donut_lab': 'tổng số quận',
     'kpi.287g': 'Thỏa thuận 287(g)',
     'kpi.287g.sub': 'Quan hệ hợp tác với cơ quan địa phương đang hoạt động',
     'kpi.cameras': 'Camera ALPR đã lập bản đồ',
     'kpi.cameras.sub': '{flock} Flock đã xác nhận; {counties} quận',
+    'kpi.cameras.flock': 'Flock',
+    'kpi.cameras.other': 'ALPR khác',
     'kpi.fb': 'Cư dân sinh ở nước ngoài',
     'kpi.fb.sub': 'Trên toàn bang',
     'kpi.arrests': 'Vụ bắt giữ được ghi nhận',
@@ -567,7 +576,7 @@ window.I18N = {
     'footer.cameras_deflock': 'DeFlock',
 
     'banner.strong': 'Bạn từ tiểu bang khác?',
-    'banner.body': 'Nếu bạn là người tổ chức #XóaBỏICE hoặc thuộc một liên minh đang làm về thực thi nhập cư, quyền tiếp cận lá phiếu, hoặc công việc dân quyền, tôi có thể đồng hành cùng bạn để nghiên cứu và xây dựng một bảng rủi ro ở cấp quận cho tiểu bang của bạn.',
+    'banner.body': 'Nếu bạn là người tổ chức #XóaBỏICE hoặc thuộc một liên minh đang làm về quyền của người nhập cư, quyền tiếp cận lá phiếu, hoặc công việc dân quyền, tôi có thể đồng hành cùng bạn để nghiên cứu và xây dựng một bảng rủi ro ở cấp quận cho tiểu bang của bạn.',
     'banner.cta': 'Bắt đầu trò chuyện',
 
     'modal.signup.h3': 'Xin một phút trước khi bạn tiếp tục khám phá',

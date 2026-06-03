@@ -88,13 +88,110 @@ function renderKPIs() {
   const s = DATA.summary;
   const arrestsCount = DATA.counties.filter(c => c.observed_arrests > 0).length;
   const camTotal = DATA.cameraTotals.total;
+
+  // Pre-compute tier-keyed aggregates for KPI mini-visuals
+  const tierKeys = ['Critical', 'High', 'Medium', 'Low'];
+  const tierColors = {
+    Critical: cssVar('--risk-critical'),
+    High: cssVar('--risk-high'),
+    Medium: cssVar('--risk-medium'),
+    Low: cssVar('--risk-low'),
+  };
+  const fbByTier = { Critical: 0, High: 0, Medium: 0, Low: 0 };
+  const arrestsByTier = { Critical: 0, High: 0, Medium: 0, Low: 0 };
+  for (const c of DATA.counties) {
+    const tk = c.risk_tier_v3;
+    if (tk in fbByTier) {
+      fbByTier[tk] += (c.foreign_born || 0);
+      arrestsByTier[tk] += (c.observed_arrests || 0);
+    }
+  }
+  // 287(g) status breakdown
+  const p287gGroups = {};
+  for (const c of DATA.counties) {
+    const k = c['287g_status'];
+    if (!k || k === 'None') continue;
+    p287gGroups[k] = (p287gGroups[k] || 0) + 1;
+  }
+  const p287gColorMap = {
+    'JEM + TFM (highest)': cssVar('--risk-critical'),
+    'Task Force Model': cssVar('--risk-critical'),
+    'JEM + WSO': cssVar('--risk-high'),
+    'Jail Enforcement Model': cssVar('--risk-high'),
+    'Warrant Service Officer': cssVar('--risk-medium'),
+  };
+  // Camera breakdown (Flock vs Other)
+  const flockCount = DATA.cameraTotals.flock || 0;
+  const otherCams = Math.max(0, camTotal - flockCount);
+
+  // Helper: segmented horizontal bar
+  const segBar = (parts) => {
+    const total = parts.reduce((a, p) => a + p.v, 0) || 1;
+    return `<div class="seg-bar" role="img" aria-label="${parts.map(p => p.label + ' ' + p.v).join('; ')}">` +
+      parts.map(p => `<i style="width:${(p.v / total * 100).toFixed(1)}%;background:${p.color}" title="${p.label}: ${p.v}"></i>`).join('') +
+    `</div>` +
+    `<div class="spark-legend">${parts.filter(p => p.v > 0).map(p => `<span><i style="background:${p.color}"></i>${p.label}: <strong style="font-family:var(--font-mono);color:var(--color-text);font-weight:600">${p.v}</strong></span>`).join('')}</div>`;
+  };
+
+  // Helper: micro bar chart (values share same scale)
+  const microBars = (parts, fmtFn = (n) => n) => {
+    const max = Math.max(1, ...parts.map(p => p.v));
+    return `<div class="spark" role="img" aria-label="${parts.map(p => p.label + ' ' + fmtFn(p.v)).join('; ')}">` +
+      `<svg viewBox="0 0 100 28" preserveAspectRatio="none">` +
+        parts.map((p, i) => {
+          const w = (100 - (parts.length - 1) * 3) / parts.length;
+          const x = i * (w + 3);
+          const h = (p.v / max) * 22;
+          const y = 28 - h;
+          return `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="1.4" fill="${p.color}"><title>${p.label}: ${fmtFn(p.v)}</title></rect>`;
+        }).join('') +
+      `</svg>` +
+    `</div>` +
+    `<div class="spark-legend">${parts.map(p => `<span><i style="background:${p.color}"></i>${p.label.charAt(0)}<strong style="font-family:var(--font-mono);color:var(--color-text);font-weight:600;margin-left:2px">${fmtFn(p.v)}</strong></span>`).join('')}</div>`;
+  };
+
+  // Helper: donut showing share
+  const donut = (value, total, color, label) => {
+    const pct = total ? (value / total * 100) : 0;
+    const r = 16, c = 2 * Math.PI * r;
+    const dash = (pct / 100) * c;
+    return `<div class="donut" role="img" aria-label="${label}: ${pct.toFixed(0)} percent">` +
+      `<svg width="42" height="42" viewBox="0 0 42 42">` +
+        `<circle cx="21" cy="21" r="${r}" fill="none" stroke="var(--color-surface-offset)" stroke-width="5"/>` +
+        `<circle cx="21" cy="21" r="${r}" fill="none" stroke="${color}" stroke-width="5" stroke-linecap="round" stroke-dasharray="${dash} ${c}" transform="rotate(-90 21 21)"/>` +
+      `</svg>` +
+      `<div class="donut-lab"><strong>${pct.toFixed(0)}%</strong>${label}</div>` +
+    `</div>`;
+  };
+
   const cards = [
-    { label: t('kpi.counties_tracked'), value: s.total_counties, sub: t('kpi.counties_tracked.sub'), accent: 'var(--color-primary)' },
-    { label: t('kpi.critical_high'), value: s.tier_counts.Critical + s.tier_counts.High, sub: t('kpi.critical_high.sub', { critical: s.tier_counts.Critical, high: s.tier_counts.High }), accent: 'var(--risk-critical)' },
-    { label: t('kpi.287g'), value: s['287g_active_count'], sub: t('kpi.287g.sub'), accent: 'var(--risk-high)' },
-    { label: t('kpi.cameras'), value: fmt(camTotal), sub: t('kpi.cameras.sub', { flock: fmt(DATA.cameraTotals.flock), counties: s.counties_with_cameras || s.flock_county_count }), accent: 'var(--color-accent)' },
-    { label: t('kpi.fb'), value: fmt(s.total_foreign_born), sub: t('kpi.fb.sub'), accent: 'var(--color-primary)' },
-    { label: t('kpi.arrests'), value: fmt(s.total_observed_arrests), sub: t('kpi.arrests.sub', { n: arrestsCount }), accent: 'var(--risk-medium)' },
+    {
+      label: t('kpi.counties_tracked'), value: s.total_counties, sub: t('kpi.counties_tracked.sub'), accent: 'var(--color-primary)',
+      viz: segBar(tierKeys.map(tk => ({ label: t('tier.' + tk.toLowerCase()), v: s.tier_counts[tk] || 0, color: tierColors[tk] }))),
+    },
+    {
+      label: t('kpi.critical_high'), value: s.tier_counts.Critical + s.tier_counts.High, sub: t('kpi.critical_high.sub', { critical: s.tier_counts.Critical, high: s.tier_counts.High }), accent: 'var(--risk-critical)',
+      viz: donut(s.tier_counts.Critical + s.tier_counts.High, s.total_counties, cssVar('--risk-critical'), t('kpi.critical_high.donut_lab')),
+    },
+    {
+      label: t('kpi.287g'), value: s['287g_active_count'], sub: t('kpi.287g.sub'), accent: 'var(--risk-high)',
+      viz: segBar(Object.entries(p287gGroups).sort((a, b) => b[1] - a[1]).map(([k, v]) => ({ label: k, v, color: p287gColorMap[k] || cssVar('--risk-high') }))),
+    },
+    {
+      label: t('kpi.cameras'), value: fmt(camTotal), sub: t('kpi.cameras.sub', { flock: fmt(DATA.cameraTotals.flock), counties: s.counties_with_cameras || s.flock_county_count }), accent: 'var(--color-accent)',
+      viz: segBar([
+        { label: t('kpi.cameras.flock'), v: flockCount, color: cssVar('--risk-critical') },
+        { label: t('kpi.cameras.other'), v: otherCams, color: cssVar('--color-primary') },
+      ]),
+    },
+    {
+      label: t('kpi.fb'), value: fmt(s.total_foreign_born), sub: t('kpi.fb.sub'), accent: 'var(--color-primary)',
+      viz: microBars(tierKeys.map(tk => ({ label: t('tier.' + tk.toLowerCase()), v: fbByTier[tk], color: tierColors[tk] })), (n) => fmt(n)),
+    },
+    {
+      label: t('kpi.arrests'), value: fmt(s.total_observed_arrests), sub: t('kpi.arrests.sub', { n: arrestsCount }), accent: 'var(--risk-medium)',
+      viz: microBars(tierKeys.map(tk => ({ label: t('tier.' + tk.toLowerCase()), v: arrestsByTier[tk], color: tierColors[tk] })), (n) => fmt(n)),
+    },
   ];
   const grid = document.getElementById('kpi-grid');
   grid.innerHTML = cards.map(c => `
@@ -102,6 +199,7 @@ function renderKPIs() {
       <div class="label">${c.label}</div>
       <div class="value">${c.value}</div>
       <div class="sub">${c.sub}</div>
+      ${c.viz || ''}
     </div>
   `).join('');
 }
