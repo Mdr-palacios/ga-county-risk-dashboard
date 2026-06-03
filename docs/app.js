@@ -1,4 +1,4 @@
-// GA County Risk Dashboard; Common Cause Georgia
+// GA County Risk Dashboard; independent analysis by Rosario Palacios
 // Data is read-only; no backend.
 
 // ---------- THEME TOGGLE ----------

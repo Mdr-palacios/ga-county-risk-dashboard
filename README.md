@@ -1,6 +1,6 @@
 # Georgia County Risk Dashboard
 
-A coalition data dashboard from **Common Cause Georgia** tracking county-level immigration enforcement risk across all 159 Georgia counties.
+An **independent analysis by Rosario Palacios** tracking county-level immigration enforcement risk across all 159 Georgia counties.
 
 **Live site:** https://mdr-palacios.github.io/ga-county-risk-dashboard/
 
@@ -62,5 +62,5 @@ python3 -m http.server 8000
 
 ## Contact
 
-Rosario Palacios, Executive Director, Common Cause Georgia
+Independent analysis by Rosario Palacios
 rosario@palacios.community
