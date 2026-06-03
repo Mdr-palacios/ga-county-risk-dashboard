@@ -167,18 +167,22 @@ function renderKPIs() {
   const cards = [
     {
       label: t('kpi.counties_tracked'), value: s.total_counties, sub: t('kpi.counties_tracked.sub'), accent: 'var(--color-primary)',
+      context: t('kpi.counties_tracked.context'),
       viz: segBar(tierKeys.map(tk => ({ label: t('tier.' + tk.toLowerCase()), v: s.tier_counts[tk] || 0, color: tierColors[tk] }))),
     },
     {
       label: t('kpi.critical_high'), value: s.tier_counts.Critical + s.tier_counts.High, sub: t('kpi.critical_high.sub', { critical: s.tier_counts.Critical, high: s.tier_counts.High }), accent: 'var(--risk-critical)',
+      context: t('kpi.critical_high.context'),
       viz: donut(s.tier_counts.Critical + s.tier_counts.High, s.total_counties, cssVar('--risk-critical'), t('kpi.critical_high.donut_lab')),
     },
     {
       label: t('kpi.287g'), value: s['287g_active_count'], sub: t('kpi.287g.sub'), accent: 'var(--risk-high)',
+      context: t('kpi.287g.context'),
       viz: segBar(Object.entries(p287gGroups).sort((a, b) => b[1] - a[1]).map(([k, v]) => ({ label: k, v, color: p287gColorMap[k] || cssVar('--risk-high') }))),
     },
     {
       label: t('kpi.cameras'), value: fmt(camTotal), sub: t('kpi.cameras.sub', { flock: fmt(DATA.cameraTotals.flock), counties: s.counties_with_cameras || s.flock_county_count }), accent: 'var(--color-accent)',
+      context: t('kpi.cameras.context'),
       viz: segBar([
         { label: t('kpi.cameras.flock'), v: flockCount, color: cssVar('--risk-critical') },
         { label: t('kpi.cameras.other'), v: otherCams, color: cssVar('--color-primary') },
@@ -186,10 +190,12 @@ function renderKPIs() {
     },
     {
       label: t('kpi.fb'), value: fmt(s.total_foreign_born), sub: t('kpi.fb.sub'), accent: 'var(--color-primary)',
+      context: t('kpi.fb.context'),
       viz: microBars(tierKeys.map(tk => ({ label: t('tier.' + tk.toLowerCase()), v: fbByTier[tk], color: tierColors[tk] })), (n) => fmt(n)),
     },
     {
       label: t('kpi.arrests'), value: fmt(s.total_observed_arrests), sub: t('kpi.arrests.sub', { n: arrestsCount }), accent: 'var(--risk-medium)',
+      context: t('kpi.arrests.context'),
       viz: microBars(tierKeys.map(tk => ({ label: t('tier.' + tk.toLowerCase()), v: arrestsByTier[tk], color: tierColors[tk] })), (n) => fmt(n)),
     },
   ];
@@ -199,6 +205,7 @@ function renderKPIs() {
       <div class="label">${c.label}</div>
       <div class="value">${c.value}</div>
       <div class="sub">${c.sub}</div>
+      ${c.context ? `<div class="context">${c.context}</div>` : ''}
       ${c.viz || ''}
     </div>
   `).join('');

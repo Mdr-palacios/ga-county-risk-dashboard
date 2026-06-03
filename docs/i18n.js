@@ -41,6 +41,22 @@ window.I18N = {
     'kpi.arrests': 'Observed arrests',
     'kpi.arrests.sub': 'Across {n} counties; coalition-aggregated',
 
+    // KPI quick-context blurbs (one short line per card, for newcomers)
+    'kpi.counties_tracked.context': 'Every Georgia county is in the model. Tiers show which ones face the most enforcement pressure.',
+    'kpi.critical_high.context': 'These are the counties where ICE has the most local cooperation and infrastructure to act on.',
+    'kpi.287g.context': "Local sheriff's offices that signed contracts letting their staff act with ICE authority.",
+    'kpi.cameras.context': 'License-plate readers (Flock and similar) build a passive surveillance net that ICE can query.',
+    'kpi.fb.context': 'The population most directly affected. High-tier counties hold most of the state’s immigrants.',
+    'kpi.arrests.context': 'Where ICE has actually acted; the pattern matches the tier system, which validates the model.',
+
+    // HB 1105 collapsible explainer
+    'hb1105.tag': 'Quick context',
+    'hb1105.q': 'What is HB 1105, and why does it matter for this dashboard?',
+    'hb1105.p1': "HB 1105 is Georgia's 2024 anti-sanctuary law. Signed in May 2024, it requires every county jail to check immigration status on intake and to honor ICE detainers; it also makes sheriffs personally liable if they refuse to cooperate.",
+    'hb1105.p2': 'Practically, that means every one of the 159 counties is a forced cooperator with ICE, whether the local sheriff wants that or not. Sanctuary policies are no longer an option under state law.',
+    'hb1105.p3': 'In this risk model, HB 1105 contributes a baseline score that applies statewide. The reason a county lands in Critical or High tier is not HB 1105 alone, but what gets layered on top: active 287(g) agreements, dense Flock and ALPR surveillance, ICE infrastructure proximity, and observed enforcement activity. HB 1105 is the floor; the tier system shows where the ceiling is highest.',
+    'hb1105.source': 'Read HB 1105 (Georgia General Assembly) →',
+
     // Map section
     'map.h2': 'Risk map · click any county',
     'map.desc': 'Counties shaded by composite risk score (v3). Score combines 287(g) participation, immigrant population share, ICE infrastructure proximity, observed arrests, and surveillance mesh density.',
@@ -242,6 +258,20 @@ window.I18N = {
     'kpi.arrests': 'Arrestos observados',
     'kpi.arrests.sub': 'En {n} condados; agregados por la coalición',
 
+    'kpi.counties_tracked.context': 'Cada condado de Georgia está en el modelo. Los niveles muestran cuáles enfrentan más presión de aplicación.',
+    'kpi.critical_high.context': 'Son los condados donde ICE tiene más cooperación local e infraestructura para actuar.',
+    'kpi.287g.context': 'Oficinas locales de sheriff que firmaron contratos permitiendo a su personal actuar con autoridad de ICE.',
+    'kpi.cameras.context': 'Lectores de placas (Flock y similares) crean una red de vigilancia pasiva que ICE puede consultar.',
+    'kpi.fb.context': 'La población más directamente afectada. Los condados de nivel alto concentran la mayoría de inmigrantes del estado.',
+    'kpi.arrests.context': 'Dónde ICE ya ha actuado; el patrón coincide con los niveles, lo que valida el modelo.',
+
+    'hb1105.tag': 'Contexto rápido',
+    'hb1105.q': '¿Qué es la HB 1105 y por qué importa para este tablero?',
+    'hb1105.p1': 'La HB 1105 es la ley antisantuario de Georgia de 2024. Firmada en mayo de 2024, obliga a cada cárcel de condado a verificar el estatus migratorio al momento del ingreso y a respetar las órdenes de detención de ICE; también hace a los sheriffs personalmente responsables si se niegan a cooperar.',
+    'hb1105.p2': 'En la práctica, eso significa que los 159 condados son cooperadores forzados con ICE, quiera o no el sheriff local. Las políticas de santuario ya no son una opción bajo la ley estatal.',
+    'hb1105.p3': 'En este modelo de riesgo, la HB 1105 aporta una puntuación base que se aplica a todo el estado. La razón por la que un condado cae en nivel Crítico o Alto no es solo la HB 1105, sino lo que se suma encima: acuerdos 287(g) activos, vigilancia densa de Flock y ALPR, proximidad a infraestructura de ICE y actividad de aplicación observada. La HB 1105 es el piso; el sistema de niveles muestra dónde el techo es más alto.',
+    'hb1105.source': 'Leer la HB 1105 (Asamblea General de Georgia) →',
+
     'map.h2': 'Mapa de riesgo · haz clic en cualquier condado',
     'map.desc': 'Condados sombreados por puntuación de riesgo compuesta (v3). La puntuación combina la participación en 287(g), la proporción de población inmigrante, la cercanía a infraestructura de ICE, los arrestos observados y la densidad de la red de vigilancia.',
     'map.mode.risk': 'Nivel de riesgo',
@@ -431,6 +461,20 @@ window.I18N = {
     'kpi.fb.sub': 'Trên toàn bang',
     'kpi.arrests': 'Vụ bắt giữ được ghi nhận',
     'kpi.arrests.sub': 'Tại {n} quận; tổng hợp bởi liên minh',
+
+    'kpi.counties_tracked.context': 'Mỗi quận của Georgia đều có trong mô hình. Các mức cho thấy quận nào chịu áp lực thực thi nhiều nhất.',
+    'kpi.critical_high.context': 'Đây là những quận nơi ICE có nhiều sự hợp tác địa phương và hạ tầng để hành động nhất.',
+    'kpi.287g.context': 'Các văn phòng sheriff địa phương đã ký hợp đồng cho phép nhân viên của họ hành động với thẩm quyền của ICE.',
+    'kpi.cameras.context': 'Camera đọc biển số (Flock và tương tự) tạo ra một mạng giám sát thụ động mà ICE có thể truy vấn.',
+    'kpi.fb.context': 'Dân số bị ảnh hưởng trực tiếp nhất. Các quận mức cao tập trung phần lớn người nhập cư của bang.',
+    'kpi.arrests.context': 'Nơi ICE đã thực sự hành động; mẫu khớp với hệ mức, điều này xác nhận mô hình.',
+
+    'hb1105.tag': 'Bối cảnh nhanh',
+    'hb1105.q': 'HB 1105 là gì, và tại sao nó quan trọng cho bảng này?',
+    'hb1105.p1': 'HB 1105 là luật chống nơi trú ẩn của Georgia năm 2024. Được ký vào tháng 5 năm 2024, luật này yêu cầu mọi nhà tù cấp quận phải kiểm tra tình trạng nhập cư khi tiếp nhận và phải tuân thủ các lệnh giữ người của ICE; nó cũng khiến các sheriff chịu trách nhiệm cá nhân nếu từ chối hợp tác.',
+    'hb1105.p2': 'Trên thực tế, điều đó có nghĩa là tất cả 159 quận đều là bên hợp tác bắt buộc với ICE, dù sheriff địa phương có muốn hay không. Các chính sách nơi trú ẩn không còn là một lựa chọn theo luật của bang.',
+    'hb1105.p3': 'Trong mô hình rủi ro này, HB 1105 đóng góp một điểm cơ bản áp dụng cho toàn bang. Lý do một quận rơi vào mức Nghiêm trọng hoặc Cao không phải chỉ do HB 1105, mà do những gì chồng lên trên: các thỏa thuận 287(g) đang hoạt động, mạng giám sát Flock và ALPR dày đặc, sự gần gũi với hạ tầng ICE, và hoạt động thực thi được ghi nhận. HB 1105 là mặt sàn; hệ mức cho thấy nơi nào trần cao nhất.',
+    'hb1105.source': 'Đọc HB 1105 (Hội đồng Lập pháp Georgia) →',
 
     'map.h2': 'Bản đồ rủi ro · nhấp vào bất kỳ quận nào',
     'map.desc': 'Các quận được tô màu theo điểm rủi ro tổng hợp (v3). Điểm số kết hợp mức tham gia 287(g), tỷ lệ dân nhập cư, mức độ gần hạ tầng ICE, các vụ bắt giữ được ghi nhận, và mật độ mạng lưới giám sát.',
