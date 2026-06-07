@@ -1,0 +1,23 @@
+{
+  "total_counties": 82,
+  "tier_counts": {
+    "Critical": 3,
+    "High": 3,
+    "Medium": 12,
+    "Low": 64
+  },
+  "287g_active_count": 5,
+  "raid_2019_direct_count": 5,
+  "raid_2019_total_count": 11,
+  "detention_county_count": 2,
+  "detention_proximity_count": 5,
+  "meatpacking_heavy_count": 5,
+  "total_foreign_born": 89952,
+  "total_hispanic": 102022,
+  "total_pop": 2954160,
+  "raid_2019_workers_arrested": 680,
+  "raid_2019_plants": 7,
+  "raid_2019_cities": 6,
+  "raid_2019_counties": 5,
+  "adams_county_avg_detainees": 2154
+}

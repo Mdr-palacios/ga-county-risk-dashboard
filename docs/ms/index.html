@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title data-i18n="doc.title">Mississippi County Risk Dashboard · Independent analysis by Rosario Palacios</title>
+  <meta name="description" content="Independent analysis by Rosario Palacios tracking county-level immigration enforcement risk across Mississippi: 287(g) agreements, the 2019 raid footprint, ICE detention infrastructure, meatpacking density, demographics, and HB 538." />
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23a5232a'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='system-ui' font-weight='800' font-size='16' fill='white'%3EM%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true" style="background: linear-gradient(135deg, #a5232a 0%, #c93b3b 100%);">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 6l9 4 9-4-9-4-9 4z" />
+            <path d="M3 6v8c0 1 9 4 9 4s9-3 9-4V6" opacity="0.6" />
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="name" data-i18n="header.brand">MS County Risk Dashboard</span>
+          <span class="sub" data-i18n="header.sub">Independent analysis by Rosario Palacios</span>
+        </div>
+      </div>
+      <div class="header-actions">
+        <div class="state-switch" role="group" aria-label="State">
+          <a class="state-btn" href="../ga/"><span>GA</span></a>
+          <a class="state-btn active" href="./"><span>MS</span></a>
+        </div>
+        <div class="lang-switch" role="group" aria-label="Language" data-i18n-attr="aria-label:header.lang.aria">
+          <button type="button" class="lang-btn" data-lang-btn="en">EN</button>
+          <button type="button" class="lang-btn" data-lang-btn="es">ES</button>
+          <button type="button" class="lang-btn" data-lang-btn="vi">VI</button>
+        </div>
+        <button class="btn-pill" data-open-modal="partnership">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+          <span data-i18n="header.cta.pill">Want one for your state?</span>
+        </button>
+        <button class="btn-icon" data-theme-toggle aria-label="Toggle dark mode" data-i18n-attr="aria-label:header.darkmode.aria">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="hero">
+      <h1 data-i18n="hero.h1">Tracking immigration enforcement risk across all 82 Mississippi counties.</h1>
+      <p class="lede" data-i18n="hero.lede">Built for activists and organizations who believe we should #AbolishICE. Mississippi's risk model layers the 2019 Morton/Canton/Carthage poultry-plant raid footprint, 287(g) cooperation, ICE detention infrastructure (Adams and Tallahatchie), meatpacking employer density, and Latino and foreign-born concentration on top of HB 538, the state's 2026 anti-sanctuary mandate.</p>
+      <div class="meta" id="meta-line">
+        <span><span class="dot"></span> <span data-i18n="hero.meta.model">v1 risk model · June 2026</span></span>
+        <span data-i18n="hero.meta.counties">82 counties</span>
+        <span data-i18n="hero.meta.updated">Updated quarterly</span>
+        <span data-i18n="hero.meta.share">Coalition link share only</span>
+      </div>
+
+      <details class="explainer" id="hb538-explainer">
+        <summary>
+          <span class="explainer-tag" data-i18n="hb538.tag">Quick context</span>
+          <span class="explainer-q" data-i18n="hb538.q">What is HB 538, and why does it matter for this dashboard?</span>
+          <svg class="explainer-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="explainer-body">
+          <p data-i18n="hb538.p1">HB 538 is Mississippi's 2026 anti-sanctuary law. Passed by the Senate in March 2026 and headed to Gov. Tate Reeves, it requires every state agency, county, municipality, college, and law-enforcement body to cooperate with ICE, share information on "all aliens within the state," and honor immigration detainer requests. The MS Attorney General has authority to investigate and prosecute any entity that refuses.</p>
+          <p data-i18n="hb538.p2">Practically, that means every one of the 82 counties is a forced cooperator with ICE, regardless of local politics. Sanctuary policies are no longer an option under state law. HB 538 builds on a separate criminalization push (SB 2114, HB 1037) that turns immigration violations into state crimes and explicitly funds 287(g) cooperation.</p>
+          <p data-i18n="hb538.p3">In this risk model, HB 538 contributes a baseline score that applies statewide. The reason a county lands in Critical or High tier is not HB 538 alone, but what gets layered on top: 287(g) agreements, the 2019 raid footprint that still shapes who lives in fear of ICE, ICE detention infrastructure (Adams County Correctional in Natchez holds ~2,154 detainees a day), and meatpacking employer density. HB 538 is the floor; the tier system shows where the ceiling is highest.</p>
+          <p class="explainer-source"><a href="https://www.mississippifreepress.org/bill-requiring-mississippi-agencies-to-comply-with-ice-moves-closer-to-approval/" target="_blank" rel="noopener" data-i18n="hb538.source">Read HB 538 coverage (Mississippi Free Press) →</a></p>
+        </div>
+      </details>
+
+      <details class="explainer" id="raid-explainer" style="margin-top: var(--space-3);">
+        <summary>
+          <span class="explainer-tag" data-i18n="raid.tag">Why 2019 still matters</span>
+          <span class="explainer-q" data-i18n="raid.q">The August 7, 2019 ICE raids: 680 arrests in one day</span>
+          <svg class="explainer-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="explainer-body">
+          <p data-i18n="raid.p1">On August 7, 2019, ICE executed coordinated workplace raids at seven poultry processing plants across six Mississippi cities: Morton (Koch Foods and PH Food, Scott County), Carthage (Pearl River Foods, Leake), Canton (PECO Foods, Madison), Pelahatchie (A&B Inc., Rankin), Walnut Grove (PECO Foods, Leake), Bay Springs (PECO Foods, Jasper), and Sebastopol (PECO Foods, Scott). Roughly 680 workers were arrested in a single day.</p>
+          <p data-i18n="raid.p2">The aftermath shaped the politics of immigrant labor in Mississippi for years. Families in Morton, Forest, Laurel, and Carthage were broken up overnight. Many workers were released on humanitarian grounds with ankle monitors and remain under ICE supervision today. Federal indictments hit personnel at two smaller companies (Pearl River Foods and A&B), while executives at Koch Foods and PECO Foods, who had publicly endorsed Gov. Phil Bryant and given thousands to Mississippi Republicans, were never charged. The asymmetry was the lesson.</p>
+          <p data-i18n="raid.p3">In this model, the five counties where plants were directly hit (Scott, Leake, Madison, Rankin, Jasper) carry a 25-point raid factor. Adjacent counties where significant numbers of affected families lived (Jones, Forrest, Newton, Smith, Neshoba, Simpson) carry 12 points. This is not historical context; it is current threat geography.</p>
+          <p class="explainer-source"><a href="https://mississippitoday.org/2019/08/07/families-scramble-for-answers-following-immigration-raids-680-people-working-at-food-processing-plants-detained/" target="_blank" rel="noopener" data-i18n="raid.source">2019 raid overview (Mississippi Today) →</a></p>
+        </div>
+      </details>
+    </section>
+
+    <!-- KPIs -->
+    <section class="section" aria-label="Key indicators">
+      <div class="kpi-grid" id="kpi-grid"></div>
+    </section>
+
+    <!-- Map + detail -->
+    <section class="section" aria-labelledby="map-h">
+      <div class="section-head">
+        <div>
+          <h2 id="map-h" data-i18n="map.h2">Risk map · click any county</h2>
+          <p class="desc" data-i18n="map.desc">Counties shaded by composite risk score. Score combines 287(g) status, 2019 raid footprint, ICE detention proximity, meatpacking density, and foreign-born / Latino concentration, on top of the statewide HB 538 floor.</p>
+        </div>
+        <div class="controls">
+          <div class="toggle-group" id="map-mode">
+            <button data-mode="risk_tier" class="active" data-i18n="map.mode.risk">Risk tier</button>
+            <button data-mode="287g_status" data-i18n="map.mode.287g">287(g)</button>
+            <button data-mode="raid_2019" data-i18n="map.mode.raid">2019 raid</button>
+            <button data-mode="detention" data-i18n="map.mode.detention">Detention</button>
+            <button data-mode="fb_pct" data-i18n="map.mode.fb">% Foreign-born</button>
+          </div>
+        </div>
+      </div>
+      <div class="map-wrap">
+        <div class="map-card">
+          <svg id="map" class="map-svg" viewBox="0 0 540 720" role="img" aria-label="Mississippi county risk map"></svg>
+          <div class="legend" id="map-legend"></div>
+        </div>
+        <aside class="panel-card" id="detail-panel" aria-live="polite">
+          <div class="empty" id="detail-empty">
+            <p data-i18n="map.empty">Click a county on the map (or pick from the table below) to see its risk profile, 287(g) status, 2019 raid history, and detention proximity.</p>
+          </div>
+          <div id="detail-content" class="hidden"></div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Risk tier + 287(g) network -->
+    <section class="section">
+      <div class="chart-row">
+        <div class="chart-card">
+          <div class="section-head" style="margin-bottom: var(--space-4);">
+            <div>
+              <h2 data-i18n="tier.h2">Risk tier distribution</h2>
+              <p class="desc" data-i18n="tier.desc">How counties stack across the four tiers, with their share of MS's foreign-born population.</p>
+            </div>
+          </div>
+          <div id="tier-bars"></div>
+          <p class="notes" data-i18n="tier.notes">Critical and High tier counties contain a disproportionate share of MS's immigrant population and the entire 2019 raid footprint. Direct legal observer and hotline capacity here first.</p>
+        </div>
+        <div class="chart-card">
+          <div class="section-head" style="margin-bottom: var(--space-4);">
+            <div>
+              <h2 data-i18n="p287g.h2">287(g) participation in Mississippi</h2>
+              <p class="desc" data-i18n="p287g.desc">MS agencies currently participating, by model. Two sheriff's offices have held agreements since 2018 and 2020; expansion accelerated in 2025-2026 with state-funded reimbursement.</p>
+            </div>
+          </div>
+          <div id="287g-bars"></div>
+          <p class="notes"><span data-i18n="p287g.notes_prefix">Sources:</span> <a href="https://www.prisonpolicy.org/blog/2026/02/23/ice_county_collaboration/" target="_blank" rel="noopener" data-i18n="p287g.notes_src">Prison Policy Initiative 287(g) tracker (Feb 2026)</a><span data-i18n="p287g.notes_suffix">; cross-checked against MS Independent reporting and MS Free Press.</span></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2019 raid footprint + methodology -->
+    <section class="section">
+      <div class="chart-row">
+        <div class="chart-card">
+          <div class="section-head" style="margin-bottom: var(--space-4);">
+            <div>
+              <h2 data-i18n="raidchart.h2">2019 raid footprint · counties</h2>
+              <p class="desc" data-i18n="raidchart.desc">Plant sites (direct hits) and adjacent counties where significant numbers of affected families lived.</p>
+            </div>
+          </div>
+          <div id="raid-bars"></div>
+          <p class="notes" data-i18n="raidchart.notes">Direct sites carry 25 points; adjacent counties carry 12. Sources: Mississippi Today, Mississippi Free Press, BBC News, ICE press releases.</p>
+        </div>
+        <div class="chart-card">
+          <div class="section-head" style="margin-bottom: var(--space-4);">
+            <div>
+              <h2 data-i18n="method.h2">What drives a county's score</h2>
+              <p class="desc" data-i18n="method.desc">Methodology in plain language.</p>
+            </div>
+          </div>
+          <div class="methodology">
+            <div class="score-bar-row"><span class="lab" data-i18n="method.row.287g">287(g) status</span><div class="track"><div class="fill" style="width: 25%; background: var(--color-primary);"></div></div><span class="num">25</span></div>
+            <div class="score-bar-row"><span class="lab" data-i18n="method.row.raid">2019 raid footprint</span><div class="track"><div class="fill" style="width: 25%; background: var(--color-primary);"></div></div><span class="num">25</span></div>
+            <div class="score-bar-row"><span class="lab" data-i18n="method.row.detention">ICE detention proximity</span><div class="track"><div class="fill" style="width: 25%; background: var(--color-primary);"></div></div><span class="num">25</span></div>
+            <div class="score-bar-row"><span class="lab" data-i18n="method.row.meatpacking">Meatpacking density</span><div class="track"><div class="fill" style="width: 20%; background: var(--color-primary);"></div></div><span class="num">20</span></div>
+            <div class="score-bar-row"><span class="lab" data-i18n="method.row.fb">Foreign-born %</span><div class="track"><div class="fill" style="width: 25%; background: var(--color-accent);"></div></div><span class="num">25</span></div>
+            <div class="score-bar-row"><span class="lab" data-i18n="method.row.hisp">Hispanic %</span><div class="track"><div class="fill" style="width: 23%; background: var(--color-accent);"></div></div><span class="num">23</span></div>
+            <div class="score-bar-row"><span class="lab" data-i18n="method.row.hb538">HB 538 base (statewide)</span><div class="track"><div class="fill" style="width: 5%; background: var(--color-accent);"></div></div><span class="num">5</span></div>
+            <p class="notes" style="margin-top: var(--space-4);" data-i18n="method.notes">Tiers: Critical ≥ 70; High 50 to 69; Medium 25 to 49; Low &lt; 25. The model is directional, not predictive.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Filterable county table (collapsible) -->
+    <section class="section">
+      <details class="county-details" id="county-details">
+        <summary>
+          <span class="summary-text">
+            <span class="summary-h" data-i18n="tbl.summary_h">All counties</span>
+            <span class="summary-sub"><span data-i18n="tbl.summary_sub">Search, sort, and click a row to load it above.</span> <span id="county-count-pill">82 counties</span></span>
+          </span>
+          <span class="summary-chev" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </span>
+        </summary>
+        <div class="filter-bar">
+          <input id="search" type="search" placeholder="Search counties..." aria-label="Search counties" data-i18n-attr="placeholder:tbl.search.placeholder,aria-label:tbl.search.aria" />
+          <select id="filter-tier" aria-label="Filter by risk tier" data-i18n-attr="aria-label:tbl.filter.tier.aria">
+            <option value="" data-i18n="tbl.filter.tier.all">All tiers</option>
+            <option value="Critical" data-i18n="tbl.filter.tier.critical">Critical only</option>
+            <option value="High" data-i18n="tbl.filter.tier.high">High only</option>
+            <option value="Medium" data-i18n="tbl.filter.tier.medium">Medium only</option>
+            <option value="Low" data-i18n="tbl.filter.tier.low">Low only</option>
+          </select>
+          <select id="filter-287g" aria-label="Filter by 287(g)" data-i18n-attr="aria-label:tbl.filter.287g.aria">
+            <option value="" data-i18n="tbl.filter.287g.all">All 287(g)</option>
+            <option value="active" data-i18n="tbl.filter.287g.active">Active 287(g)</option>
+            <option value="inactive" data-i18n="tbl.filter.287g.inactive">No 287(g)</option>
+          </select>
+          <select id="filter-raid" aria-label="Filter by 2019 raid footprint" data-i18n-attr="aria-label:tbl.filter.raid.aria">
+            <option value="" data-i18n="tbl.filter.raid.all">Anywhere in MS</option>
+            <option value="direct" data-i18n="tbl.filter.raid.direct">Direct 2019 plant sites</option>
+            <option value="footprint" data-i18n="tbl.filter.raid.adjacent">In raid footprint (direct + adjacent)</option>
+            <option value="outside" data-i18n="tbl.filter.raid.outside">Outside raid footprint</option>
+          </select>
+        </div>
+        <div class="table-wrap">
+          <table class="county-table" id="county-table">
+            <thead>
+              <tr>
+                <th data-sort="county" data-i18n="tbl.col.county">County</th>
+                <th data-sort="risk_total" class="num" data-i18n="tbl.col.score">Score</th>
+                <th data-sort="risk_tier" data-i18n="tbl.col.tier">Tier</th>
+                <th data-sort="287g_status" data-i18n="tbl.col.287g">287(g)</th>
+                <th data-sort="raid_2019_status" data-i18n="tbl.col.raid">2019 raid</th>
+                <th data-sort="detention_status" data-i18n="tbl.col.detention">Detention</th>
+                <th data-sort="score_meatpacking" class="num" data-i18n="tbl.col.meat">Meatpacking</th>
+                <th data-sort="fb_pct" class="num" data-i18n="tbl.col.fb">FB %</th>
+                <th data-sort="hisp_pct" class="num" data-i18n="tbl.col.hisp">Hisp %</th>
+              </tr>
+            </thead>
+            <tbody id="county-tbody"></tbody>
+          </table>
+        </div>
+        <p class="notes"><span data-i18n="tbl.notes.demographics">Demographics:</span> <a href="https://data.census.gov" target="_blank" rel="noopener" data-i18n="tbl.notes.census">U.S. Census ACS 5-year</a><span data-i18n="tbl.notes.middle">. 287(g): ICE program list and Prison Policy Initiative. Raids: Mississippi Today, Mississippi Free Press, BBC. Detention: CoreCivic disclosures and TRAC.</span></p>
+      </details>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="inner">
+      <div>
+        <p><strong data-i18n="footer.line1.strong">Independent analysis by Rosario Palacios.</strong> <span data-i18n="footer.line1.rest">This page combines public records into a comparable risk score for coalition planning in Mississippi. Strategic and personnel data (sheriff contacts, observer rosters, attorney triggers) are intentionally excluded from this view.</span></p>
+        <p style="margin-top: var(--space-2);"><span data-i18n="footer.contact">Questions, corrections, or data updates:</span> <a href="mailto:rosario@palacios.community">rosario@palacios.community</a></p>
+        <p style="margin-top: var(--space-2);"><span data-i18n="footer.crosslink">Looking for Georgia? See the</span> <a href="../ga/" data-i18n="footer.crosslink_link">GA County Risk Dashboard</a>.</p>
+      </div>
+      <div>
+        <p class="cite"><span data-i18n="footer.build">v1 model · build</span> <span id="build-date"></span></p>
+        <p style="margin-top: var(--space-2);" data-i18n="footer.audience">Built for coalition partners. Not for public press distribution.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Persistent partnership callout -->
+  <aside class="partnership-banner" id="partnership-banner">
+    <div class="inner">
+      <div class="copy">
+        <strong data-i18n="banner.strong">From another state?</strong>
+        <span data-i18n="banner.body">If you're an #AbolishICE organizer or coalition working on immigrant rights, voter access, or civil-rights work, I can partner with you to research and build a county-level risk dashboard for your state.</span>
+      </div>
+      <button class="btn-primary" data-open-modal="partnership" data-i18n="banner.cta">Start a conversation</button>
+    </div>
+  </aside>
+
+  <!-- Signup modal -->
+  <div class="modal-backdrop" id="modal-signup" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="signup-title">
+    <div class="modal">
+      <button class="modal-close" data-close-modal aria-label="Close" data-i18n-attr="aria-label:modal.close.aria">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6l-12 12"/></svg>
+      </button>
+      <div class="modal-head">
+        <h3 id="signup-title" data-i18n="modal.signup.h3">Quick check-in before you keep exploring</h3>
+        <p data-i18n="modal.signup.p">This dashboard is an independent analysis. If you'd like occasional updates as new data is added, drop your email; either choice keeps the dashboard open.</p>
+      </div>
+      <iframe id="signup-frame" data-form-id="261534821207048" title="Stay in the loop" allowtransparency="true" allow="geolocation; microphone; camera; fullscreen" frameborder="0" style="width:100%;" loading="lazy" data-i18n-attr="title:modal.signup.frame_title"></iframe>
+      <div class="modal-foot">
+        <button class="btn-ghost" data-close-modal data-dismiss-signup data-i18n="modal.signup.skip">Skip for now</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Partnership modal -->
+  <div class="modal-backdrop" id="modal-partnership" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="partnership-title">
+    <div class="modal">
+      <button class="modal-close" data-close-modal aria-label="Close" data-i18n-attr="aria-label:modal.close.aria">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6l-12 12"/></svg>
+      </button>
+      <div class="modal-head">
+        <h3 id="partnership-title" data-i18n="modal.partnership.h3">Build this for your state</h3>
+        <p data-i18n="modal.partnership.p">Tell me about the state you'd want to assess and the problem you're trying to solve. I'll be in touch within a few days.</p>
+      </div>
+      <iframe id="partnership-frame" data-form-id="261535151874055" title="Build this for your state" allowtransparency="true" allow="geolocation; microphone; camera; fullscreen" frameborder="0" style="width:100%;" loading="lazy" data-i18n-attr="title:modal.partnership.frame_title"></iframe>
+    </div>
+  </div>
+
+  <div class="tooltip" id="tooltip" role="tooltip"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
+  <script src="./i18n.js" defer></script>
+  <script src="./app.js" defer></script>
+</body>
+</html>

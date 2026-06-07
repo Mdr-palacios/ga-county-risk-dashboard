@@ -48,12 +48,12 @@ let SORT_KEY = 'risk_total_v3';
 let SORT_DIR = -1; // desc by default
 
 Promise.all([
-  fetch('./data/counties.json').then(r => r.json()),
-  fetch('./data/ga-counties.json').then(r => r.json()),
-  fetch('./data/summary.json').then(r => r.json()),
-  fetch('./data/cameras.json').then(r => r.json()).catch(() => ({ cameras: [], count: 0, flock_count: 0 })),
-  fetch('./data/roads.json').then(r => r.json()).catch(() => ({ interstates: [] })),
-  fetch('./data/places.json').then(r => r.json()).catch(() => ({ places: [] })),
+  fetch('../data/counties.json').then(r => r.json()),
+  fetch('../data/ga-counties.json').then(r => r.json()),
+  fetch('../data/summary.json').then(r => r.json()),
+  fetch('../data/cameras.json').then(r => r.json()).catch(() => ({ cameras: [], count: 0, flock_count: 0 })),
+  fetch('../data/roads.json').then(r => r.json()).catch(() => ({ interstates: [] })),
+  fetch('../data/places.json').then(r => r.json()).catch(() => ({ places: [] })),
 ]).then(([counties, topo, summary, cams, roads, places]) => {
   DATA.counties = counties;
   DATA.topo = topo;
