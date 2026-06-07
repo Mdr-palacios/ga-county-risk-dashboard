@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title data-i18n="doc.title">Mississippi County Risk Dashboard · Independent analysis by Rosario Palacios</title>
-  <meta name="description" content="Independent analysis by Rosario Palacios tracking county-level immigration enforcement risk across Mississippi: 287(g) agreements, the 2019 raid footprint, ICE detention infrastructure, meatpacking density, demographics, and HB 538." />
+  <meta name="description" content="Independent analysis by Rosario Palacios tracking county-level immigration enforcement risk across Mississippi: 287(g) agreements, the 2019 raid footprint, ICE detention infrastructure, meatpacking density, Flock Safety ALPR surveillance mesh, demographics, and HB 538." />
   <meta name="robots" content="noindex" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23a5232a'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='system-ui' font-weight='800' font-size='16' fill='white'%3EM%3C/text%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -51,7 +51,7 @@
   <main class="shell">
     <section class="hero">
       <h1 data-i18n="hero.h1">Tracking immigration enforcement risk across all 82 Mississippi counties.</h1>
-      <p class="lede" data-i18n="hero.lede">Built for activists and organizations who believe we should #AbolishICE. Mississippi's risk model layers the 2019 Morton/Canton/Carthage poultry-plant raid footprint, 287(g) cooperation, ICE detention infrastructure (Adams and Tallahatchie), meatpacking employer density, and Latino and foreign-born concentration on top of HB 538, the state's 2026 anti-sanctuary mandate.</p>
+      <p class="lede" data-i18n="hero.lede">Built for activists and organizations who believe we should #AbolishICE. Mississippi's risk model layers the 2019 Morton/Canton/Carthage poultry-plant raid footprint, 287(g) cooperation, ICE detention infrastructure (Adams and Tallahatchie), meatpacking employer density, the Flock Safety ALPR surveillance mesh (891 cameras across 41 cities), and Latino and foreign-born concentration on top of HB 538, the state's 2026 anti-sanctuary mandate.</p>
       <div class="meta" id="meta-line">
         <span><span class="dot"></span> <span data-i18n="hero.meta.model">v1 risk model · June 2026</span></span>
         <span data-i18n="hero.meta.counties">82 counties</span>
@@ -70,6 +70,20 @@
           <p data-i18n="hb538.p2">Practically, that means every one of the 82 counties is a forced cooperator with ICE, regardless of local politics. Sanctuary policies are no longer an option under state law. HB 538 builds on a separate criminalization push (SB 2114, HB 1037) that turns immigration violations into state crimes and explicitly funds 287(g) cooperation.</p>
           <p data-i18n="hb538.p3">In this risk model, HB 538 contributes a baseline score that applies statewide. The reason a county lands in Critical or High tier is not HB 538 alone, but what gets layered on top: 287(g) agreements, the 2019 raid footprint that still shapes who lives in fear of ICE, ICE detention infrastructure (Adams County Correctional in Natchez holds ~2,154 detainees a day), and meatpacking employer density. HB 538 is the floor; the tier system shows where the ceiling is highest.</p>
           <p class="explainer-source"><a href="https://www.mississippifreepress.org/bill-requiring-mississippi-agencies-to-comply-with-ice-moves-closer-to-approval/" target="_blank" rel="noopener" data-i18n="hb538.source">Read HB 538 coverage (Mississippi Free Press) →</a></p>
+        </div>
+      </details>
+
+      <details class="explainer" id="flock-explainer" style="margin-top: var(--space-3);">
+        <summary>
+          <span class="explainer-tag" data-i18n="flock.tag">Surveillance infrastructure</span>
+          <span class="explainer-q" data-i18n="flock.q">Flock Safety ALPRs: 891 cameras feeding the same network that runs background checks</span>
+          <svg class="explainer-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="explainer-body">
+          <p data-i18n="flock.p1">Flock Safety automated license plate readers (ALPRs) are stationary, solar-powered cameras that capture every passing vehicle's plate, make, model, color, and unique features, then route that data to a searchable national network shared across thousands of police agencies. DeFlock.me has mapped roughly 891 Flock cameras across 41 Mississippi cities and towns, with the heaviest density in Madison County (Ridgeland alone has ~55 cameras), DeSoto County (Olive Branch and Southaven), Harrison County (Gulfport and D'Iberville), and Hinds County (Jackson).</p>
+          <p data-i18n="flock.p2">Two things make this directly relevant to immigration enforcement. First, the Electronic Frontier Foundation documented in May 2026 that law enforcement agencies in Mississippi, Missouri, Texas, and Illinois are using Flock to run background checks, the kind of dragnet use Flock claims it does not permit. Second, EFF has separately shown Flock being used to surveil protesters and activists, and Vicksburg just approved 10 more cameras on April 6, 2026, partially grant-funded. The cumulative effect is a state-spanning mesh that ICE and 287(g) sheriffs can query, often through informal channels and shared logins, without ever filing a public records request.</p>
+          <p data-i18n="flock.p3">In this risk model, Flock contributes up to 15 points, scaled by camera density: 15 for heavy mesh (40+ cameras in the county, like Madison or DeSoto), 12 for dense (20-39), 9 for moderate (10-19), 6 for light (5-9), and 3 for any confirmed Flock city. Crossing a county line with a Flock mesh is not a neutral event for an undocumented worker or organizer; it is a recorded vehicle movement that can be retrieved months later.</p>
+          <p class="explainer-source"><a href="https://maps.deflock.org/" target="_blank" rel="noopener" data-i18n="flock.source">DeFlock.me map of ALPR cameras →</a></p>
         </div>
       </details>
 
@@ -98,7 +112,7 @@
       <div class="section-head">
         <div>
           <h2 id="map-h" data-i18n="map.h2">Risk map · click any county</h2>
-          <p class="desc" data-i18n="map.desc">Counties shaded by composite risk score. Score combines 287(g) status, 2019 raid footprint, ICE detention proximity, meatpacking density, and foreign-born / Latino concentration, on top of the statewide HB 538 floor.</p>
+          <p class="desc" data-i18n="map.desc">Counties shaded by composite risk score. Score combines 287(g) status, 2019 raid footprint, ICE detention proximity, meatpacking density, Flock Safety ALPR mesh, and foreign-born / Latino concentration, on top of the statewide HB 538 floor.</p>
         </div>
         <div class="controls">
           <div class="toggle-group" id="map-mode">
@@ -106,6 +120,7 @@
             <button data-mode="287g_status" data-i18n="map.mode.287g">287(g)</button>
             <button data-mode="raid_2019" data-i18n="map.mode.raid">2019 raid</button>
             <button data-mode="detention" data-i18n="map.mode.detention">Detention</button>
+            <button data-mode="flock" data-i18n="map.mode.flock">Flock mesh</button>
             <button data-mode="fb_pct" data-i18n="map.mode.fb">% Foreign-born</button>
           </div>
         </div>
@@ -175,6 +190,7 @@
             <div class="score-bar-row"><span class="lab" data-i18n="method.row.raid">2019 raid footprint</span><div class="track"><div class="fill" style="width: 25%; background: var(--color-primary);"></div></div><span class="num">25</span></div>
             <div class="score-bar-row"><span class="lab" data-i18n="method.row.detention">ICE detention proximity</span><div class="track"><div class="fill" style="width: 25%; background: var(--color-primary);"></div></div><span class="num">25</span></div>
             <div class="score-bar-row"><span class="lab" data-i18n="method.row.meatpacking">Meatpacking density</span><div class="track"><div class="fill" style="width: 20%; background: var(--color-primary);"></div></div><span class="num">20</span></div>
+            <div class="score-bar-row"><span class="lab" data-i18n="method.row.flock">Flock ALPR mesh</span><div class="track"><div class="fill" style="width: 15%; background: var(--color-primary);"></div></div><span class="num">15</span></div>
             <div class="score-bar-row"><span class="lab" data-i18n="method.row.fb">Foreign-born %</span><div class="track"><div class="fill" style="width: 25%; background: var(--color-accent);"></div></div><span class="num">25</span></div>
             <div class="score-bar-row"><span class="lab" data-i18n="method.row.hisp">Hispanic %</span><div class="track"><div class="fill" style="width: 23%; background: var(--color-accent);"></div></div><span class="num">23</span></div>
             <div class="score-bar-row"><span class="lab" data-i18n="method.row.hb538">HB 538 base (statewide)</span><div class="track"><div class="fill" style="width: 5%; background: var(--color-accent);"></div></div><span class="num">5</span></div>
@@ -216,6 +232,12 @@
             <option value="footprint" data-i18n="tbl.filter.raid.adjacent">In raid footprint (direct + adjacent)</option>
             <option value="outside" data-i18n="tbl.filter.raid.outside">Outside raid footprint</option>
           </select>
+          <select id="filter-flock" aria-label="Filter by Flock surveillance mesh" data-i18n-attr="aria-label:tbl.filter.flock.aria">
+            <option value="" data-i18n="tbl.filter.flock.all">Any Flock status</option>
+            <option value="any" data-i18n="tbl.filter.flock.any">Any Flock cameras</option>
+            <option value="heavy" data-i18n="tbl.filter.flock.heavy">Heavy mesh (40+ cameras)</option>
+            <option value="none" data-i18n="tbl.filter.flock.none">No confirmed Flock</option>
+          </select>
         </div>
         <div class="table-wrap">
           <table class="county-table" id="county-table">
@@ -228,6 +250,7 @@
                 <th data-sort="raid_2019_status" data-i18n="tbl.col.raid">2019 raid</th>
                 <th data-sort="detention_status" data-i18n="tbl.col.detention">Detention</th>
                 <th data-sort="score_meatpacking" class="num" data-i18n="tbl.col.meat">Meatpacking</th>
+                <th data-sort="flock_total" class="num" data-i18n="tbl.col.flock">Flock</th>
                 <th data-sort="fb_pct" class="num" data-i18n="tbl.col.fb">FB %</th>
                 <th data-sort="hisp_pct" class="num" data-i18n="tbl.col.hisp">Hisp %</th>
               </tr>

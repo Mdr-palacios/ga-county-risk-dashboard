@@ -113,6 +113,17 @@ function renderKPIs() {
     else if (m.startsWith('Some')) meatGroups.some++;
   }
 
+  // Flock mesh by density
+  const flockGroups = { heavy: 0, dense: 0, moderate: 0, light: 0, minimal: 0 };
+  for (const c of DATA.counties) {
+    const ft = c.flock_total || 0;
+    if (ft >= 40) flockGroups.heavy++;
+    else if (ft >= 20) flockGroups.dense++;
+    else if (ft >= 10) flockGroups.moderate++;
+    else if (ft >= 5) flockGroups.light++;
+    else if (ft >= 1) flockGroups.minimal++;
+  }
+
   // segmented horizontal bar
   const segBar = (parts) => {
     const total = parts.reduce((a, p) => a + p.v, 0) || 1;
@@ -168,7 +179,7 @@ function renderKPIs() {
       viz: segBar(Object.entries(p287gGroups).sort((a, b) => b[1] - a[1]).map(([k, v]) => ({ label: k, v, color: p287gColorMap[k] || cssVar('--risk-high') }))),
     },
     {
-      label: t('kpi.raid'), value: s.raid_2019_total_count, sub: t('kpi.raid.sub', { workers: fmt(s.raid_2019_workers_arrested), plants: s.raid_2019_plants }), accent: 'var(--risk-critical)',
+      label: t('kpi.raid'), value: s.raid_2019_total_count, sub: t('kpi.raid.sub', { direct: s.raid_2019_direct_count, adjacent: s.raid_2019_total_count - s.raid_2019_direct_count }), accent: 'var(--risk-critical)',
       context: t('kpi.raid.context'),
       viz: segBar([
         { label: t('kpi.raid.direct'), v: s.raid_2019_direct_count, color: cssVar('--risk-critical') },
@@ -193,12 +204,29 @@ function renderKPIs() {
   // Optionally append meatpacking as a 7th KPI if i18n provides it
   if (s.meatpacking_heavy_count != null) {
     cards.push({
-      label: t('kpi.meatpacking'), value: s.meatpacking_heavy_count + meatGroups.moderate, sub: t('kpi.meatpacking.sub'), accent: 'var(--color-accent)',
+      label: t('kpi.meatpacking'), value: s.meatpacking_heavy_count + meatGroups.moderate, sub: t('kpi.meatpacking.sub', { heavy: s.meatpacking_heavy_count }), accent: 'var(--color-accent)',
       context: t('kpi.meatpacking.context'),
       viz: segBar([
         { label: t('kpi.meatpacking.heavy'), v: meatGroups.heavy, color: cssVar('--risk-critical') },
         { label: t('kpi.meatpacking.moderate'), v: meatGroups.moderate, color: cssVar('--risk-high') },
         { label: t('kpi.meatpacking.some'), v: meatGroups.some, color: cssVar('--risk-medium') },
+      ]),
+    });
+  }
+
+  // Flock KPI
+  if (s.flock_county_count != null) {
+    cards.push({
+      label: t('kpi.flock'),
+      value: fmt(s.flock_total_cameras),
+      sub: t('kpi.flock.sub', { counties: s.flock_county_count, cities: s.flock_cities_count }),
+      accent: 'var(--risk-high)',
+      context: t('kpi.flock.context'),
+      viz: segBar([
+        { label: t('kpi.flock.heavy'), v: flockGroups.heavy, color: cssVar('--risk-critical') },
+        { label: t('kpi.flock.dense'), v: flockGroups.dense, color: cssVar('--risk-high') },
+        { label: t('kpi.flock.moderate'), v: flockGroups.moderate, color: cssVar('--risk-medium') },
+        { label: t('kpi.flock.light'), v: flockGroups.light + flockGroups.minimal, color: cssVar('--risk-low') },
       ]),
     });
   }
@@ -267,6 +295,14 @@ function fillForFeature(d) {
     if (row.detention_status === 'ICE processing hub') return cssVar('--risk-high');
     return cssVar('--color-divider');
   }
+  if (MAP_MODE === 'flock') {
+    const ft = row.flock_total || 0;
+    if (ft >= 40) return cssVar('--risk-critical');
+    if (ft >= 20) return cssVar('--risk-high');
+    if (ft >= 10) return cssVar('--risk-medium');
+    if (ft >= 1) return cssVar('--risk-low');
+    return cssVar('--color-divider');
+  }
   if (MAP_MODE === 'fb_pct') {
     const max = d3.max(DATA.counties, c => c.fb_pct) || 1;
     const v = Math.min(1, row.fb_pct / max);
@@ -297,6 +333,14 @@ function drawLegend() {
       { label: t('legend.detention_host'), color: cssVar('--risk-critical') },
       { label: t('legend.detention_hub'), color: cssVar('--risk-high') },
       { label: t('legend.detention_none'), color: cssVar('--color-divider') },
+    ];
+  } else if (MAP_MODE === 'flock') {
+    items = [
+      { label: t('legend.flock_heavy'), color: cssVar('--risk-critical') },
+      { label: t('legend.flock_dense'), color: cssVar('--risk-high') },
+      { label: t('legend.flock_moderate'), color: cssVar('--risk-medium') },
+      { label: t('legend.flock_light'), color: cssVar('--risk-low') },
+      { label: t('legend.flock_none'), color: cssVar('--color-divider') },
     ];
   } else if (MAP_MODE === 'fb_pct') {
     items = [
@@ -329,7 +373,10 @@ function showTip(e, d) {
   const ag = row['287g_status'] === 'None' ? t('tip.no_287g') : row['287g_status'];
   const tierLabel = t('tier.' + row.risk_tier.toLowerCase());
   const raidBit = row.raid_2019_status === 'Direct 2019 raid site' ? ' · 2019' : '';
-  tip.innerHTML = `<div class="t-name">${row.county} ${t('detail.county_suffix')}</div><div class="t-meta">${tierLabel} · ${t('tip.score')} ${row.risk_total} · ${ag}${raidBit}</div>`;
+  const flockBit = (row.flock_total || 0) >= 40 ? ' · ' + t('tip.flock_heavy')
+                  : (row.flock_total || 0) >= 1 ? ' · ' + t('tip.flock', { n: row.flock_total })
+                  : '';
+  tip.innerHTML = `<div class="t-name">${row.county} ${t('detail.county_suffix')}</div><div class="t-meta">${tierLabel} · ${t('tip.score')} ${row.risk_total} · ${ag}${raidBit}${flockBit}</div>`;
   tip.classList.add('show');
   moveTip(e);
 }
@@ -383,6 +430,11 @@ function renderDetail(c) {
   else if (c.detention_status === 'ICE processing hub') tags.push({ t: t('detail.tag.detention_hub'), cls: 'warn' });
   if ((c.meatpacking_status || '').startsWith('Heavy')) tags.push({ t: t('detail.tag.meat_heavy'), cls: 'warn' });
   else if ((c.meatpacking_status || '').startsWith('Moderate')) tags.push({ t: t('detail.tag.meat_mod'), cls: '' });
+  const ft = c.flock_total || 0;
+  if (ft >= 40) tags.push({ t: t('detail.tag.flock_heavy', { n: ft }), cls: 'danger' });
+  else if (ft >= 20) tags.push({ t: t('detail.tag.flock_dense', { n: ft }), cls: 'warn' });
+  else if (ft >= 10) tags.push({ t: t('detail.tag.flock_moderate', { n: ft }), cls: 'warn' });
+  else if (ft >= 1) tags.push({ t: t('detail.tag.flock_light', { n: ft }), cls: '' });
   if (tags.length === 0) tags.push({ t: t('detail.tag.none'), cls: 'ok' });
 
   const maxBars = [
@@ -390,6 +442,7 @@ function renderDetail(c) {
     { label: t('detail.score.raid'), val: c.score_raid_2019, max: 25 },
     { label: t('detail.score.detention'), val: c.score_detention, max: 25 },
     { label: t('detail.score.meatpacking'), val: c.score_meatpacking, max: 20 },
+    { label: t('detail.score.flock'), val: c.score_flock || 0, max: 15 },
     { label: t('detail.score.fb'), val: c.score_foreign_born, max: 25 },
     { label: t('detail.score.hisp'), val: c.score_hispanic, max: 23 },
     { label: t('detail.score.hb538'), val: c.score_hb538_base, max: 5 },
@@ -413,11 +466,13 @@ function renderDetail(c) {
       <div class="row"><span class="l">${t('detail.stat.hb538')}</span><span class="v" style="font-size: var(--text-sm); font-family: var(--font-body); font-weight: 600;">${c.hb538_status}</span></div>
       <div class="row"><span class="l">${t('detail.stat.detention')}</span><span class="v" style="font-size: var(--text-sm); font-family: var(--font-body); font-weight: 600;">${c.detention_status}</span></div>
       <div class="row"><span class="l">${t('detail.stat.meatpacking')}</span><span class="v" style="font-size: var(--text-sm); font-family: var(--font-body); font-weight: 600;">${c.meatpacking_status}</span></div>
+      <div class="row"><span class="l">${t('detail.stat.flock')}</span><span class="v" style="font-size: var(--text-sm); font-family: var(--font-body); font-weight: 600;">${(c.flock_total || 0) > 0 ? t('detail.stat.flock_value', { total: c.flock_total, cities: (c.flock_cities || []).length }) : t('detail.stat.flock_none')}</span></div>
     </div>
 
     ${c['287g_agencies'] ? `<p style="font-size: var(--text-xs); color: var(--color-text-muted); margin-bottom: var(--space-3);"><strong style="color: var(--color-text);">${t('detail.287g_agencies')}</strong> ${c['287g_agencies']}</p>` : ''}
     ${c.raid_2019_notes ? `<p style="font-size: var(--text-xs); color: var(--color-text-muted); margin-bottom: var(--space-3);"><strong style="color: var(--color-text);">${t('detail.raid_notes')}</strong> ${c.raid_2019_notes}</p>` : ''}
-    ${c.detention_notes ? `<p style="font-size: var(--text-xs); color: var(--color-text-muted); margin-bottom: var(--space-4);"><strong style="color: var(--color-text);">${t('detail.detention_notes')}</strong> ${c.detention_notes}</p>` : ''}
+    ${c.detention_notes ? `<p style="font-size: var(--text-xs); color: var(--color-text-muted); margin-bottom: var(--space-3);"><strong style="color: var(--color-text);">${t('detail.detention_notes')}</strong> ${c.detention_notes}</p>` : ''}
+    ${(c.flock_cities || []).length ? `<p style="font-size: var(--text-xs); color: var(--color-text-muted); margin-bottom: var(--space-4);"><strong style="color: var(--color-text);">${t('detail.flock_cities')}</strong> ${c.flock_cities.map(fc => `${fc.city} (${fc.count})`).join(', ')}</p>` : ''}
 
     <h4 style="font-size: var(--text-sm); font-weight: 700; margin: var(--space-4) 0 var(--space-3); letter-spacing: -0.01em;">${t('detail.score_breakdown')}</h4>
     ${maxBars.map(b => `
@@ -548,6 +603,7 @@ function renderTable() {
         <td>${isDirect ? `<span class="tag danger" style="padding:1px 5px;font-size:10px;">2019</span>` : isAdj ? `<span class="tag warn" style="padding:1px 5px;font-size:10px;">adj.</span>` : '<span class="dash">·</span>'}</td>
         <td>${isHost ? `<span class="tag danger" style="padding:1px 5px;font-size:10px;">host</span>` : isHub ? `<span class="tag warn" style="padding:1px 5px;font-size:10px;">hub</span>` : '<span class="dash">·</span>'}</td>
         <td class="num">${c.score_meatpacking || '<span class="dash">·</span>'}</td>
+        <td class="num">${(c.flock_total || 0) > 0 ? `<strong>${c.flock_total}</strong>` : '<span class="dash">·</span>'}</td>
         <td class="num">${fmtPct(c.fb_pct)}</td>
         <td class="num">${fmtPct(c.hisp_pct)}</td>
       </tr>
@@ -571,6 +627,8 @@ function filterRows() {
   const tier = document.getElementById('filter-tier').value;
   const ag = document.getElementById('filter-287g').value;
   const raid = document.getElementById('filter-raid').value;
+  const flockEl = document.getElementById('filter-flock');
+  const flock = flockEl ? flockEl.value : '';
   return DATA.counties.filter(c => {
     if (q && !c.county.toLowerCase().includes(q)) return false;
     if (tier && c.risk_tier !== tier) return false;
@@ -579,6 +637,10 @@ function filterRows() {
     if (raid === 'direct' && c.raid_2019_status !== 'Direct 2019 raid site') return false;
     if (raid === 'adjacent' && c.raid_2019_status !== 'Adjacent / affected community') return false;
     if (raid === 'outside' && c.raid_2019_status !== 'Not in 2019 raid footprint') return false;
+    const ft = c.flock_total || 0;
+    if (flock === 'any' && ft === 0) return false;
+    if (flock === 'heavy' && ft < 40) return false;
+    if (flock === 'none' && ft > 0) return false;
     return true;
   });
 }
@@ -626,6 +688,8 @@ function bindFilters() {
   document.getElementById('filter-tier').addEventListener('change', renderTable);
   document.getElementById('filter-287g').addEventListener('change', renderTable);
   document.getElementById('filter-raid').addEventListener('change', renderTable);
+  const flockEl = document.getElementById('filter-flock');
+  if (flockEl) flockEl.addEventListener('change', renderTable);
   document.querySelectorAll('#county-table thead th').forEach(th => {
     th.addEventListener('click', () => {
       const k = th.dataset.sort;

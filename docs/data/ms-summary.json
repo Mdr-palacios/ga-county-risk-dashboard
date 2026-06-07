@@ -1,10 +1,10 @@
 {
   "total_counties": 82,
   "tier_counts": {
-    "Critical": 3,
-    "High": 3,
-    "Medium": 12,
-    "Low": 64
+    "Critical": 4,
+    "High": 7,
+    "Medium": 13,
+    "Low": 58
   },
   "287g_active_count": 5,
   "raid_2019_direct_count": 5,
@@ -12,6 +12,9 @@
   "detention_county_count": 2,
   "detention_proximity_count": 5,
   "meatpacking_heavy_count": 5,
+  "flock_county_count": 26,
+  "flock_total_cameras": 378,
+  "flock_cities_count": 41,
   "total_foreign_born": 89952,
   "total_hispanic": 102022,
   "total_pop": 2954160,

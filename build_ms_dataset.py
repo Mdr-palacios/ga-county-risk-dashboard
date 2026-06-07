@@ -16,6 +16,8 @@ Methodology (parallel to Georgia but adapted):
     score_foreign_born  : 0 - 25 scaled (linearly) on foreign-born % (cap ~10%)
     score_hispanic      : 0 - 23 scaled on Hispanic %
     score_meatpacking   : 0 - 20 based on poultry / meatpacking employer density
+    score_flock         : 0 - 15 based on Flock Safety ALPR camera density,
+                          using DeFlock.me crowdsourced data
     score_hb538_base    : 5 baseline (every county)
 
   Tiers:
@@ -36,6 +38,10 @@ Sources (all confirmed in research):
   - Detention: Adams Co Correctional Center (Natchez, ~2,154 ICE/day),
     Tallahatchie Co Correctional Facility (Tutwiler). [Mississippi Today]
   - HB 538 (2026): statewide ICE-cooperation mandate. [Mississippi Free Press]
+  - Flock Safety ALPR network: DeFlock.me / DontGetFlocked.com mapped 891
+    Flock cameras across 41+ MS cities. EFF (May 2026) documented MS agencies
+    using Flock to run background checks. Vicksburg approved 10 cameras
+    April 6, 2026. [DeFlock.me, EFF, Vicksburg Daily News]
   - Population baseline: 2020 Census via Wikipedia.
   - Hispanic / foreign-born estimates: ACS 2023 5-year (compiled from
     DataUSA / Census Reporter for high-concentration counties; estimated
@@ -45,6 +51,59 @@ import json
 
 # Statewide baseline
 HB538_BASE = 5
+
+# Flock Safety ALPR cameras per city, mapped to county.
+# Source: DeFlock.me / DontGetFlocked.com crowdsourced map (891 MS cameras),
+# confirmed against Vicksburg Daily News (April 2026) and EFF (May 2026).
+# Format: county -> {"cities": [(city, camera_count), ...], "total": int}
+FLOCK_BY_COUNTY = {
+    # Jackson metro
+    "Madison":    {"cities": [("Ridgeland", 55), ("Gluckstadt", 8), ("Madison", 6), ("Canton", 4)], "total": 73},
+    "Hinds":      {"cities": [("Jackson", 35), ("Raymond", 8), ("Clinton", 2), ("Terry", 1)], "total": 46},
+    "Rankin":     {"cities": [("Flowood", 11), ("Pearl", 7), ("Florence", 5)], "total": 23},
+    # Memphis suburbs (DeSoto County)
+    "DeSoto":     {"cities": [("Olive Branch", 29), ("Southaven", 28), ("Hernando", 5), ("Horn Lake", 5)], "total": 67},
+    # Gulf Coast
+    "Harrison":   {"cities": [("Gulfport", 28), ("D'Iberville", 18), ("Long Beach", 3)], "total": 49},
+    "Hancock":    {"cities": [("Bay St. Louis", 19)], "total": 19},
+    "Jackson":    {"cities": [("Gautier", 6), ("Ocean Springs", 3)], "total": 9},
+    # Northeast MS
+    "Lee":        {"cities": [("Tupelo", 18)], "total": 18},
+    "Copiah":     {"cities": [("Crystal Springs", 9)], "total": 9},
+    "Tate":       {"cities": [("Senatobia", 8)], "total": 8},
+    "Lafayette":  {"cities": [("Oxford", 7)], "total": 7},
+    "Lauderdale": {"cities": [("Meridian", 7)], "total": 7},
+    "Scott":      {"cities": [("Forest", 5)], "total": 5},
+    "Grenada":    {"cities": [("Grenada", 5)], "total": 5},
+    "Forrest":    {"cities": [("Hattiesburg", 5), ("Petal", 4)], "total": 9},
+    "Attala":     {"cities": [("Kosciusko", 4)], "total": 4},
+    "Prentiss":   {"cities": [("Booneville", 3)], "total": 3},
+    "Lowndes":    {"cities": [("Columbus", 3)], "total": 3},
+    "Oktibbeha":  {"cities": [("Starkville", 3)], "total": 3},
+    "Pontotoc":   {"cities": [("Pontotoc", 2)], "total": 2},
+    "Leake":      {"cities": [("Carthage", 2)], "total": 2},
+    "Neshoba":    {"cities": [("Philadelphia", 2)], "total": 2},
+    "Washington": {"cities": [("Greenville", 2)], "total": 2},
+    "Union":      {"cities": [("Sherman", 1)], "total": 1},
+    "Bolivar":    {"cities": [("Cleveland", 1)], "total": 1},
+    "Warren":     {"cities": [("Vicksburg", 1)], "total": 1},
+}
+
+# Flock scoring: 0 - 15 points based on camera density.
+# Tiers tuned so the heavy-surveillance metros (Jackson metro, Memphis suburbs,
+# Gulf Coast) hit the top of the scale.
+def score_flock(total):
+    if total >= 40:
+        return 15  # heavy mesh (Madison, DeSoto, Harrison, Hinds)
+    if total >= 20:
+        return 12  # dense (Rankin, Hancock)
+    if total >= 10:
+        return 9   # moderate (Lee, Forrest)
+    if total >= 5:
+        return 6   # light mesh
+    if total >= 1:
+        return 3   # at least one confirmed Flock city
+    return 0
 
 # 287(g) participants. Source: Prison Policy Initiative table (Feb 2026)
 # + MS Independent reporting (Jan 2026).
@@ -320,6 +379,24 @@ def build():
             det_notes = ""
             det_status = "No major detention infrastructure"
 
+        # Flock ALPR mesh
+        flock = FLOCK_BY_COUNTY.get(name)
+        if flock:
+            flock_total = flock["total"]
+            flock_cities = flock["cities"]
+            flock_status = (
+                "Heavy Flock mesh" if flock_total >= 40 else
+                "Dense Flock deployment" if flock_total >= 20 else
+                "Moderate Flock deployment" if flock_total >= 10 else
+                "Light Flock deployment" if flock_total >= 5 else
+                "At least one Flock city"
+            )
+        else:
+            flock_total = 0
+            flock_cities = []
+            flock_status = "No confirmed Flock cities"
+        s_flock = score_flock(flock_total)
+
         # Meatpacking density
         s_meat = MEATPACKING.get(name, 0)
         if s_meat >= 16:
@@ -339,7 +416,7 @@ def build():
         s_hb538 = HB538_BASE
 
         total = (
-            s_287g + s_raid + s_det + s_meat + s_fb + s_hisp + s_hb538
+            s_287g + s_raid + s_det + s_meat + s_fb + s_hisp + s_flock + s_hb538
         )
 
         if total >= 70:
@@ -368,12 +445,16 @@ def build():
             "detention_status": det_status,
             "detention_notes": det_notes,
             "meatpacking_status": meat_status,
+            "flock_status": flock_status,
+            "flock_total": flock_total,
+            "flock_cities": [{"city": c, "count": n} for c, n in flock_cities],
             "score_287g": s_287g,
             "score_raid_2019": s_raid,
             "score_detention": s_det,
             "score_meatpacking": s_meat,
             "score_foreign_born": s_fb,
             "score_hispanic": s_hisp,
+            "score_flock": s_flock,
             "score_hb538_base": s_hb538,
             "risk_total": round(total, 1),
             "risk_tier": tier,
@@ -395,6 +476,9 @@ def summary(rows):
         "detention_county_count": sum(1 for r in rows if r["score_detention"] == 25),
         "detention_proximity_count": sum(1 for r in rows if r["score_detention"] > 0),
         "meatpacking_heavy_count": sum(1 for r in rows if r["score_meatpacking"] >= 16),
+        "flock_county_count": sum(1 for r in rows if r["flock_total"] > 0),
+        "flock_total_cameras": sum(r["flock_total"] for r in rows),
+        "flock_cities_count": sum(len(r["flock_cities"]) for r in rows),
         "total_foreign_born": sum(r["foreign_born"] for r in rows),
         "total_hispanic": sum(r["hispanic"] for r in rows),
         "total_pop": sum(r["total_pop"] for r in rows),
@@ -421,6 +505,7 @@ def main():
     print("Raid direct:", s["raid_2019_direct_count"])
     print("Detention host:", s["detention_county_count"])
     print("Meatpacking heavy:", s["meatpacking_heavy_count"])
+    print("Flock counties:", s["flock_county_count"], "with", s["flock_total_cameras"], "cameras in", s["flock_cities_count"], "cities")
     print("Total foreign-born:", s["total_foreign_born"])
     print()
     print("Top 12 by risk:")
@@ -428,7 +513,8 @@ def main():
         print(f"  {r['county']:<14} {r['risk_tier']:<8} score={r['risk_total']:>5.1f}  "
               f"287g={r['score_287g']:>2}  raid={r['score_raid_2019']:>2}  "
               f"det={r['score_detention']:>2}  meat={r['score_meatpacking']:>2}  "
-              f"fb={r['score_foreign_born']:>4}  hisp={r['score_hispanic']:>4}")
+              f"fb={r['score_foreign_born']:>4}  hisp={r['score_hispanic']:>4}  "
+              f"flock={r['score_flock']:>2} ({r['flock_total']:>2}cam)")
 
 
 if __name__ == "__main__":
