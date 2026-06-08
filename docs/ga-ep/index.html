@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title data-i18n="doc.title">Georgia EP Training & Infrastructure · Independent analysis by Rosario Palacios</title>
+  <meta name="description" content="Proposed Election Protection training and infrastructure plan for Georgia to offset ICE at the polls. Five volunteer roles, escalation rubric, Airtable intake spec, and regional response map. Independent analysis by Rosario Palacios." />
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231d3557'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='system-ui' font-weight='800' font-size='16' fill='white'%3EE%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <style>
+    /* Page-local layout for the EP plan */
+    .ep-section { margin-bottom: var(--space-12); }
+    .ep-section h2 { font-family: var(--font-display); font-weight: 800; font-size: var(--text-2xl); letter-spacing: -0.015em; margin-bottom: var(--space-2); }
+    .ep-section .desc { font-size: var(--text-sm); color: var(--color-text-muted); max-width: 70ch; margin-bottom: var(--space-5); }
+
+    .role-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-4); }
+    .role-card { padding: var(--space-5); border: 1px solid var(--color-border); border-radius: 14px; background: var(--color-surface); position: relative; }
+    .role-card .num { font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--color-text-muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: var(--space-2); }
+    .role-card h3 { font-size: var(--text-lg); font-weight: 700; letter-spacing: -0.01em; margin-bottom: var(--space-2); }
+    .role-card .role-mission { font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.55; margin-bottom: var(--space-3); }
+    .role-card ul { list-style: none; padding: 0; margin: 0; }
+    .role-card li { font-size: var(--text-xs); color: var(--color-text); line-height: 1.5; padding: 4px 0; padding-left: 18px; position: relative; }
+    .role-card li.do::before { content: "✓"; position: absolute; left: 0; color: var(--risk-low); font-weight: 700; }
+    .role-card li.dont::before { content: "✕"; position: absolute; left: 0; color: var(--risk-critical); font-weight: 700; }
+    .role-card .sla { display: inline-block; font-family: var(--font-mono); font-size: 10px; font-weight: 700; padding: 3px 7px; border-radius: 4px; background: var(--color-surface-offset); color: var(--color-text); margin-bottom: var(--space-3); letter-spacing: 0.04em; }
+
+    .rubric-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-4); }
+    .rubric-card { padding: var(--space-5); border-radius: 14px; border: 1px solid var(--color-border); background: var(--color-surface); position: relative; overflow: hidden; }
+    .rubric-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px; }
+    .rubric-card.red::before { background: var(--risk-critical); }
+    .rubric-card.yellow::before { background: var(--risk-medium); }
+    .rubric-card.green::before { background: var(--risk-low); }
+    .rubric-card h3 { font-size: var(--text-base); font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: var(--space-2); margin-top: var(--space-2); }
+    .rubric-card h3.red { color: var(--risk-critical); }
+    .rubric-card h3.yellow { color: var(--risk-medium); }
+    .rubric-card h3.green { color: var(--risk-low); }
+    .rubric-card .trigger { font-size: var(--text-sm); color: var(--color-text); line-height: 1.55; margin-bottom: var(--space-3); }
+    .rubric-card .action { font-size: var(--text-xs); color: var(--color-text-muted); line-height: 1.55; padding-top: var(--space-3); border-top: 1px dashed var(--color-divider); }
+    .rubric-card .sla-pill { display: inline-block; font-family: var(--font-mono); font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 4px; background: var(--color-surface-offset); margin-bottom: var(--space-3); letter-spacing: 0.04em; }
+
+    .curriculum-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--space-3); }
+    .module { padding: var(--space-4); border: 1px solid var(--color-border); border-radius: 12px; background: var(--color-surface); }
+    .module .mod-num { font-family: var(--font-mono); font-size: 10px; color: var(--color-text-muted); font-weight: 700; letter-spacing: 0.08em; }
+    .module .mod-time { font-family: var(--font-mono); font-size: 11px; color: var(--color-accent); font-weight: 700; margin-left: var(--space-2); }
+    .module h4 { font-size: var(--text-sm); font-weight: 700; margin: var(--space-2) 0 var(--space-2); letter-spacing: -0.005em; }
+    .module p { font-size: var(--text-xs); color: var(--color-text-muted); line-height: 1.5; }
+
+    .form-spec { padding: var(--space-5); border: 1px solid var(--color-border); border-radius: 14px; background: var(--color-surface); }
+    .form-spec h3 { font-size: var(--text-base); font-weight: 700; margin-bottom: var(--space-3); }
+    .form-spec ol { padding-left: var(--space-5); margin: 0; }
+    .form-spec li { font-size: var(--text-sm); color: var(--color-text); line-height: 1.6; margin-bottom: var(--space-2); }
+    .form-spec li code { font-family: var(--font-mono); font-size: 11px; background: var(--color-surface-offset); padding: 1px 6px; border-radius: 3px; color: var(--color-text); }
+    .form-spec .note { font-size: var(--text-xs); color: var(--color-text-muted); margin-top: var(--space-3); padding-top: var(--space-3); border-top: 1px dashed var(--color-divider); line-height: 1.55; }
+
+    .matrix-table { width: 100%; border-collapse: collapse; font-size: var(--text-xs); }
+    .matrix-table th, .matrix-table td { padding: var(--space-3); text-align: left; border-bottom: 1px solid var(--color-divider); vertical-align: top; }
+    .matrix-table th { font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; font-size: 10px; color: var(--color-text-muted); background: var(--color-surface-offset); }
+    .matrix-table td.role-name { font-weight: 700; color: var(--color-text); white-space: nowrap; }
+    .matrix-table td.do-col { color: var(--color-text); }
+    .matrix-table td.dont-col { color: var(--color-text-muted); }
+    .matrix-wrap { overflow-x: auto; border: 1px solid var(--color-border); border-radius: 12px; }
+
+    .regions-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-3); }
+    .region-card { padding: var(--space-4); border: 1px solid var(--color-border); border-radius: 12px; background: var(--color-surface); }
+    .region-card h4 { font-size: var(--text-sm); font-weight: 700; margin-bottom: var(--space-2); }
+    .region-card .counties { font-size: var(--text-xs); color: var(--color-text-muted); line-height: 1.55; margin-bottom: var(--space-2); }
+    .region-card .lead { font-size: 11px; font-family: var(--font-mono); color: var(--color-text); letter-spacing: 0.02em; padding-top: var(--space-2); border-top: 1px dashed var(--color-divider); }
+
+    .principles-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-3); }
+    .principle { padding: var(--space-4); border-left: 3px solid var(--color-accent); background: var(--color-surface-offset); border-radius: 0 8px 8px 0; }
+    .principle .num { font-family: var(--font-mono); font-size: 10px; font-weight: 700; color: var(--color-text-muted); letter-spacing: 0.08em; }
+    .principle h4 { font-size: var(--text-sm); font-weight: 700; margin: 4px 0 6px; }
+    .principle p { font-size: var(--text-xs); color: var(--color-text-muted); line-height: 1.55; }
+
+    .pullquote { padding: var(--space-5); border-left: 4px solid var(--color-accent); background: var(--color-surface-offset); border-radius: 0 12px 12px 0; margin: var(--space-5) 0; }
+    .pullquote p { font-family: var(--font-display); font-size: var(--text-lg); font-weight: 600; line-height: 1.4; color: var(--color-text); letter-spacing: -0.01em; }
+    .pullquote .cite { display: block; margin-top: var(--space-3); font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--color-text-muted); letter-spacing: 0.06em; text-transform: uppercase; }
+
+    .toolbar-row { display: flex; gap: var(--space-2); flex-wrap: wrap; margin-bottom: var(--space-5); }
+    .pill-link { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border: 1px solid var(--color-border); border-radius: 999px; background: var(--color-surface); font-size: var(--text-xs); font-weight: 600; color: var(--color-text); text-decoration: none; transition: border-color 0.15s ease, transform 0.15s ease; }
+    .pill-link:hover { border-color: var(--color-text); transform: translateY(-1px); }
+    .pill-link svg { opacity: 0.7; }
+
+    .source-list { font-size: 11px; color: var(--color-text-muted); line-height: 1.7; }
+    .source-list a { color: var(--color-accent); text-decoration: none; font-weight: 600; }
+    .source-list a:hover { text-decoration: underline; }
+
+    @media (max-width: 600px) {
+      .matrix-table th, .matrix-table td { padding: var(--space-2); font-size: 11px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 6l9 4 9-4-9-4-9 4z" />
+            <path d="M3 6v8c0 1 9 4 9 4s9-3 9-4V6" opacity="0.6" />
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="name" data-i18n="header.brand">GA EP Training & Infrastructure</span>
+          <span class="sub" data-i18n="header.sub">Independent analysis by Rosario Palacios</span>
+        </div>
+      </div>
+      <div class="header-actions">
+        <div class="lang-switch" role="group" aria-label="Language">
+          <button type="button" class="lang-btn" data-lang-btn="en">EN</button>
+          <button type="button" class="lang-btn" data-lang-btn="es">ES</button>
+          <button type="button" class="lang-btn" data-lang-btn="vi">VI</button>
+        </div>
+        <button class="btn-icon" data-theme-toggle aria-label="Toggle dark mode">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="hero">
+      <h1 data-i18n="hero.h1">A proposed Election Protection training and rapid-response plan for Georgia, designed to offset ICE at the polls.</h1>
+      <p class="lede" data-i18n="hero.lede">A five-role volunteer structure, a 90-minute role-specific curriculum, a structured Airtable intake form, a RED/YELLOW/GREEN escalation rubric, and a seven-region response map. Built for activists and organizations who believe we should #AbolishICE. Nonpartisan in practice, partisan about voter safety.</p>
+      <div class="meta">
+        <span><span class="dot"></span> <span data-i18n="hero.meta.model">EP infrastructure plan · v1</span></span>
+        <span data-i18n="hero.meta.roles">5 volunteer roles</span>
+        <span data-i18n="hero.meta.regions">7 response regions</span>
+        <span data-i18n="hero.meta.languages">EN / ES / VI</span>
+      </div>
+
+      <div class="toolbar-row" style="margin-top: var(--space-5);">
+        <a class="pill-link" href="../ga/">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          <span data-i18n="nav.back.ga">GA risk dashboard</span>
+        </a>
+        <a class="pill-link" href="../">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+          <span data-i18n="nav.home">All dashboards</span>
+        </a>
+        <a class="pill-link" href="../ms/">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          <span data-i18n="nav.ms">MS dashboard</span>
+        </a>
+      </div>
+
+      <details class="explainer" id="overview-explainer">
+        <summary>
+          <span class="explainer-tag" data-i18n="why.tag">Why this plan</span>
+          <span class="explainer-q" data-i18n="why.q">Why does Georgia need a dedicated ICE-at-the-polls infrastructure?</span>
+          <svg class="explainer-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="explainer-body">
+          <p data-i18n="why.p1">HB 1105 makes every Georgia county a forced cooperator with ICE and personally penalizes sheriffs who refuse. That removes local sanctuary policy as a buffer between voters and federal agents on Election Day. Voter intimidation by uniformed or armed individuals near polls is already illegal under O.C.G.A. § 21-2-566 and § 21-2-413(i); what is missing is the volunteer infrastructure to detect, document, escalate, and contest those incidents in real time.</p>
+          <p data-i18n="why.p2">This plan separates roles, defines SLAs, and pre-stages legal and press response so that the people who show up on Election Day are doing one well-trained job, not five badly. It also assumes voters are observing things they cannot legally photograph from inside the 150-foot buffer, so it leans on the Airtable form and the hotline rather than on phones-up at the polling place.</p>
+          <p data-i18n="why.p3">Built independently by Rosario Palacios. Adoptable by any 501(c)(3), (c)(4), or coalition of activists and organizations. Nonpartisan in practice; #AbolishICE in framing.</p>
+          <p class="explainer-source"><a href="https://866ourvote.org/wp-content/uploads/2024/10/Intimidation_Polling-Place-Issues-Volunteer-Facing-Guidance.pdf" target="_blank" rel="noopener" data-i18n="why.source">Election Protection Voter-Facing Guidance →</a></p>
+        </div>
+      </details>
+    </section>
+
+    <!-- Pull quote -->
+    <section class="ep-section">
+      <div class="pullquote">
+        <p data-i18n="pull.quote">"We are witnesses, not enforcers. Our job is to make sure the right people, with the right authority, get there fast and get the facts right."</p>
+        <span class="cite" data-i18n="pull.cite">Rosario Palacios, Independent Election Protection plan</span>
+      </div>
+    </section>
+
+    <!-- Cross-cutting principles -->
+    <section class="ep-section">
+      <h2 data-i18n="principles.h2">Cross-cutting principles</h2>
+      <p class="desc" data-i18n="principles.desc">Five non-negotiables that apply to every role in the plan. Signed annually by every volunteer.</p>
+      <div class="principles-list">
+        <div class="principle">
+          <span class="num">01</span>
+          <h4 data-i18n="principles.p1.h">Nonpartisan, always.</h4>
+          <p data-i18n="principles.p1.p">No campaigning, no candidate gear, no partisan commentary on the line, in Slack, or in any incident note. Partisan behavior gets you removed.</p>
+        </div>
+        <div class="principle">
+          <span class="num">02</span>
+          <h4 data-i18n="principles.p2.h">Witness safety first, agent confrontation never.</h4>
+          <p data-i18n="principles.p2.p">No volunteer physically intervenes with ICE or armed individuals. Document, escalate, call 911 only if life-safety is at risk.</p>
+        </div>
+        <div class="principle">
+          <span class="num">03</span>
+          <h4 data-i18n="principles.p3.h">Only first-person reports escalate.</h4>
+          <p data-i18n="principles.p3.p">Second-hand reports and social-media reports go in the tracker for pattern review but do not trigger dispatch. This is the EP standard.</p>
+        </div>
+        <div class="principle">
+          <span class="num">04</span>
+          <h4 data-i18n="principles.p4.h">Privacy and code of conduct.</h4>
+          <p data-i18n="principles.p4.p">Signed annually. Do not share caller PII outside the case team. Do not post incident details to personal social media.</p>
+        </div>
+        <div class="principle">
+          <span class="num">05</span>
+          <h4 data-i18n="principles.p5.h">Document, then act.</h4>
+          <p data-i18n="principles.p5.p">Every state change on an incident gets logged in Airtable with a timestamp and your initials. If it is not in the tracker, it did not happen.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Five roles -->
+    <section class="ep-section">
+      <h2 data-i18n="roles.h2">Five volunteer roles</h2>
+      <p class="desc" data-i18n="roles.desc">Each role exists because of a specific failure mode the plan is built to prevent. Roles do not overlap; promotions happen between elections, not during them.</p>
+      <div class="role-grid" id="role-grid"></div>
+    </section>
+
+    <!-- Do/Don't matrix -->
+    <section class="ep-section">
+      <h2 data-i18n="matrix.h2">Quick do / don't matrix</h2>
+      <p class="desc" data-i18n="matrix.desc">A laminated pocket card of the top three Do's and Don'ts per role. Volunteers receive one with their ID badge at training.</p>
+      <div class="matrix-wrap">
+        <table class="matrix-table">
+          <thead>
+            <tr>
+              <th data-i18n="matrix.th.role">Role</th>
+              <th data-i18n="matrix.th.do">Top 3 Do's</th>
+              <th data-i18n="matrix.th.dont">Top 3 Don'ts</th>
+            </tr>
+          </thead>
+          <tbody id="matrix-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Escalation rubric -->
+    <section class="ep-section">
+      <h2 data-i18n="rubric.h2">Escalation rubric: RED / YELLOW / GREEN</h2>
+      <p class="desc" data-i18n="rubric.desc">Severity is set by what the witness describes, not by how upset they sound. Severity governs SLA, who gets paged, and whether press protocol activates.</p>
+      <div class="rubric-grid" id="rubric-grid"></div>
+    </section>
+
+    <!-- 90-minute curriculum -->
+    <section class="ep-section">
+      <h2 data-i18n="curriculum.h2">90-minute role-specific training curriculum</h2>
+      <p class="desc" data-i18n="curriculum.desc">Every volunteer completes a 90-minute role-specific session before being scheduled. Curriculum below is the canonical agenda; instructors mark off each module on the training tracker.</p>
+      <div class="curriculum-grid" id="curriculum-grid"></div>
+    </section>
+
+    <!-- Airtable intake form -->
+    <section class="ep-section">
+      <h2 data-i18n="airtable.h2">Airtable intake: ICE / federal agent at the polls</h2>
+      <p class="desc" data-i18n="airtable.desc">Five-page form, bilingual EN/ES, one screen per question, with a visual ID card on Page 3 so callers can recognize agency without knowing names. Page 1 is a safety check; the rest only runs if the caller is safe.</p>
+      <div class="form-spec">
+        <h3 data-i18n="airtable.h3">Form pages, in caller order</h3>
+        <ol id="form-pages-list"></ol>
+        <p class="note" data-i18n="airtable.note">Behind-the-scenes fields are auto-populated: <code>Severity</code> from <code>Q15</code> (someone detained) or <code>Q14</code> ("asking for ID/papers", "blocking entrance"); <code>Region</code> from <code>Q3</code> (county); <code>Deduplication key</code> from <code>concatenate(County, Polling place, Date, hour)</code>; <code>Pattern flag</code> set when 3+ reports cluster at one precinct in 24 hours.</p>
+      </div>
+    </section>
+
+    <!-- Severity auto-set table -->
+    <section class="ep-section">
+      <h2 data-i18n="severity.h2">Severity rules (auto-set on submission)</h2>
+      <p class="desc" data-i18n="severity.desc">How the form decides RED / YELLOW / GREEN before any human touches the record.</p>
+      <div class="matrix-wrap">
+        <table class="matrix-table">
+          <thead>
+            <tr>
+              <th data-i18n="severity.th.level">Severity</th>
+              <th data-i18n="severity.th.trigger">Trigger</th>
+              <th data-i18n="severity.th.action">Action</th>
+            </tr>
+          </thead>
+          <tbody id="severity-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Regional response map -->
+    <section class="ep-section">
+      <h2 data-i18n="regions.h2">Seven-region response map</h2>
+      <p class="desc" data-i18n="regions.desc">County selected on the form auto-tags the incident with a region and notifies that region's Slack channel plus the regional lead by SMS. Adjacent-region copy is automatic for any incident within 5 miles of a regional border.</p>
+      <div class="regions-grid" id="regions-grid"></div>
+    </section>
+
+    <!-- Press protocol gate -->
+    <section class="ep-section">
+      <h2 data-i18n="press.h2">Press protocol gate</h2>
+      <p class="desc" data-i18n="press.desc">A pattern is press-ready only when all four conditions are met. Designed to prevent broadcasting unverified rumor and burning coalition credibility for the next election.</p>
+      <div class="principles-list">
+        <div class="principle">
+          <span class="num">01</span>
+          <h4 data-i18n="press.g1.h">Volume threshold</h4>
+          <p data-i18n="press.g1.p">3+ first-person reports from one county, OR 5+ across the state, in 24 hours.</p>
+        </div>
+        <div class="principle">
+          <span class="num">02</span>
+          <h4 data-i18n="press.g2.h">RED confirmed</h4>
+          <p data-i18n="press.g2.p">At least one of those reports is confirmed RED by the attorney on call, in writing in the case thread.</p>
+        </div>
+        <div class="principle">
+          <span class="num">03</span>
+          <h4 data-i18n="press.g3.h">Detention verified</h4>
+          <p data-i18n="press.g3.p">Detention or voter-turned-away has been verified, not just alleged.</p>
+        </div>
+        <div class="principle">
+          <span class="num">04</span>
+          <h4 data-i18n="press.g4.h">Affected families notified first</h4>
+          <p data-i18n="press.g4.p">Affected families and any detained individual's counsel are notified before any public statement, per NILC/TIRRC standard.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Training onboarding checklist -->
+    <section class="ep-section">
+      <h2 data-i18n="onboarding.h2">Onboarding checklist (per role, annual)</h2>
+      <p class="desc" data-i18n="onboarding.desc">Every volunteer signs this annually. Without it they are not scheduled for a shift.</p>
+      <div class="form-spec">
+        <ol id="onboarding-list"></ol>
+      </div>
+    </section>
+
+    <!-- Sources -->
+    <section class="ep-section">
+      <h2 data-i18n="sources.h2">Sources and references</h2>
+      <p class="desc" data-i18n="sources.desc">Public standards and legal citations underpinning the plan. The full curriculum decks (Observer manual, Poll Monitor Training Companion, Attorney Panel Operational Model, Volunteer Roles & Best Practices, agent / vehicle / uniform ID cards) are available on request as PDFs and PPTX.</p>
+      <div class="source-list" id="source-list"></div>
+    </section>
+
+    <footer class="chooser-footer" style="margin-top: var(--space-12);">
+      <span data-i18n="footer.text">Independent Election Protection infrastructure plan. Built by Rosario Palacios. Adoptable by any 501(c)(3), (c)(4), or coalition. Nonpartisan in execution, partisan about voter safety. #AbolishICE.</span>
+    </footer>
+  </main>
+
+  <script src="./i18n.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
