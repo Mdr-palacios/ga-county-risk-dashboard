@@ -1,0 +1,2163 @@
+[
+  {
+    "county": "Autauga",
+    "fips": 1001,
+    "region": "montgomery_river_region",
+    "total_pop": 59947,
+    "hispanic": 3177,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "1 agency, JEM/TFM/WSO",
+    "287g_agencies": [
+      {
+        "agency": "Autauga County Sheriff's Office",
+        "types": [
+          "JEM",
+          "TFM",
+          "WSO"
+        ],
+        "signed_dates": [
+          "2025-09-22",
+          "2025-09-22",
+          "2025-09-22"
+        ]
+      }
+    ],
+    "287g_count": 1,
+    "287g_types": {
+      "JEM": 1,
+      "TFM": 1,
+      "WSO": 1
+    },
+    "detention_status": "No nearby detention",
+    "detention_notes": "",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 30,
+    "score_detention": 0,
+    "score_hispanic": 7.9,
+    "score_population": 4,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 46.9,
+    "risk_tier": "Medium"
+  },
+  {
+    "county": "Baldwin",
+    "fips": 1003,
+    "region": "gulf_coast",
+    "total_pop": 246989,
+    "hispanic": 13337,
+    "hisp_pct": 5.4,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "7 agencies, TFM",
+    "287g_agencies": [
+      {
+        "agency": "Baldwin County Sheriff's Office",
+        "types": [
+          "TFM"
+        ],
+        "signed_dates": [
+          "2025-10-17"
+        ]
+      },
+      {
+        "agency": "Elberta Police Department",
+        "types": [
+          "TFM"
+        ],
+        "signed_dates": [
+          "2025-11-14"
+        ]
+      },
+      {
+        "agency": "Foley Police Department",
+        "types": [
+          "TFM"
+        ],
+        "signed_dates": [
+          "2026-03-25"
+        ]
+      },
+      {
+        "agency": "Loxley Police Department",
+        "types": [
+          "TFM"
+        ],
+        "signed_dates": [
+          "2026-01-07"
+        ]
+      },
+      {
+        "agency": "Robertsdale Police Department",
+        "types": [
+          "TFM"
+        ],
+        "signed_dates": [
+          "2025-12-17"
+        ]
+      },
+      {
+        "agency": "Silverhill Police Department",
+        "types": [
+          "TFM"
+        ],
+        "signed_dates": [
+          "2025-10-17"
+        ]
+      },
+      {
+        "agency": "Summerdale Police Department",
+        "types": [
+          "TFM"
+        ],
+        "signed_dates": [
+          "2025-12-10"
+        ]
+      }
+    ],
+    "287g_count": 7,
+    "287g_types": {
+      "TFM": 7
+    },
+    "detention_status": "Hosts ICE detention facility",
+    "detention_notes": "Baldwin County facility (opened 2025)",
+    "poultry_status": "In poultry/concentration belt",
+    "score_287g": 25,
+    "score_detention": 25,
+    "score_hispanic": 8.1,
+    "score_population": 10,
+    "score_poultry_belt": 6,
+    "score_base": 5,
+    "risk_total": 79.1,
+    "risk_tier": "Critical"
+  },
+  {
+    "county": "Barbour",
+    "fips": 1005,
+    "region": "wiregrass",
+    "total_pop": 24643,
+    "hispanic": 1306,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "None",
+    "287g_agencies": [],
+    "287g_count": 0,
+    "287g_types": {},
+    "detention_status": "No nearby detention",
+    "detention_notes": "",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 0,
+    "score_detention": 0,
+    "score_hispanic": 7.9,
+    "score_population": 2,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 14.9,
+    "risk_tier": "Low"
+  },
+  {
+    "county": "Bibb",
+    "fips": 1007,
+    "region": "birmingham_metro",
+    "total_pop": 22130,
+    "hispanic": 1173,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "None",
+    "287g_agencies": [],
+    "287g_count": 0,
+    "287g_types": {},
+    "detention_status": "No nearby detention",
+    "detention_notes": "",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 0,
+    "score_detention": 0,
+    "score_hispanic": 7.9,
+    "score_population": 2,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 14.9,
+    "risk_tier": "Low"
+  },
+  {
+    "county": "Blount",
+    "fips": 1009,
+    "region": "birmingham_metro",
+    "total_pop": 59518,
+    "hispanic": 5654,
+    "hisp_pct": 9.5,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "1 agency, TFM",
+    "287g_agencies": [
+      {
+        "agency": "Blount County Sheriff's Office",
+        "types": [
+          "TFM"
+        ],
+        "signed_dates": [
+          "2026-01-26"
+        ]
+      }
+    ],
+    "287g_count": 1,
+    "287g_types": {
+      "TFM": 1
+    },
+    "detention_status": "Adjacent to detention facility",
+    "detention_notes": "Adjacent to Etowah County",
+    "poultry_status": "In poultry/concentration belt",
+    "score_287g": 22,
+    "score_detention": 10,
+    "score_hispanic": 14.2,
+    "score_population": 4,
+    "score_poultry_belt": 8,
+    "score_base": 5,
+    "risk_total": 63.2,
+    "risk_tier": "High"
+  },
+  {
+    "county": "Bullock",
+    "fips": 1011,
+    "region": "black_belt",
+    "total_pop": 10058,
+    "hispanic": 533,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "None",
+    "287g_agencies": [],
+    "287g_count": 0,
+    "287g_types": {},
+    "detention_status": "No nearby detention",
+    "detention_notes": "",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 0,
+    "score_detention": 0,
+    "score_hispanic": 7.9,
+    "score_population": 0,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 12.9,
+    "risk_tier": "Low"
+  },
+  {
+    "county": "Butler",
+    "fips": 1013,
+    "region": "wiregrass",
+    "total_pop": 18630,
+    "hispanic": 987,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "None",
+    "287g_agencies": [],
+    "287g_count": 0,
+    "287g_types": {},
+    "detention_status": "No nearby detention",
+    "detention_notes": "",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 0,
+    "score_detention": 0,
+    "score_hispanic": 7.9,
+    "score_population": 0,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 12.9,
+    "risk_tier": "Low"
+  },
+  {
+    "county": "Calhoun",
+    "fips": 1015,
+    "region": "ne_appalachian",
+    "total_pop": 116090,
+    "hispanic": 6153,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "2 agencies, TFM",
+    "287g_agencies": [
+      {
+        "agency": "Ohatchee Police Department",
+        "types": [
+          "TFM"
+        ],
+        "signed_dates": [
+          "2026-06-03"
+        ]
+      },
+      {
+        "agency": "Piedmont Police Department",
+        "types": [
+          "TFM"
+        ],
+        "signed_dates": [
+          "2026-04-20"
+        ]
+      }
+    ],
+    "287g_count": 2,
+    "287g_types": {
+      "TFM": 2
+    },
+    "detention_status": "Adjacent to detention facility",
+    "detention_notes": "Adjacent to Etowah County",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 22,
+    "score_detention": 10,
+    "score_hispanic": 7.9,
+    "score_population": 7,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 51.9,
+    "risk_tier": "High"
+  },
+  {
+    "county": "Chambers",
+    "fips": 1017,
+    "region": "montgomery_river_region",
+    "total_pop": 34192,
+    "hispanic": 1812,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "1 agency, TFM",
+    "287g_agencies": [
+      {
+        "agency": "Lanett Police Department",
+        "types": [
+          "TFM"
+        ],
+        "signed_dates": [
+          "2025-09-22"
+        ]
+      }
+    ],
+    "287g_count": 1,
+    "287g_types": {
+      "TFM": 1
+    },
+    "detention_status": "No nearby detention",
+    "detention_notes": "",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 22,
+    "score_detention": 0,
+    "score_hispanic": 7.9,
+    "score_population": 2,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 36.9,
+    "risk_tier": "Medium"
+  },
+  {
+    "county": "Cherokee",
+    "fips": 1019,
+    "region": "ne_appalachian",
+    "total_pop": 25443,
+    "hispanic": 1348,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "4 agencies, TFM/WSO",
+    "287g_agencies": [
+      {
+        "agency": "Cedar Bluff Police Department",
+        "types": [
+          "TFM"
+        ],
+        "signed_dates": [
+          "2026-04-29"
+        ]
+      },
+      {
+        "agency": "Cherokee County Sheriff's Office",
+        "types": [
+          "TFM",
+          "WSO"
+        ],
+        "signed_dates": [
+          "2026-02-10",
+          "2025-06-25"
+        ]
+      },
+      {
+        "agency": "Cherokee Police Department",
+        "types": [
+          "TFM"
+        ],
+        "signed_dates": [
+          "2026-02-14"
+        ]
+      },
+      {
+        "agency": "Leesburg Police Department",
+        "types": [
+          "TFM"
+        ],
+        "signed_dates": [
+          "2026-04-07"
+        ]
+      }
+    ],
+    "287g_count": 4,
+    "287g_types": {
+      "TFM": 4,
+      "WSO": 1
+    },
+    "detention_status": "Adjacent to detention facility",
+    "detention_notes": "Adjacent to Etowah County",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 29,
+    "score_detention": 10,
+    "score_hispanic": 7.9,
+    "score_population": 2,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 53.9,
+    "risk_tier": "High"
+  },
+  {
+    "county": "Chilton",
+    "fips": 1021,
+    "region": "birmingham_metro",
+    "total_pop": 45992,
+    "hispanic": 2438,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "None",
+    "287g_agencies": [],
+    "287g_count": 0,
+    "287g_types": {},
+    "detention_status": "No nearby detention",
+    "detention_notes": "",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 0,
+    "score_detention": 0,
+    "score_hispanic": 7.9,
+    "score_population": 2,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 14.9,
+    "risk_tier": "Low"
+  },
+  {
+    "county": "Choctaw",
+    "fips": 1023,
+    "region": "black_belt",
+    "total_pop": 12380,
+    "hispanic": 656,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "None",
+    "287g_agencies": [],
+    "287g_count": 0,
+    "287g_types": {},
+    "detention_status": "No nearby detention",
+    "detention_notes": "",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 0,
+    "score_detention": 0,
+    "score_hispanic": 7.9,
+    "score_population": 0,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 12.9,
+    "risk_tier": "Low"
+  },
+  {
+    "county": "Clarke",
+    "fips": 1025,
+    "region": "gulf_coast",
+    "total_pop": 22543,
+    "hispanic": 1195,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "3 agencies, TFM",
+    "287g_agencies": [
+      {
+        "agency": "Clarke County Sheriff's Office",
+        "types": [
+          "TFM"
+        ],
+        "signed_dates": [
+          "2026-01-30"
+        ]
+      },
+      {
+        "agency": "Jackson Police Department",
+        "types": [
+          "TFM"
+        ],
+        "signed_dates": [
+          "2026-01-07"
+        ]
+      },
+      {
+        "agency": "Thomasville Police Department",
+        "types": [
+          "TFM"
+        ],
+        "signed_dates": [
+          "2026-02-25"
+        ]
+      }
+    ],
+    "287g_count": 3,
+    "287g_types": {
+      "TFM": 3
+    },
+    "detention_status": "No nearby detention",
+    "detention_notes": "",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 22,
+    "score_detention": 0,
+    "score_hispanic": 7.9,
+    "score_population": 2,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 36.9,
+    "risk_tier": "Medium"
+  },
+  {
+    "county": "Clay",
+    "fips": 1027,
+    "region": "ne_appalachian",
+    "total_pop": 14192,
+    "hispanic": 752,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "None",
+    "287g_agencies": [],
+    "287g_count": 0,
+    "287g_types": {},
+    "detention_status": "No nearby detention",
+    "detention_notes": "",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 0,
+    "score_detention": 0,
+    "score_hispanic": 7.9,
+    "score_population": 0,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 12.9,
+    "risk_tier": "Low"
+  },
+  {
+    "county": "Cleburne",
+    "fips": 1029,
+    "region": "ne_appalachian",
+    "total_pop": 15426,
+    "hispanic": 818,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "None",
+    "287g_agencies": [],
+    "287g_count": 0,
+    "287g_types": {},
+    "detention_status": "No nearby detention",
+    "detention_notes": "",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 0,
+    "score_detention": 0,
+    "score_hispanic": 7.9,
+    "score_population": 0,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 12.9,
+    "risk_tier": "Low"
+  },
+  {
+    "county": "Coffee",
+    "fips": 1031,
+    "region": "wiregrass",
+    "total_pop": 54920,
+    "hispanic": 2911,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "None",
+    "287g_agencies": [],
+    "287g_count": 0,
+    "287g_types": {},
+    "detention_status": "No nearby detention",
+    "detention_notes": "",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 0,
+    "score_detention": 0,
+    "score_hispanic": 7.9,
+    "score_population": 4,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 16.9,
+    "risk_tier": "Low"
+  },
+  {
+    "county": "Colbert",
+    "fips": 1033,
+    "region": "north_poultry_belt",
+    "total_pop": 58022,
+    "hispanic": 3075,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "2 agencies, JEM/TFM/WSO",
+    "287g_agencies": [
+      {
+        "agency": "Colbert County Sheriff's Office",
+        "types": [
+          "JEM",
+          "TFM",
+          "WSO"
+        ],
+        "signed_dates": [
+          "2025-05-08",
+          "2025-07-02",
+          "2025-05-08"
+        ]
+      },
+      {
+        "agency": "Littleville Police Department",
+        "types": [
+          "TFM"
+        ],
+        "signed_dates": [
+          "2026-02-10"
+        ]
+      }
+    ],
+    "287g_count": 2,
+    "287g_types": {
+      "JEM": 1,
+      "TFM": 2,
+      "WSO": 1
+    },
+    "detention_status": "No nearby detention",
+    "detention_notes": "",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 30,
+    "score_detention": 0,
+    "score_hispanic": 7.9,
+    "score_population": 4,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 46.9,
+    "risk_tier": "Medium"
+  },
+  {
+    "county": "Conecuh",
+    "fips": 1035,
+    "region": "gulf_coast",
+    "total_pop": 11275,
+    "hispanic": 598,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "None",
+    "287g_agencies": [],
+    "287g_count": 0,
+    "287g_types": {},
+    "detention_status": "No nearby detention",
+    "detention_notes": "",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 0,
+    "score_detention": 0,
+    "score_hispanic": 7.9,
+    "score_population": 0,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 12.9,
+    "risk_tier": "Low"
+  },
+  {
+    "county": "Coosa",
+    "fips": 1037,
+    "region": "ne_appalachian",
+    "total_pop": 10300,
+    "hispanic": 546,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "None",
+    "287g_agencies": [],
+    "287g_count": 0,
+    "287g_types": {},
+    "detention_status": "No nearby detention",
+    "detention_notes": "",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 0,
+    "score_detention": 0,
+    "score_hispanic": 7.9,
+    "score_population": 0,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 12.9,
+    "risk_tier": "Low"
+  },
+  {
+    "county": "Covington",
+    "fips": 1039,
+    "region": "wiregrass",
+    "total_pop": 37628,
+    "hispanic": 1994,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "2 agencies, TFM",
+    "287g_agencies": [
+      {
+        "agency": "Florala Police Department",
+        "types": [
+          "TFM"
+        ],
+        "signed_dates": [
+          "2026-02-23"
+        ]
+      },
+      {
+        "agency": "Lockhart Police Department",
+        "types": [
+          "TFM"
+        ],
+        "signed_dates": [
+          "2026-04-27"
+        ]
+      }
+    ],
+    "287g_count": 2,
+    "287g_types": {
+      "TFM": 2
+    },
+    "detention_status": "No nearby detention",
+    "detention_notes": "",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 22,
+    "score_detention": 0,
+    "score_hispanic": 7.9,
+    "score_population": 2,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 36.9,
+    "risk_tier": "Medium"
+  },
+  {
+    "county": "Crenshaw",
+    "fips": 1041,
+    "region": "wiregrass",
+    "total_pop": 13122,
+    "hispanic": 695,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "1 agency, WSO",
+    "287g_agencies": [
+      {
+        "agency": "Crenshaw County Sheriff's Office",
+        "types": [
+          "WSO"
+        ],
+        "signed_dates": [
+          "2025-04-16"
+        ]
+      }
+    ],
+    "287g_count": 1,
+    "287g_types": {
+      "WSO": 1
+    },
+    "detention_status": "No nearby detention",
+    "detention_notes": "",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 4,
+    "score_detention": 0,
+    "score_hispanic": 7.9,
+    "score_population": 0,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 16.9,
+    "risk_tier": "Low"
+  },
+  {
+    "county": "Cullman",
+    "fips": 1043,
+    "region": "north_poultry_belt",
+    "total_pop": 90566,
+    "hispanic": 4075,
+    "hisp_pct": 4.5,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "None",
+    "287g_agencies": [],
+    "287g_count": 0,
+    "287g_types": {},
+    "detention_status": "No nearby detention",
+    "detention_notes": "",
+    "poultry_status": "In poultry/concentration belt",
+    "score_287g": 0,
+    "score_detention": 0,
+    "score_hispanic": 6.8,
+    "score_population": 4,
+    "score_poultry_belt": 7,
+    "score_base": 5,
+    "risk_total": 22.8,
+    "risk_tier": "Low"
+  },
+  {
+    "county": "Dale",
+    "fips": 1045,
+    "region": "wiregrass",
+    "total_pop": 49599,
+    "hispanic": 2629,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "1 agency, TFM",
+    "287g_agencies": [
+      {
+        "agency": "Level Plains Police Department",
+        "types": [
+          "TFM"
+        ],
+        "signed_dates": [
+          "2025-06-18"
+        ]
+      }
+    ],
+    "287g_count": 1,
+    "287g_types": {
+      "TFM": 1
+    },
+    "detention_status": "No nearby detention",
+    "detention_notes": "",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 22,
+    "score_detention": 0,
+    "score_hispanic": 7.9,
+    "score_population": 2,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 36.9,
+    "risk_tier": "Medium"
+  },
+  {
+    "county": "Dallas",
+    "fips": 1047,
+    "region": "black_belt",
+    "total_pop": 36858,
+    "hispanic": 1953,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "None",
+    "287g_agencies": [],
+    "287g_count": 0,
+    "287g_types": {},
+    "detention_status": "No nearby detention",
+    "detention_notes": "",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 0,
+    "score_detention": 0,
+    "score_hispanic": 7.9,
+    "score_population": 2,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 14.9,
+    "risk_tier": "Low"
+  },
+  {
+    "county": "DeKalb",
+    "fips": 1049,
+    "region": "north_poultry_belt",
+    "total_pop": 72269,
+    "hispanic": 9684,
+    "hisp_pct": 13.4,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "1 agency, TFM",
+    "287g_agencies": [
+      {
+        "agency": "DeKalb County Sheriff's Office",
+        "types": [
+          "TFM"
+        ],
+        "signed_dates": [
+          "2025-12-08"
+        ]
+      }
+    ],
+    "287g_count": 1,
+    "287g_types": {
+      "TFM": 1
+    },
+    "detention_status": "Adjacent to detention facility",
+    "detention_notes": "Adjacent to Etowah County",
+    "poultry_status": "In poultry/concentration belt",
+    "score_287g": 22,
+    "score_detention": 10,
+    "score_hispanic": 20,
+    "score_population": 4,
+    "score_poultry_belt": 10,
+    "score_base": 5,
+    "risk_total": 71,
+    "risk_tier": "Critical"
+  },
+  {
+    "county": "Elmore",
+    "fips": 1051,
+    "region": "montgomery_river_region",
+    "total_pop": 89526,
+    "hispanic": 4745,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "2 agencies, JEM/TFM",
+    "287g_agencies": [
+      {
+        "agency": "Eclectic Police Department",
+        "types": [
+          "TFM"
+        ],
+        "signed_dates": [
+          "2026-05-21"
+        ]
+      },
+      {
+        "agency": "Elmore County Sheriff's Office",
+        "types": [
+          "JEM"
+        ],
+        "signed_dates": [
+          "2025-03-17"
+        ]
+      }
+    ],
+    "287g_count": 2,
+    "287g_types": {
+      "TFM": 1,
+      "JEM": 1
+    },
+    "detention_status": "No nearby detention",
+    "detention_notes": "",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 28,
+    "score_detention": 0,
+    "score_hispanic": 7.9,
+    "score_population": 4,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 44.9,
+    "risk_tier": "Medium"
+  },
+  {
+    "county": "Escambia",
+    "fips": 1053,
+    "region": "gulf_coast",
+    "total_pop": 36629,
+    "hispanic": 1941,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "None",
+    "287g_agencies": [],
+    "287g_count": 0,
+    "287g_types": {},
+    "detention_status": "Adjacent to detention facility",
+    "detention_notes": "Adjacent to Baldwin County",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 0,
+    "score_detention": 10,
+    "score_hispanic": 7.9,
+    "score_population": 2,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 24.9,
+    "risk_tier": "Low"
+  },
+  {
+    "county": "Etowah",
+    "fips": 1055,
+    "region": "ne_appalachian",
+    "total_pop": 103105,
+    "hispanic": 5465,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "2 agencies, JEM/TFM",
+    "287g_agencies": [
+      {
+        "agency": "Etowah County Sheriff's Office",
+        "types": [
+          "JEM",
+          "TFM"
+        ],
+        "signed_dates": [
+          "2020-06-09",
+          "2025-12-08"
+        ]
+      },
+      {
+        "agency": "Southside Police Department",
+        "types": [
+          "TFM"
+        ],
+        "signed_dates": [
+          "2026-01-08"
+        ]
+      }
+    ],
+    "287g_count": 2,
+    "287g_types": {
+      "JEM": 1,
+      "TFM": 2
+    },
+    "detention_status": "Hosts ICE detention facility",
+    "detention_notes": "Etowah County Jail (reopened 2025; 865-bed)",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 28,
+    "score_detention": 25,
+    "score_hispanic": 7.9,
+    "score_population": 7,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 72.9,
+    "risk_tier": "Critical"
+  },
+  {
+    "county": "Fayette",
+    "fips": 1057,
+    "region": "north_poultry_belt",
+    "total_pop": 16053,
+    "hispanic": 851,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "None",
+    "287g_agencies": [],
+    "287g_count": 0,
+    "287g_types": {},
+    "detention_status": "Adjacent to detention facility",
+    "detention_notes": "Adjacent to Pickens County",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 0,
+    "score_detention": 10,
+    "score_hispanic": 7.9,
+    "score_population": 0,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 22.9,
+    "risk_tier": "Low"
+  },
+  {
+    "county": "Franklin",
+    "fips": 1059,
+    "region": "north_poultry_belt",
+    "total_pop": 31966,
+    "hispanic": 4475,
+    "hisp_pct": 14.0,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "1 agency, JEM/TFM/WSO",
+    "287g_agencies": [
+      {
+        "agency": "Franklin County Sheriff's Office",
+        "types": [
+          "JEM",
+          "TFM",
+          "WSO"
+        ],
+        "signed_dates": [
+          "2025-06-11",
+          "2025-11-06",
+          "2025-03-26"
+        ]
+      }
+    ],
+    "287g_count": 1,
+    "287g_types": {
+      "JEM": 1,
+      "TFM": 1,
+      "WSO": 1
+    },
+    "detention_status": "No nearby detention",
+    "detention_notes": "",
+    "poultry_status": "In poultry/concentration belt",
+    "score_287g": 30,
+    "score_detention": 0,
+    "score_hispanic": 20,
+    "score_population": 2,
+    "score_poultry_belt": 10,
+    "score_base": 5,
+    "risk_total": 67,
+    "risk_tier": "High"
+  },
+  {
+    "county": "Geneva",
+    "fips": 1061,
+    "region": "wiregrass",
+    "total_pop": 26887,
+    "hispanic": 1425,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "None",
+    "287g_agencies": [],
+    "287g_count": 0,
+    "287g_types": {},
+    "detention_status": "No nearby detention",
+    "detention_notes": "",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 0,
+    "score_detention": 0,
+    "score_hispanic": 7.9,
+    "score_population": 2,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 14.9,
+    "risk_tier": "Low"
+  },
+  {
+    "county": "Greene",
+    "fips": 1063,
+    "region": "black_belt",
+    "total_pop": 7424,
+    "hispanic": 393,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "None",
+    "287g_agencies": [],
+    "287g_count": 0,
+    "287g_types": {},
+    "detention_status": "Adjacent to detention facility",
+    "detention_notes": "Adjacent to Pickens County",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 0,
+    "score_detention": 10,
+    "score_hispanic": 7.9,
+    "score_population": 0,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 22.9,
+    "risk_tier": "Low"
+  },
+  {
+    "county": "Hale",
+    "fips": 1065,
+    "region": "black_belt",
+    "total_pop": 14829,
+    "hispanic": 786,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "1 agency, TFM",
+    "287g_agencies": [
+      {
+        "agency": "Hale County Sheriff's Office",
+        "types": [
+          "TFM"
+        ],
+        "signed_dates": [
+          "2026-03-31"
+        ]
+      }
+    ],
+    "287g_count": 1,
+    "287g_types": {
+      "TFM": 1
+    },
+    "detention_status": "No nearby detention",
+    "detention_notes": "",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 22,
+    "score_detention": 0,
+    "score_hispanic": 7.9,
+    "score_population": 0,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 34.9,
+    "risk_tier": "Medium"
+  },
+  {
+    "county": "Henry",
+    "fips": 1067,
+    "region": "wiregrass",
+    "total_pop": 17647,
+    "hispanic": 935,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "1 agency, JEM/TFM",
+    "287g_agencies": [
+      {
+        "agency": "Henry County Sheriff's Office",
+        "types": [
+          "JEM",
+          "TFM"
+        ],
+        "signed_dates": [
+          "2025-03-17",
+          "2025-12-11"
+        ]
+      }
+    ],
+    "287g_count": 1,
+    "287g_types": {
+      "JEM": 1,
+      "TFM": 1
+    },
+    "detention_status": "No nearby detention",
+    "detention_notes": "",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 28,
+    "score_detention": 0,
+    "score_hispanic": 7.9,
+    "score_population": 0,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 40.9,
+    "risk_tier": "Medium"
+  },
+  {
+    "county": "Houston",
+    "fips": 1069,
+    "region": "wiregrass",
+    "total_pop": 108140,
+    "hispanic": 5731,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "None",
+    "287g_agencies": [],
+    "287g_count": 0,
+    "287g_types": {},
+    "detention_status": "No nearby detention",
+    "detention_notes": "",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 0,
+    "score_detention": 0,
+    "score_hispanic": 7.9,
+    "score_population": 7,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 19.9,
+    "risk_tier": "Low"
+  },
+  {
+    "county": "Jackson",
+    "fips": 1071,
+    "region": "north_poultry_belt",
+    "total_pop": 53053,
+    "hispanic": 2812,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "None",
+    "287g_agencies": [],
+    "287g_count": 0,
+    "287g_types": {},
+    "detention_status": "No nearby detention",
+    "detention_notes": "",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 0,
+    "score_detention": 0,
+    "score_hispanic": 7.9,
+    "score_population": 4,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 16.9,
+    "risk_tier": "Low"
+  },
+  {
+    "county": "Jefferson",
+    "fips": 1073,
+    "region": "birmingham_metro",
+    "total_pop": 667755,
+    "hispanic": 34723,
+    "hisp_pct": 5.2,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "None",
+    "287g_agencies": [],
+    "287g_count": 0,
+    "287g_types": {},
+    "detention_status": "No nearby detention",
+    "detention_notes": "",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 0,
+    "score_detention": 0,
+    "score_hispanic": 7.8,
+    "score_population": 10,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 22.8,
+    "risk_tier": "Low"
+  },
+  {
+    "county": "Lamar",
+    "fips": 1075,
+    "region": "north_poultry_belt",
+    "total_pop": 13693,
+    "hispanic": 726,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "None",
+    "287g_agencies": [],
+    "287g_count": 0,
+    "287g_types": {},
+    "detention_status": "Adjacent to detention facility",
+    "detention_notes": "Adjacent to Pickens County",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 0,
+    "score_detention": 10,
+    "score_hispanic": 7.9,
+    "score_population": 0,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 22.9,
+    "risk_tier": "Low"
+  },
+  {
+    "county": "Lauderdale",
+    "fips": 1077,
+    "region": "north_poultry_belt",
+    "total_pop": 95830,
+    "hispanic": 5079,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "1 agency, JEM/TFM/WSO",
+    "287g_agencies": [
+      {
+        "agency": "Lauderdale County Sheriff's Office",
+        "types": [
+          "JEM",
+          "TFM",
+          "WSO"
+        ],
+        "signed_dates": [
+          "2025-06-12",
+          "2025-10-17",
+          "2025-06-12"
+        ]
+      }
+    ],
+    "287g_count": 1,
+    "287g_types": {
+      "JEM": 1,
+      "TFM": 1,
+      "WSO": 1
+    },
+    "detention_status": "No nearby detention",
+    "detention_notes": "",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 30,
+    "score_detention": 0,
+    "score_hispanic": 7.9,
+    "score_population": 4,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 46.9,
+    "risk_tier": "Medium"
+  },
+  {
+    "county": "Lawrence",
+    "fips": 1079,
+    "region": "north_poultry_belt",
+    "total_pop": 33276,
+    "hispanic": 1764,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "2 agencies, TFM/WSO",
+    "287g_agencies": [
+      {
+        "agency": "Courtland Police Department",
+        "types": [
+          "TFM"
+        ],
+        "signed_dates": [
+          "2026-03-13"
+        ]
+      },
+      {
+        "agency": "Lawrence County Sheriff's Office",
+        "types": [
+          "TFM",
+          "WSO"
+        ],
+        "signed_dates": [
+          "2025-06-18",
+          "2025-06-30"
+        ]
+      }
+    ],
+    "287g_count": 2,
+    "287g_types": {
+      "TFM": 2,
+      "WSO": 1
+    },
+    "detention_status": "No nearby detention",
+    "detention_notes": "",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 26,
+    "score_detention": 0,
+    "score_hispanic": 7.9,
+    "score_population": 2,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 40.9,
+    "risk_tier": "Medium"
+  },
+  {
+    "county": "Lee",
+    "fips": 1081,
+    "region": "montgomery_river_region",
+    "total_pop": 181134,
+    "hispanic": 10506,
+    "hisp_pct": 5.8,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "None",
+    "287g_agencies": [],
+    "287g_count": 0,
+    "287g_types": {},
+    "detention_status": "No nearby detention",
+    "detention_notes": "",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 0,
+    "score_detention": 0,
+    "score_hispanic": 8.7,
+    "score_population": 7,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 20.7,
+    "risk_tier": "Low"
+  },
+  {
+    "county": "Limestone",
+    "fips": 1083,
+    "region": "north_poultry_belt",
+    "total_pop": 111233,
+    "hispanic": 7453,
+    "hisp_pct": 6.7,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "1 agency, TFM/WSO",
+    "287g_agencies": [
+      {
+        "agency": "Limestone County Sheriff's Office",
+        "types": [
+          "TFM",
+          "WSO"
+        ],
+        "signed_dates": [
+          "2025-06-11",
+          "2025-05-22"
+        ]
+      }
+    ],
+    "287g_count": 1,
+    "287g_types": {
+      "TFM": 1,
+      "WSO": 1
+    },
+    "detention_status": "No nearby detention",
+    "detention_notes": "",
+    "poultry_status": "In poultry/concentration belt",
+    "score_287g": 26,
+    "score_detention": 0,
+    "score_hispanic": 10.1,
+    "score_population": 7,
+    "score_poultry_belt": 6,
+    "score_base": 5,
+    "risk_total": 54.1,
+    "risk_tier": "High"
+  },
+  {
+    "county": "Lowndes",
+    "fips": 1085,
+    "region": "montgomery_river_region",
+    "total_pop": 9833,
+    "hispanic": 521,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "None",
+    "287g_agencies": [],
+    "287g_count": 0,
+    "287g_types": {},
+    "detention_status": "No nearby detention",
+    "detention_notes": "",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 0,
+    "score_detention": 0,
+    "score_hispanic": 7.9,
+    "score_population": 0,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 12.9,
+    "risk_tier": "Low"
+  },
+  {
+    "county": "Macon",
+    "fips": 1087,
+    "region": "montgomery_river_region",
+    "total_pop": 18691,
+    "hispanic": 991,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "None",
+    "287g_agencies": [],
+    "287g_count": 0,
+    "287g_types": {},
+    "detention_status": "No nearby detention",
+    "detention_notes": "",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 0,
+    "score_detention": 0,
+    "score_hispanic": 7.9,
+    "score_population": 0,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 12.9,
+    "risk_tier": "Low"
+  },
+  {
+    "county": "Madison",
+    "fips": 1089,
+    "region": "north_poultry_belt",
+    "total_pop": 405718,
+    "hispanic": 24749,
+    "hisp_pct": 6.1,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "None",
+    "287g_agencies": [],
+    "287g_count": 0,
+    "287g_types": {},
+    "detention_status": "No nearby detention",
+    "detention_notes": "",
+    "poultry_status": "In poultry/concentration belt",
+    "score_287g": 0,
+    "score_detention": 0,
+    "score_hispanic": 9.1,
+    "score_population": 10,
+    "score_poultry_belt": 6,
+    "score_base": 5,
+    "risk_total": 30.1,
+    "risk_tier": "Medium"
+  },
+  {
+    "county": "Marengo",
+    "fips": 1091,
+    "region": "black_belt",
+    "total_pop": 18851,
+    "hispanic": 999,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "1 agency, TFM",
+    "287g_agencies": [
+      {
+        "agency": "Demopolis Police Department",
+        "types": [
+          "TFM"
+        ],
+        "signed_dates": [
+          "2026-01-26"
+        ]
+      }
+    ],
+    "287g_count": 1,
+    "287g_types": {
+      "TFM": 1
+    },
+    "detention_status": "No nearby detention",
+    "detention_notes": "",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 22,
+    "score_detention": 0,
+    "score_hispanic": 7.9,
+    "score_population": 0,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 34.9,
+    "risk_tier": "Medium"
+  },
+  {
+    "county": "Marion",
+    "fips": 1093,
+    "region": "north_poultry_belt",
+    "total_pop": 29184,
+    "hispanic": 1547,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "1 agency, JEM/TFM/WSO",
+    "287g_agencies": [
+      {
+        "agency": "Marion County Sheriff's Office",
+        "types": [
+          "JEM",
+          "TFM",
+          "WSO"
+        ],
+        "signed_dates": [
+          "2025-07-23",
+          "2025-06-12",
+          "2025-07-23"
+        ]
+      }
+    ],
+    "287g_count": 1,
+    "287g_types": {
+      "JEM": 1,
+      "TFM": 1,
+      "WSO": 1
+    },
+    "detention_status": "No nearby detention",
+    "detention_notes": "",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 30,
+    "score_detention": 0,
+    "score_hispanic": 7.9,
+    "score_population": 2,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 44.9,
+    "risk_tier": "Medium"
+  },
+  {
+    "county": "Marshall",
+    "fips": 1095,
+    "region": "north_poultry_belt",
+    "total_pop": 99748,
+    "hispanic": 15660,
+    "hisp_pct": 15.7,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "1 agency, JEM",
+    "287g_agencies": [
+      {
+        "agency": "Marshall County Sheriff's Office",
+        "types": [
+          "JEM"
+        ],
+        "signed_dates": [
+          "2025-09-22"
+        ]
+      }
+    ],
+    "287g_count": 1,
+    "287g_types": {
+      "JEM": 1
+    },
+    "detention_status": "Adjacent to detention facility",
+    "detention_notes": "Adjacent to Etowah County",
+    "poultry_status": "In poultry/concentration belt",
+    "score_287g": 6,
+    "score_detention": 10,
+    "score_hispanic": 20,
+    "score_population": 4,
+    "score_poultry_belt": 10,
+    "score_base": 5,
+    "risk_total": 55,
+    "risk_tier": "High"
+  },
+  {
+    "county": "Mobile",
+    "fips": 1097,
+    "region": "gulf_coast",
+    "total_pop": 412590,
+    "hispanic": 13203,
+    "hisp_pct": 3.2,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "2 agencies, TFM",
+    "287g_agencies": [
+      {
+        "agency": "Mobile County Sheriff's Office",
+        "types": [
+          "TFM"
+        ],
+        "signed_dates": [
+          "2025-07-23"
+        ]
+      },
+      {
+        "agency": "Semmes Police Department",
+        "types": [
+          "TFM"
+        ],
+        "signed_dates": [
+          "2025-11-14"
+        ]
+      }
+    ],
+    "287g_count": 2,
+    "287g_types": {
+      "TFM": 2
+    },
+    "detention_status": "Adjacent to detention facility",
+    "detention_notes": "Adjacent to Baldwin County",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 22,
+    "score_detention": 10,
+    "score_hispanic": 4.8,
+    "score_population": 10,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 51.8,
+    "risk_tier": "High"
+  },
+  {
+    "county": "Monroe",
+    "fips": 1099,
+    "region": "gulf_coast",
+    "total_pop": 19388,
+    "hispanic": 1028,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "1 agency, TFM",
+    "287g_agencies": [
+      {
+        "agency": "Monroe County Sheriff's Office",
+        "types": [
+          "TFM"
+        ],
+        "signed_dates": [
+          "2025-11-04"
+        ]
+      }
+    ],
+    "287g_count": 1,
+    "287g_types": {
+      "TFM": 1
+    },
+    "detention_status": "Adjacent to detention facility",
+    "detention_notes": "Adjacent to Baldwin County",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 22,
+    "score_detention": 10,
+    "score_hispanic": 7.9,
+    "score_population": 0,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 44.9,
+    "risk_tier": "Medium"
+  },
+  {
+    "county": "Montgomery",
+    "fips": 1101,
+    "region": "montgomery_river_region",
+    "total_pop": 226718,
+    "hispanic": 5441,
+    "hisp_pct": 2.4,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "None",
+    "287g_agencies": [],
+    "287g_count": 0,
+    "287g_types": {},
+    "detention_status": "No nearby detention",
+    "detention_notes": "",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 0,
+    "score_detention": 0,
+    "score_hispanic": 3.6,
+    "score_population": 10,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 18.6,
+    "risk_tier": "Low"
+  },
+  {
+    "county": "Morgan",
+    "fips": 1103,
+    "region": "north_poultry_belt",
+    "total_pop": 124471,
+    "hispanic": 12323,
+    "hisp_pct": 9.9,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "None",
+    "287g_agencies": [],
+    "287g_count": 0,
+    "287g_types": {},
+    "detention_status": "No nearby detention",
+    "detention_notes": "",
+    "poultry_status": "In poultry/concentration belt",
+    "score_287g": 0,
+    "score_detention": 0,
+    "score_hispanic": 14.9,
+    "score_population": 7,
+    "score_poultry_belt": 8,
+    "score_base": 5,
+    "risk_total": 34.9,
+    "risk_tier": "Medium"
+  },
+  {
+    "county": "Perry",
+    "fips": 1105,
+    "region": "black_belt",
+    "total_pop": 8031,
+    "hispanic": 426,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "None",
+    "287g_agencies": [],
+    "287g_count": 0,
+    "287g_types": {},
+    "detention_status": "No nearby detention",
+    "detention_notes": "",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 0,
+    "score_detention": 0,
+    "score_hispanic": 7.9,
+    "score_population": 0,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 12.9,
+    "risk_tier": "Low"
+  },
+  {
+    "county": "Pickens",
+    "fips": 1107,
+    "region": "black_belt",
+    "total_pop": 18721,
+    "hispanic": 1030,
+    "hisp_pct": 5.5,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "None",
+    "287g_agencies": [],
+    "287g_count": 0,
+    "287g_types": {},
+    "detention_status": "Hosts ICE detention facility",
+    "detention_notes": "Pickens County Detention Center (Carrollton)",
+    "poultry_status": "In poultry/concentration belt",
+    "score_287g": 0,
+    "score_detention": 25,
+    "score_hispanic": 8.2,
+    "score_population": 0,
+    "score_poultry_belt": 8,
+    "score_base": 5,
+    "risk_total": 46.2,
+    "risk_tier": "Medium"
+  },
+  {
+    "county": "Pike",
+    "fips": 1109,
+    "region": "wiregrass",
+    "total_pop": 32987,
+    "hispanic": 1748,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "None",
+    "287g_agencies": [],
+    "287g_count": 0,
+    "287g_types": {},
+    "detention_status": "No nearby detention",
+    "detention_notes": "",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 0,
+    "score_detention": 0,
+    "score_hispanic": 7.9,
+    "score_population": 2,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 14.9,
+    "risk_tier": "Low"
+  },
+  {
+    "county": "Randolph",
+    "fips": 1111,
+    "region": "ne_appalachian",
+    "total_pop": 22510,
+    "hispanic": 1193,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "None",
+    "287g_agencies": [],
+    "287g_count": 0,
+    "287g_types": {},
+    "detention_status": "No nearby detention",
+    "detention_notes": "",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 0,
+    "score_detention": 0,
+    "score_hispanic": 7.9,
+    "score_population": 2,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 14.9,
+    "risk_tier": "Low"
+  },
+  {
+    "county": "Russell",
+    "fips": 1113,
+    "region": "montgomery_river_region",
+    "total_pop": 58811,
+    "hispanic": 3117,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "None",
+    "287g_agencies": [],
+    "287g_count": 0,
+    "287g_types": {},
+    "detention_status": "No nearby detention",
+    "detention_notes": "",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 0,
+    "score_detention": 0,
+    "score_hispanic": 7.9,
+    "score_population": 4,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 16.9,
+    "risk_tier": "Low"
+  },
+  {
+    "county": "St. Clair",
+    "fips": 1115,
+    "region": "birmingham_metro",
+    "total_pop": 94166,
+    "hispanic": 4991,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "1 agency, TFM",
+    "287g_agencies": [
+      {
+        "agency": "Margaret Police Department",
+        "types": [
+          "TFM"
+        ],
+        "signed_dates": [
+          "2025-12-17"
+        ]
+      }
+    ],
+    "287g_count": 1,
+    "287g_types": {
+      "TFM": 1
+    },
+    "detention_status": "Adjacent to detention facility",
+    "detention_notes": "Adjacent to Etowah County",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 22,
+    "score_detention": 10,
+    "score_hispanic": 7.9,
+    "score_population": 4,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 48.9,
+    "risk_tier": "Medium"
+  },
+  {
+    "county": "Shelby",
+    "fips": 1117,
+    "region": "birmingham_metro",
+    "total_pop": 230211,
+    "hispanic": 16115,
+    "hisp_pct": 7.0,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "None",
+    "287g_agencies": [],
+    "287g_count": 0,
+    "287g_types": {},
+    "detention_status": "No nearby detention",
+    "detention_notes": "",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 0,
+    "score_detention": 0,
+    "score_hispanic": 10.5,
+    "score_population": 10,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 25.5,
+    "risk_tier": "Medium"
+  },
+  {
+    "county": "Sumter",
+    "fips": 1119,
+    "region": "black_belt",
+    "total_pop": 11878,
+    "hispanic": 630,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "None",
+    "287g_agencies": [],
+    "287g_count": 0,
+    "287g_types": {},
+    "detention_status": "Adjacent to detention facility",
+    "detention_notes": "Adjacent to Pickens County",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 0,
+    "score_detention": 10,
+    "score_hispanic": 7.9,
+    "score_population": 0,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 22.9,
+    "risk_tier": "Low"
+  },
+  {
+    "county": "Talladega",
+    "fips": 1121,
+    "region": "ne_appalachian",
+    "total_pop": 81021,
+    "hispanic": 4294,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "None",
+    "287g_agencies": [],
+    "287g_count": 0,
+    "287g_types": {},
+    "detention_status": "No nearby detention",
+    "detention_notes": "",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 0,
+    "score_detention": 0,
+    "score_hispanic": 7.9,
+    "score_population": 4,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 16.9,
+    "risk_tier": "Low"
+  },
+  {
+    "county": "Tallapoosa",
+    "fips": 1123,
+    "region": "montgomery_river_region",
+    "total_pop": 40938,
+    "hispanic": 2170,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "2 agencies, TFM",
+    "287g_agencies": [
+      {
+        "agency": "Camp Hill Police Department",
+        "types": [
+          "TFM"
+        ],
+        "signed_dates": [
+          "2025-12-08"
+        ]
+      },
+      {
+        "agency": "Jackson's Gap Police Department",
+        "types": [
+          "TFM"
+        ],
+        "signed_dates": [
+          "2026-01-26"
+        ]
+      }
+    ],
+    "287g_count": 2,
+    "287g_types": {
+      "TFM": 2
+    },
+    "detention_status": "No nearby detention",
+    "detention_notes": "",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 22,
+    "score_detention": 0,
+    "score_hispanic": 7.9,
+    "score_population": 2,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 36.9,
+    "risk_tier": "Medium"
+  },
+  {
+    "county": "Tuscaloosa",
+    "fips": 1125,
+    "region": "birmingham_metro",
+    "total_pop": 237552,
+    "hispanic": 9977,
+    "hisp_pct": 4.2,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "None",
+    "287g_agencies": [],
+    "287g_count": 0,
+    "287g_types": {},
+    "detention_status": "Adjacent to detention facility",
+    "detention_notes": "Adjacent to Pickens County",
+    "poultry_status": "In poultry/concentration belt",
+    "score_287g": 0,
+    "score_detention": 10,
+    "score_hispanic": 6.3,
+    "score_population": 10,
+    "score_poultry_belt": 6,
+    "score_base": 5,
+    "risk_total": 37.3,
+    "risk_tier": "Medium"
+  },
+  {
+    "county": "Walker",
+    "fips": 1127,
+    "region": "birmingham_metro",
+    "total_pop": 64841,
+    "hispanic": 3437,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "None",
+    "287g_agencies": [],
+    "287g_count": 0,
+    "287g_types": {},
+    "detention_status": "No nearby detention",
+    "detention_notes": "",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 0,
+    "score_detention": 0,
+    "score_hispanic": 7.9,
+    "score_population": 4,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 16.9,
+    "risk_tier": "Low"
+  },
+  {
+    "county": "Washington",
+    "fips": 1129,
+    "region": "gulf_coast",
+    "total_pop": 15143,
+    "hispanic": 803,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "1 agency, TFM",
+    "287g_agencies": [
+      {
+        "agency": "Washington County Sheriff's Office",
+        "types": [
+          "TFM"
+        ],
+        "signed_dates": [
+          "2025-10-17"
+        ]
+      }
+    ],
+    "287g_count": 1,
+    "287g_types": {
+      "TFM": 1
+    },
+    "detention_status": "Adjacent to detention facility",
+    "detention_notes": "Adjacent to Baldwin County",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 22,
+    "score_detention": 10,
+    "score_hispanic": 7.9,
+    "score_population": 0,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 44.9,
+    "risk_tier": "Medium"
+  },
+  {
+    "county": "Wilcox",
+    "fips": 1131,
+    "region": "black_belt",
+    "total_pop": 10172,
+    "hispanic": 539,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "None",
+    "287g_agencies": [],
+    "287g_count": 0,
+    "287g_types": {},
+    "detention_status": "No nearby detention",
+    "detention_notes": "",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 0,
+    "score_detention": 0,
+    "score_hispanic": 7.9,
+    "score_population": 0,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 12.9,
+    "risk_tier": "Low"
+  },
+  {
+    "county": "Winston",
+    "fips": 1133,
+    "region": "north_poultry_belt",
+    "total_pop": 23682,
+    "hispanic": 1255,
+    "hisp_pct": 5.3,
+    "hb56_sb53_status": "Subject (statewide mandate, HB 56 + SB 53/2025)",
+    "287g_status": "None",
+    "287g_agencies": [],
+    "287g_count": 0,
+    "287g_types": {},
+    "detention_status": "No nearby detention",
+    "detention_notes": "",
+    "poultry_status": "Not in concentration belt",
+    "score_287g": 0,
+    "score_detention": 0,
+    "score_hispanic": 7.9,
+    "score_population": 2,
+    "score_poultry_belt": 0,
+    "score_base": 5,
+    "risk_total": 14.9,
+    "risk_tier": "Low"
+  }
+]

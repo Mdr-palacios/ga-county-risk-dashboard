@@ -1,0 +1,44 @@
+{
+  "as_of": "2026-06-09",
+  "model_version": "v1",
+  "data_source": "ICE participating agencies file dated 2026-06-08",
+  "total_counties": 67,
+  "total_pop": 5086768,
+  "hispanic_total": 287496,
+  "hispanic_pct_state": 5.7,
+  "counties_with_287g": 28,
+  "distinct_287g_agencies": 47,
+  "total_287g_rows": 62,
+  "tier_counts": {
+    "Critical": 3,
+    "High": 7,
+    "Medium": 22,
+    "Low": 35
+  },
+  "tier_population": {
+    "Critical": 422363,
+    "High": 856588,
+    "Medium": 1747382,
+    "Low": 2060435
+  },
+  "tier_hispanic": {
+    "Critical": 28486,
+    "High": 53946,
+    "Medium": 102923,
+    "Low": 102141
+  },
+  "critical_counties": [
+    "Baldwin",
+    "DeKalb",
+    "Etowah"
+  ],
+  "high_counties": [
+    "Blount",
+    "Calhoun",
+    "Cherokee",
+    "Franklin",
+    "Limestone",
+    "Marshall",
+    "Mobile"
+  ]
+}

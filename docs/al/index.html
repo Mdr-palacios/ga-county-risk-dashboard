@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title data-i18n="doc.title">Alabama County Risk Dashboard · Independent analysis by Rosario Palacios</title>
+  <meta name="description" content="Independent analysis by Rosario Palacios tracking county-level immigration enforcement risk across Alabama: 287(g) agreements (40 agencies as of June 2026), ICE detention infrastructure (Etowah, Pickens, Baldwin), Hispanic concentration in the North Alabama poultry belt, and the 2025 anti-sanctuary legislative package (SB 53, SB 63, SB 158, SB 55) on top of the surviving HB 56 'show me your papers' mandate." />
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23a5232a'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='system-ui' font-weight='800' font-size='16' fill='white'%3EA%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true" style="background: linear-gradient(135deg, #a5232a 0%, #c93b3b 100%);">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 6l9 4 9-4-9-4-9 4z" />
+            <path d="M3 6v8c0 1 9 4 9 4s9-3 9-4V6" opacity="0.6" />
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="name" data-i18n="header.brand">AL County Risk Dashboard</span>
+          <span class="sub" data-i18n="header.sub">Independent analysis by Rosario Palacios</span>
+        </div>
+      </div>
+      <div class="header-actions">
+        <div class="state-switch" role="group" aria-label="State">
+          <a class="state-btn" href="../ga/"><span>GA</span></a>
+          <a class="state-btn" href="../ms/"><span>MS</span></a>
+          <a class="state-btn active" href="./"><span>AL</span></a>
+        </div>
+        <div class="lang-switch" role="group" aria-label="Language" data-i18n-attr="aria-label:header.lang.aria">
+          <button type="button" class="lang-btn" data-lang-btn="en">EN</button>
+          <button type="button" class="lang-btn" data-lang-btn="es">ES</button>
+          <button type="button" class="lang-btn" data-lang-btn="vi">VI</button>
+        </div>
+        <button class="btn-pill" data-open-modal="partnership">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+          <span data-i18n="header.cta.pill">Want one for your state?</span>
+        </button>
+        <button class="btn-icon" data-theme-toggle aria-label="Toggle dark mode" data-i18n-attr="aria-label:header.darkmode.aria">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="hero">
+      <h1 data-i18n="hero.h1">Tracking immigration enforcement risk across all 67 Alabama counties.</h1>
+      <p class="lede" data-i18n="hero.lede">Built for activists and organizations who believe we should #AbolishICE. Alabama's risk model layers a 287(g) explosion (47 agency agreements as of June 2026, concentrated in the North Alabama poultry belt and Gulf Coast), ICE detention infrastructure (Etowah reopened in 2025, plus Pickens and Baldwin), Hispanic concentration in poultry-processing counties, and overall population size, on top of the surviving HB 56 'show me your papers' mandate (Ala. Code § 31-13-5) and the 2025 anti-sanctuary package (SB 53, SB 63, SB 158, SB 55).</p>
+      <div class="meta" id="meta-line">
+        <span><span class="dot"></span> <span data-i18n="hero.meta.model">v1 risk model · June 2026</span></span>
+        <span data-i18n="hero.meta.counties">67 counties</span>
+        <span data-i18n="hero.meta.updated">Updated quarterly</span>
+        <span data-i18n="hero.meta.share">Coalition link share only</span>
+      </div>
+
+      <details class="explainer" id="hb56-explainer">
+        <summary>
+          <span class="explainer-tag" data-i18n="hb56.tag">Quick context</span>
+          <span class="explainer-q" data-i18n="hb56.q">HB 56 (2011) and the 2025 SB 53/63/158/55 package: why every AL county is in the model</span>
+          <svg class="explainer-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="explainer-body">
+          <p data-i18n="hb56.p1">Alabama's HB 56 (the Beason-Hammon Act, 2011) was one of the harshest state immigration laws ever passed. Federal courts struck down most of it (school checks, contract bars, harboring), but the core 'show me your papers' provision survived as Ala. Code § 31-13-5: every state and local law enforcement officer must attempt to determine the immigration status of anyone they reasonably suspect of being unlawfully present during any lawful stop, detention, or arrest. That mandate is still in force in every AL county in 2026.</p>
+          <p data-i18n="hb56.p2">In 2025, Gov. Kay Ivey signed a four-bill package that layers a hard anti-sanctuary regime on top of HB 56. SB 53 makes it a Class C felony for any state or local official to adopt or enforce a sanctuary policy, and conditions all state funding on documented ICE cooperation. SB 63 requires every law enforcement agency to honor ICE detainers and to participate in 287(g) when offered. SB 158 mandates E-Verify for all public and private employers and authorizes the Attorney General to investigate violations. SB 55 criminalizes harboring or transporting an undocumented person as a separate state offense.</p>
+          <p data-i18n="hb56.p3">Practically, that means every one of Alabama's 67 counties is a forced cooperator with ICE in 2026, regardless of local politics. In this risk model, the HB 56 / SB 53 baseline contributes a small statewide floor (5 points). The reason a county lands in Critical or High tier is what gets layered on top: 287(g) agreements, ICE detention infrastructure, Hispanic concentration in poultry-processing counties, and total population. The legislative package is the floor; the tier system shows where the ceiling is highest.</p>
+          <p class="explainer-source"><a href="https://nipnlg.org/sites/default/files/2025-06/2025_SB53-SB63.pdf" target="_blank" rel="noopener" data-i18n="hb56.source">Read the SB 53 / SB 63 explainer (NIPNLG, June 2025) →</a></p>
+        </div>
+      </details>
+
+      <details class="explainer" id="p287g-explainer" style="margin-top: var(--space-3);">
+        <summary>
+          <span class="explainer-tag" data-i18n="p287gx.tag">Enforcement infrastructure</span>
+          <span class="explainer-q" data-i18n="p287gx.q">The 287(g) explosion: 1 agency to 40+ in twelve months</span>
+          <svg class="explainer-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="explainer-body">
+          <p data-i18n="p287gx.p1">287(g) is the federal program that deputizes state and local police to perform some immigration enforcement functions. As of June 2026, ICE's participating agencies file lists 47 agency-level Alabama agreements, covering roughly 40 distinct sheriff's offices, police departments, and state agencies; up from just one Alabama agency in early 2025. The dominant model is Task Force Model (TFM), which authorizes officers to question and arrest people about immigration status during routine encounters: traffic stops, calls for service, and street investigations. A smaller number of jails use Jail Enforcement Model (JEM) and Warrant Service Officer (WSO).</p>
+          <p data-i18n="p287gx.p2">The expansion is geographically concentrated. Baldwin County (Gulf Coast) signed five separate agreements in 2025 alone. Cherokee County (northeast) has four. The North Alabama poultry belt (DeKalb, Marshall, Franklin, Blount, Cullman, Limestone) shows the next densest cluster, exactly where Latino workforce concentration is highest. SB 63 (2025) requires every AL law enforcement agency to participate when offered, so the trajectory is one direction.</p>
+          <p data-i18n="p287gx.p3">In this risk model, 287(g) contributes up to 30 points by type: TFM is weighted heaviest (22 points), JEM and WSO add smaller amounts, and counties with four or more agency agreements receive a saturation bonus. Counties currently in Critical tier are not Critical because of HB 56; they are Critical because TFM-deputized officers now operate during routine traffic enforcement.</p>
+          <p class="explainer-source"><a href="https://www.ice.gov/identify-and-arrest/287g" target="_blank" rel="noopener" data-i18n="p287gx.source">ICE 287(g) participating agencies file (updated June 8, 2026) →</a></p>
+        </div>
+      </details>
+
+      <details class="explainer" id="detention-explainer" style="margin-top: var(--space-3);">
+        <summary>
+          <span class="explainer-tag" data-i18n="det.tag">Detention infrastructure</span>
+          <span class="explainer-q" data-i18n="det.q">Etowah reopens, Pickens expands, Baldwin opens: AL's detention footprint in 2026</span>
+          <svg class="explainer-chevron" width="14" height="14" viewBox=" 0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="explainer-body">
+          <p data-i18n="det.p1">In September 2025, ICE reopened the Etowah County Detention Center in Gadsden, three years after it had been closed following a long campaign documenting medical neglect, suicide attempts, and hunger strikes by detained men. The new contract authorizes up to 865 beds and is one of the largest single ICE bed-expansions in the South in 2025-2026. Etowah's reopening was paired with the opening of a new Baldwin County facility (2025) and the expansion of the Pickens County Detention Center in Carrollton, which has long held ICE detainees under a county jail contract.</p>
+          <p data-i18n="det.p2">Detention proximity matters because it shapes who an ICE field office can hold and for how long. A 287(g) arrest in a county adjacent to detention is a transfer of hours, not days. The further a detainee is moved from their family, the harder visitation, bond posting, and attorney access become; and the more pressure detainees feel to sign voluntary removal orders.</p>
+          <p data-i18n="det.p3">In this model, host counties (Etowah, Pickens, Baldwin) carry the full 25-point detention factor; counties adjacent to a host carry 10 points. The detention map is changing fast: rumors of additional contracts in Mobile and Madison have circulated, and this score will be updated as ICE publishes new facility lists.</p>
+          <p class="explainer-source"><a href="https://www.detentionwatchnetwork.org/pressroom/releases/2025/notorious-alabama-detention-center-re-open-three-years-after-its-celebrated" target="_blank" rel="noopener" data-i18n="det.source">Etowah reopening coverage (Detention Watch Network) →</a></p>
+        </div>
+      </details>
+    </section>
+
+    <!-- KPIs -->
+    <section class="section" aria-label="Key indicators">
+      <div class="kpi-grid" id="kpi-grid"></div>
+    </section>
+
+    <!-- Map + detail -->
+    <section class="section" aria-labelledby="map-h">
+      <div class="section-head">
+        <div>
+          <h2 id="map-h" data-i18n="map.h2">Risk map · click any county</h2>
+          <p class="desc" data-i18n="map.desc">Counties shaded by composite risk score. Score combines 287(g) status, ICE detention proximity, Hispanic concentration, total population, and poultry-belt density, on top of the statewide HB 56 / SB 53 floor.</p>
+        </div>
+        <div class="controls">
+          <div class="toggle-group" id="map-mode">
+            <button data-mode="risk_tier" class="active" data-i18n="map.mode.risk">Risk tier</button>
+            <button data-mode="287g_status" data-i18n="map.mode.287g">287(g)</button>
+            <button data-mode="detention" data-i18n="map.mode.detention">Detention</button>
+            <button data-mode="poultry" data-i18n="map.mode.poultry">Poultry belt</button>
+            <button data-mode="hisp_pct" data-i18n="map.mode.hisp">% Hispanic</button>
+          </div>
+        </div>
+      </div>
+      <div class="map-wrap">
+        <div class="map-card">
+          <svg id="map" class="map-svg" viewBox="0 0 540 720" role="img" aria-label="Alabama county risk map"></svg>
+          <div class="legend" id="map-legend"></div>
+        </div>
+        <aside class="panel-card" id="detail-panel" aria-live="polite">
+          <div class="empty" id="detail-empty">
+            <p data-i18n="map.empty">Click a county on the map (or pick from the table below) to see its risk profile, 287(g) status, detention proximity, and Hispanic concentration.</p>
+          </div>
+          <div id="detail-content" class="hidden"></div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Risk tier + 287(g) network -->
+    <section class="section">
+      <div class="chart-row">
+        <div class="chart-card">
+          <div class="section-head" style="margin-bottom: var(--space-4);">
+            <div>
+              <h2 data-i18n="tier.h2">Risk tier distribution</h2>
+              <p class="desc" data-i18n="tier.desc">How counties stack across the four tiers, with their share of AL's Hispanic population.</p>
+            </div>
+          </div>
+          <div id="tier-bars"></div>
+          <p class="notes" data-i18n="tier.notes">Critical and High tier counties contain a disproportionate share of Alabama's immigrant workforce and host every active ICE detention bed in the state. Direct legal observer and hotline capacity here first.</p>
+        </div>
+        <div class="chart-card">
+          <div class="section-head" style="margin-bottom: var(--space-4);">
+            <div>
+              <h2 data-i18n="p287g.h2">287(g) participation in Alabama</h2>
+              <p class="desc" data-i18n="p287g.desc">AL agencies currently participating, by model. The state went from one agency in early 2025 to roughly 40 in 12 months, dominated by Task Force Model (street-level enforcement).</p>
+            </div>
+          </div>
+          <div id="287g-bars"></div>
+          <p class="notes"><span data-i18n="p287g.notes_prefix">Sources:</span> <a href="https://www.ice.gov/identify-and-arrest/287g" target="_blank" rel="noopener" data-i18n="p287g.notes_src">ICE 287(g) participating agencies file (June 8, 2026)</a><span data-i18n="p287g.notes_suffix">; cross-checked against the ILRC national 287(g) map.</span></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Region rollup + methodology -->
+    <section class="section">
+      <div class="chart-row">
+        <div class="chart-card">
+          <div class="section-head" style="margin-bottom: var(--space-4);">
+            <div>
+              <h2 data-i18n="region.h2">Risk by Alabama region</h2>
+              <p class="desc" data-i18n="region.desc">Seven regional groupings rolled up by average risk score and Hispanic population concentration.</p>
+            </div>
+          </div>
+          <div id="region-bars"></div>
+          <p class="notes" data-i18n="region.notes">North Alabama Poultry Belt and Gulf Coast carry the highest combined exposure: dense 287(g) participation, the largest Hispanic workforce concentrations, and now host or adjacent to active detention beds.</p>
+        </div>
+        <div class="chart-card">
+          <div class="section-head" style="margin-bottom: var(--space-4);">
+            <div>
+              <h2 data-i18n="method.h2">What drives a county's score</h2>
+              <p class="desc" data-i18n="method.desc">Methodology in plain language.</p>
+            </div>
+          </div>
+          <div class="methodology">
+            <div class="score-bar-row"><span class="lab" data-i18n="method.row.287g">287(g) status</span><div class="track"><div class="fill" style="width: 30%; background: var(--color-primary);"></div></div><span class="num">30</span></div>
+            <div class="score-bar-row"><span class="lab" data-i18n="method.row.detention">ICE detention proximity</span><div class="track"><div class="fill" style="width: 25%; background: var(--color-primary);"></div></div><span class="num">25</span></div>
+            <div class="score-bar-row"><span class="lab" data-i18n="method.row.hisp">Hispanic concentration</span><div class="track"><div class="fill" style="width: 20%; background: var(--color-accent);"></div></div><span class="num">20</span></div>
+            <div class="score-bar-row"><span class="lab" data-i18n="method.row.pop">Total population</span><div class="track"><div class="fill" style="width: 10%; background: var(--color-accent);"></div></div><span class="num">10</span></div>
+            <div class="score-bar-row"><span class="lab" data-i18n="method.row.poultry">Poultry belt density</span><div class="track"><div class="fill" style="width: 10%; background: var(--color-accent);"></div></div><span class="num">10</span></div>
+            <div class="score-bar-row"><span class="lab" data-i18n="method.row.hb56">HB 56 / SB 53 base (statewide)</span><div class="track"><div class="fill" style="width: 5%; background: var(--color-accent);"></div></div><span class="num">5</span></div>
+            <p class="notes" style="margin-top: var(--space-4);" data-i18n="method.notes">Tiers: Critical ≥ 70; High 50 to 69; Medium 25 to 49; Low &lt; 25. The model is directional, not predictive.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Filterable county table (collapsible) -->
+    <section class="section">
+      <details class="county-details" id="county-details">
+        <summary>
+          <span class="summary-text">
+            <span class="summary-h" data-i18n="tbl.summary_h">All counties</span>
+            <span class="summary-sub"><span data-i18n="tbl.summary_sub">Search, sort, and click a row to load it above.</span> <span id="county-count-pill">67 counties</span></span>
+          </span>
+          <span class="summary-chev" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </span>
+        </summary>
+        <div class="filter-bar">
+          <input id="search" type="search" placeholder="Search counties..." aria-label="Search counties" data-i18n-attr="placeholder:tbl.search.placeholder,aria-label:tbl.search.aria" />
+          <select id="filter-tier" aria-label="Filter by risk tier" data-i18n-attr="aria-label:tbl.filter.tier.aria">
+            <option value="" data-i18n="tbl.filter.tier.all">All tiers</option>
+            <option value="Critical" data-i18n="tbl.filter.tier.critical">Critical only</option>
+            <option value="High" data-i18n="tbl.filter.tier.high">High only</option>
+            <option value="Medium" data-i18n="tbl.filter.tier.medium">Medium only</option>
+            <option value="Low" data-i18n="tbl.filter.tier.low">Low only</option>
+          </select>
+          <select id="filter-287g" aria-label="Filter by 287(g)" data-i18n-attr="aria-label:tbl.filter.287g.aria">
+            <option value="" data-i18n="tbl.filter.287g.all">All 287(g)</option>
+            <option value="active" data-i18n="tbl.filter.287g.active">Active 287(g)</option>
+            <option value="inactive" data-i18n="tbl.filter.287g.inactive">No 287(g)</option>
+          </select>
+          <select id="filter-detention" aria-label="Filter by detention proximity" data-i18n-attr="aria-label:tbl.filter.detention.aria">
+            <option value="" data-i18n="tbl.filter.detention.all">Any detention status</option>
+            <option value="host" data-i18n="tbl.filter.detention.host">Hosts a facility</option>
+            <option value="adjacent" data-i18n="tbl.filter.detention.adjacent">Adjacent to a facility</option>
+            <option value="none" data-i18n="tbl.filter.detention.none">No nearby detention</option>
+          </select>
+          <select id="filter-region" aria-label="Filter by region" data-i18n-attr="aria-label:tbl.filter.region.aria">
+            <option value="" data-i18n="tbl.filter.region.all">All regions</option>
+            <option value="north_poultry_belt" data-i18n="tbl.filter.region.poultry">North Poultry Belt</option>
+            <option value="birmingham_metro" data-i18n="tbl.filter.region.bham">Birmingham Metro</option>
+            <option value="ne_appalachian" data-i18n="tbl.filter.region.appalachian">NE Appalachian</option>
+            <option value="montgomery_river_region" data-i18n="tbl.filter.region.montgomery">Montgomery / River</option>
+            <option value="black_belt" data-i18n="tbl.filter.region.blackbelt">Black Belt</option>
+            <option value="wiregrass" data-i18n="tbl.filter.region.wiregrass">Wiregrass / SE</option>
+            <option value="gulf_coast" data-i18n="tbl.filter.region.gulf">Gulf Coast / SW</option>
+          </select>
+        </div>
+        <div class="table-wrap">
+          <table class="county-table" id="county-table">
+            <thead>
+              <tr>
+                <th data-sort="county" data-i18n="tbl.col.county">County</th>
+                <th data-sort="risk_total" class="num" data-i18n="tbl.col.score">Score</th>
+                <th data-sort="risk_tier" data-i18n="tbl.col.tier">Tier</th>
+                <th data-sort="287g_status" data-i18n="tbl.col.287g">287(g)</th>
+                <th data-sort="detention_status" data-i18n="tbl.col.detention">Detention</th>
+                <th data-sort="region" data-i18n="tbl.col.region">Region</th>
+                <th data-sort="total_pop" class="num" data-i18n="tbl.col.pop">Population</th>
+                <th data-sort="hisp_pct" class="num" data-i18n="tbl.col.hisp">Hisp %</th>
+              </tr>
+            </thead>
+            <tbody id="county-tbody"></tbody>
+          </table>
+        </div>
+        <p class="notes"><span data-i18n="tbl.notes.demographics">Demographics:</span> <a href="https://data.census.gov" target="_blank" rel="noopener" data-i18n="tbl.notes.census">U.S. Census ACS 5-year</a><span data-i18n="tbl.notes.middle">. 287(g): ICE participating agencies file. Detention: Detention Watch Network, ICE facility list, county jail records. Hispanic concentration: PARCA Alabama and ACS.</span></p>
+      </details>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="inner">
+      <div>
+        <p><strong data-i18n="footer.line1.strong">Independent analysis by Rosario Palacios.</strong> <span data-i18n="footer.line1.rest">This page combines public records into a comparable risk score for coalition planning in Alabama. Strategic and personnel data (sheriff contacts, observer rosters, attorney triggers) are intentionally excluded from this view.</span></p>
+        <p style="margin-top: var(--space-2);"><span data-i18n="footer.contact">Questions, corrections, or data updates:</span> <a href="mailto:rosario@palacios.community">rosario@palacios.community</a></p>
+        <p style="margin-top: var(--space-2);"><span data-i18n="footer.crosslink">Looking for another state? See the</span> <a href="../ga/" data-i18n="footer.crosslink_ga">GA dashboard</a> <span data-i18n="footer.crosslink_or">or</span> <a href="../ms/" data-i18n="footer.crosslink_ms">MS dashboard</a>.</p>
+      </div>
+      <div>
+        <p class="cite"><span data-i18n="footer.build">v1 model · build</span> <span id="build-date"></span></p>
+        <p style="margin-top: var(--space-2);" data-i18n="footer.audience">Built for coalition partners. Not for public press distribution.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Persistent partnership callout -->
+  <aside class="partnership-banner" id="partnership-banner">
+    <div class="inner">
+      <div class="copy">
+        <strong data-i18n="banner.strong">From another state?</strong>
+        <span data-i18n="banner.body">If you're an #AbolishICE organizer or coalition working on immigrant rights, voter access, or civil-rights work, I can partner with you to research and build a county-level risk dashboard for your state.</span>
+      </div>
+      <button class="btn-primary" data-open-modal="partnership" data-i18n="banner.cta">Start a conversation</button>
+    </div>
+  </aside>
+
+  <!-- Signup modal -->
+  <div class="modal-backdrop" id="modal-signup" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="signup-title">
+    <div class="modal">
+      <button class="modal-close" data-close-modal aria-label="Close" data-i18n-attr="aria-label:modal.close.aria">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6l-12 12"/></svg>
+      </button>
+      <div class="modal-head">
+        <h3 id="signup-title" data-i18n="modal.signup.h3">Quick check-in before you keep exploring</h3>
+        <p data-i18n="modal.signup.p">This dashboard is an independent analysis. If you'd like occasional updates as new data is added, drop your email; either choice keeps the dashboard open.</p>
+      </div>
+      <iframe id="signup-frame" data-form-id="261534821207048" title="Stay in the loop" allowtransparency="true" allow="geolocation; microphone; camera; fullscreen" frameborder="0" style="width:100%;" loading="lazy" data-i18n-attr="title:modal.signup.frame_title"></iframe>
+      <div class="modal-foot">
+        <button class="btn-ghost" data-close-modal data-dismiss-signup data-i18n="modal.signup.skip">Skip for now</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Partnership modal -->
+  <div class="modal-backdrop" id="modal-partnership" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="partnership-title">
+    <div class="modal">
+      <button class="modal-close" data-close-modal aria-label="Close" data-i18n-attr="aria-label:modal.close.aria">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6l-12 12"/></svg>
+      </button>
+      <div class="modal-head">
+        <h3 id="partnership-title" data-i18n="modal.partnership.h3">Build this for your state</h3>
+        <p data-i18n="modal.partnership.p">Tell me about the state you'd want to assess and the problem you're trying to solve. I'll be in touch within a few days.</p>
+      </div>
+      <iframe id="partnership-frame" data-form-id="261535151874055" title="Build this for your state" allowtransparency="true" allow="geolocation; microphone; camera; fullscreen" frameborder="0" style="width:100%;" loading="lazy" data-i18n-attr="title:modal.partnership.frame_title"></iframe>
+    </div>
+  </div>
+
+  <div class="tooltip" id="tooltip" role="tooltip"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
+  <script src="./i18n.js" defer></script>
+  <script src="./app.js" defer></script>
+</body>
+</html>
