@@ -16,7 +16,7 @@
   <header class="site-header">
     <div class="inner">
       <div class="brand">
-        <div class="brand-mark" aria-hidden="true" style="background: linear-gradient(135deg, #111 0%, #444 100%);">
+        <div class="brand-mark chooser-brand-mark" aria-hidden="true">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M3 6l9 4 9-4-9-4-9 4z" />
             <path d="M3 6v8c0 1 9 4 9 4s9-3 9-4V6" opacity="0.6" />
@@ -47,42 +47,40 @@
       <p class="chooser-lede" data-i18n="lede">Independent dashboards built for activists and organizations who believe we should #AbolishICE. Each dashboard layers 287(g) cooperation, local enforcement infrastructure, and demographic concentration with that state's specific anti-sanctuary mandate, raid history, and detention footprint.</p>
 
       <div class="chooser-grid">
-        <a class="chooser-card" href="./ga/" aria-label="Open Georgia dashboard">
-          <div class="accent" style="background: linear-gradient(90deg, #c1272d, #f4a04a);"></div>
-          <div class="meta-row">
-            <span data-i18n="ga.meta1">159 counties</span>
-            <span data-i18n="ga.meta2">HB 1105 · 2024</span>
+        <a class="chooser-card chooser-card--state" href="./ga/" aria-label="Open Georgia dashboard">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+              <path d="M 42.25,2.36 L 8.35,2.25 L 15.10,46.39 L 15.50,47.12 L 16.30,49.12 L 17.05,52.18 L 18.14,53.42 L 18.75,55.11 L 18.53,56.76 L 18.10,57.30 L 20.13,58.84 L 19.45,59.76 L 18.25,60.44 L 17.17,61.46 L 17.37,62.47 L 16.98,64.96 L 15.65,67.60 L 16.03,69.82 L 15.91,70.60 L 17.09,72.16 L 17.09,73.18 L 17.37,73.73 L 16.83,75.31 L 16.92,76.07 L 16.44,77.49 L 16.47,78.90 L 16.14,79.65 L 16.14,81.15 L 17.41,82.78 L 17.83,83.92 L 17.98,85.01 L 17.92,85.50 L 18.31,86.34 L 19.16,87.55 L 19.18,88.48 L 19.46,89.77 L 20.41,91.03 L 63.54,93.47 L 67.87,93.82 L 67.69,94.72 L 68.22,95.68 L 68.07,96.71 L 68.64,97.86 L 70.17,98.00 L 71.14,97.79 L 71.11,97.10 L 71.34,96.18 L 71.50,92.98 L 70.87,91.87 L 71.14,89.89 L 72.71,88.27 L 73.44,88.39 L 74.06,88.96 L 75.14,88.99 L 75.95,89.31 L 76.52,89.80 L 77.67,89.88 L 78.30,90.18 L 79.59,90.44 L 80.57,90.27 L 81.70,90.51 L 81.39,89.27 L 82.30,86.38 L 82.20,84.94 L 81.97,84.13 L 82.28,82.96 L 82.24,81.87 L 82.84,81.62 L 83.93,80.15 L 84.31,79.35 L 84.66,78.10 L 84.31,77.13 L 84.65,76.01 L 86.04,73.64 L 86.09,72.83 L 86.75,71.41 L 86.60,69.82 L 86.75,69.35 L 87.67,68.52 L 88.98,66.50 L 90.50,64.65 L 91.58,63.69 L 91.65,62.94 L 90.90,62.75 L 89.86,62.30 L 88.71,61.43 L 88.17,61.79 L 86.82,61.23 L 86.68,59.91 L 86.04,58.67 L 86.47,57.86 L 86.35,56.65 L 85.21,55.08 L 85.18,53.97 L 83.73,52.37 L 82.77,52.04 L 81.55,51.15 L 81.58,50.16 L 81.20,48.39 L 81.01,46.48 L 79.57,44.18 L 79.49,42.70 L 77.71,41.30 L 76.71,40.94 L 75.00,39.98 L 74.83,38.90 L 73.36,38.14 L 73.34,36.85 L 71.81,36.06 L 72.00,34.66 L 71.87,33.58 L 70.74,32.95 L 70.06,31.92 L 68.69,30.89 L 67.72,30.60 L 67.04,29.64 L 66.33,28.13 L 64.82,26.31 L 62.95,25.36 L 61.51,23.94 L 60.75,23.77 L 60.12,22.46 L 59.22,20.98 L 57.95,19.61 L 57.41,17.61 L 56.03,15.26 L 55.13,12.93 L 54.24,12.73 L 53.05,12.94 L 52.13,12.52 L 51.28,11.73 L 50.28,10.57 L 49.13,10.13 L 47.11,8.65 L 46.85,7.68 L 47.41,7.04 L 47.34,6.41 L 48.55,5.08 L 50.45,3.58 L 50.98,2.00 L 42.25,2.36 Z" />
+            </svg>
           </div>
           <h2 data-i18n="ga.h2">Georgia</h2>
-          <p class="summary" data-i18n="ga.summary">Adds an ALPR / Flock surveillance mesh layer and documented ICE queries on top of HB 1105's statewide cooperation mandate, 287(g) participation, and metro Atlanta enforcement infrastructure.</p>
+          <p class="card-sub" data-i18n="ga.sub">159 counties · HB 1105</p>
           <span class="cta">
-            <span data-i18n="ga.cta">Open Georgia dashboard</span>
+            <span data-i18n="ga.cta">Open dashboard</span>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
           </span>
         </a>
 
-        <a class="chooser-card" href="./ms/" aria-label="Open Mississippi dashboard">
-          <div class="accent" style="background: linear-gradient(90deg, #a5232a, #d97844);"></div>
-          <div class="meta-row">
-            <span data-i18n="ms.meta1">82 counties</span>
-            <span data-i18n="ms.meta2">HB 538 · 2026</span>
+        <a class="chooser-card chooser-card--state" href="./ms/" aria-label="Open Mississippi dashboard">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+              <path d="M 51.69,2.38 L 43.28,2.37 L 44.34,3.53 L 44.25,4.13 L 43.21,4.84 L 41.76,5.56 L 40.74,5.57 L 40.58,6.48 L 40.06,6.96 L 39.39,8.20 L 39.32,8.97 L 38.71,9.92 L 39.33,10.87 L 39.00,11.73 L 38.76,13.04 L 38.90,13.91 L 37.81,14.53 L 37.49,15.48 L 36.36,14.91 L 35.76,15.33 L 35.96,16.40 L 34.97,16.59 L 34.52,17.45 L 33.62,17.68 L 33.81,18.47 L 33.61,18.94 L 32.89,19.18 L 32.75,19.96 L 33.49,20.26 L 33.93,20.71 L 33.63,21.60 L 32.80,21.77 L 32.18,22.13 L 31.76,22.58 L 31.04,22.42 L 30.37,22.89 L 31.24,23.24 L 31.40,23.95 L 30.81,24.55 L 30.95,25.62 L 31.40,25.98 L 31.37,26.82 L 30.40,26.56 L 29.97,26.59 L 29.43,27.14 L 30.56,27.80 L 30.12,28.86 L 28.84,29.04 L 29.62,29.84 L 28.65,30.53 L 28.20,31.45 L 29.31,33.49 L 29.87,34.18 L 29.39,35.05 L 29.66,36.42 L 30.31,36.55 L 30.60,37.36 L 29.99,39.37 L 29.18,39.30 L 28.71,40.03 L 29.71,40.90 L 28.94,41.90 L 30.50,43.23 L 30.52,44.21 L 29.39,44.99 L 28.98,45.71 L 29.04,46.43 L 29.78,47.16 L 30.73,47.45 L 30.02,48.24 L 30.33,49.93 L 30.84,50.47 L 31.47,51.61 L 30.64,51.69 L 30.76,53.16 L 32.22,53.44 L 31.86,54.88 L 32.97,55.08 L 32.51,56.25 L 31.77,57.61 L 29.79,57.72 L 31.02,59.86 L 30.26,60.87 L 30.23,61.40 L 29.60,62.12 L 28.59,62.38 L 28.52,63.44 L 26.65,65.14 L 25.71,64.95 L 25.47,65.81 L 26.15,66.89 L 25.09,67.14 L 24.82,68.89 L 23.66,69.35 L 23.76,70.00 L 24.09,70.83 L 23.21,71.06 L 22.73,71.77 L 22.83,72.95 L 22.45,73.91 L 22.37,74.94 L 22.83,75.87 L 21.88,76.46 L 20.90,76.33 L 20.50,76.99 L 21.42,77.81 L 20.87,78.93 L 21.89,80.68 L 20.57,81.66 L 35.60,81.77 L 53.24,81.70 L 52.87,83.48 L 51.41,87.18 L 51.67,88.83 L 52.19,90.66 L 53.56,92.13 L 54.16,93.38 L 54.93,95.48 L 55.40,97.29 L 56.84,98.00 L 57.68,97.78 L 58.17,97.51 L 58.55,96.70 L 59.92,95.74 L 62.64,94.96 L 64.42,94.21 L 66.34,93.74 L 67.67,93.67 L 68.97,94.30 L 70.21,94.54 L 71.01,94.61 L 71.64,94.24 L 72.52,94.38 L 73.06,94.83 L 74.08,94.64 L 74.96,95.02 L 75.39,94.46 L 76.02,94.56 L 76.27,94.02 L 74.53,65.79 L 74.48,62.96 L 79.50,4.02 L 78.56,3.44 L 77.78,2.00 L 51.69,2.38 Z" />
+            </svg>
           </div>
           <h2 data-i18n="ms.h2">Mississippi</h2>
-          <p class="summary" data-i18n="ms.summary">Layers the August 2019 Morton, Canton, Carthage, Sebastopol, Pelahatchie, and Bay Springs poultry-plant raid footprint (680 arrests, 7 plants) with 287(g), CoreCivic detention proximity, meatpacking density, and HB 538.</p>
+          <p class="card-sub" data-i18n="ms.sub">82 counties · HB 538</p>
           <span class="cta">
-            <span data-i18n="ms.cta">Open Mississippi dashboard</span>
+            <span data-i18n="ms.cta">Open dashboard</span>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
           </span>
         </a>
 
-        <a class="chooser-card" href="./ga-ep/" aria-label="Open Georgia Election Protection training plan">
-          <div class="accent" style="background: linear-gradient(90deg, #1d3557, #6b8caf);"></div>
-          <div class="meta-row">
-            <span data-i18n="ep.meta1">GA training plan</span>
-            <span data-i18n="ep.meta2">5 roles · 7 regions</span>
+        <a class="chooser-card chooser-card--plan" href="./ga-ep/" aria-label="Open Georgia Election Protection training plan">
+          <div class="card-icon card-icon--emoji" aria-hidden="true">
+            <span class="emoji">🗳️</span>
           </div>
-          <h2 data-i18n="ep.h2">GA Election Protection</h2>
-          <p class="summary" data-i18n="ep.summary">A proposed training and rapid-response infrastructure plan for Georgia, designed to offset ICE at the polls: five volunteer roles, a 90-minute curriculum, an Airtable intake spec, a RED/YELLOW/GREEN escalation rubric, and a seven-region response map.</p>
+          <h2 data-i18n="ep.h2">Election Protection</h2>
+          <p class="card-sub" data-i18n="ep.sub">GA training plan · 5 roles · 7 regions</p>
           <span class="cta">
             <span data-i18n="ep.cta">Open the EP plan</span>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
@@ -122,20 +120,14 @@
         eyebrow: "Pick a state",
         h1: "County-level immigration enforcement risk, mapped state by state.",
         lede: "Independent dashboards built for activists and organizations who believe we should #AbolishICE. Each dashboard layers 287(g) cooperation, local enforcement infrastructure, and demographic concentration with that state's specific anti-sanctuary mandate, raid history, and detention footprint.",
-        "ga.meta1": "159 counties",
-        "ga.meta2": "HB 1105 · 2024",
         "ga.h2": "Georgia",
-        "ga.summary": "Adds an ALPR / Flock surveillance mesh layer and documented ICE queries on top of HB 1105's statewide cooperation mandate, 287(g) participation, and metro Atlanta enforcement infrastructure.",
-        "ga.cta": "Open Georgia dashboard",
-        "ms.meta1": "82 counties",
-        "ms.meta2": "HB 538 · 2026",
+        "ga.sub": "159 counties · HB 1105",
+        "ga.cta": "Open dashboard",
         "ms.h2": "Mississippi",
-        "ms.summary": "Layers the August 2019 Morton, Canton, Carthage, Sebastopol, Pelahatchie, and Bay Springs poultry-plant raid footprint (680 arrests, 7 plants) with 287(g), CoreCivic detention proximity, meatpacking density, and HB 538.",
-        "ms.cta": "Open Mississippi dashboard",
-        "ep.meta1": "GA training plan",
-        "ep.meta2": "5 roles · 7 regions",
-        "ep.h2": "GA Election Protection",
-        "ep.summary": "A proposed training and rapid-response infrastructure plan for Georgia, designed to offset ICE at the polls: five volunteer roles, a 90-minute curriculum, an Airtable intake spec, a RED/YELLOW/GREEN escalation rubric, and a seven-region response map.",
+        "ms.sub": "82 counties · HB 538",
+        "ms.cta": "Open dashboard",
+        "ep.h2": "Election Protection",
+        "ep.sub": "GA training plan · 5 roles · 7 regions",
         "ep.cta": "Open the EP plan",
         footer: "Independent analysis by Rosario Palacios. All data is read-only and sourced from public records: ICE 287(g) program list, U.S. Census ACS 5-year, state legislative trackers, CoreCivic disclosures, TRAC, Prison Policy Initiative, Mississippi Today, Mississippi Free Press, BBC, Associated Press, and Georgia Recorder. No personally identifying information is collected.",
       },
@@ -145,20 +137,14 @@
         eyebrow: "Elige un estado",
         h1: "Riesgo de aplicación migratoria a nivel de condado, mapeado estado por estado.",
         lede: "Tableros independientes hechos para activistas y organizaciones que creemos que debemos #AbolirICE. Cada tablero combina la cooperación 287(g), la infraestructura local de aplicación y la concentración demográfica con el mandato anti-santuario, el historial de redadas y la huella de detención de cada estado.",
-        "ga.meta1": "159 condados",
-        "ga.meta2": "HB 1105 · 2024",
         "ga.h2": "Georgia",
-        "ga.summary": "Agrega una capa de malla de vigilancia ALPR / Flock y consultas documentadas de ICE sobre el mandato estatal de cooperación de HB 1105, la participación en 287(g) y la infraestructura de aplicación del área metropolitana de Atlanta.",
-        "ga.cta": "Abrir tablero de Georgia",
-        "ms.meta1": "82 condados",
-        "ms.meta2": "HB 538 · 2026",
+        "ga.sub": "159 condados · HB 1105",
+        "ga.cta": "Abrir tablero",
         "ms.h2": "Mississippi",
-        "ms.summary": "Combina la huella de las redadas de agosto de 2019 en las plantas avícolas de Morton, Canton, Carthage, Sebastopol, Pelahatchie y Bay Springs (680 arrestos, 7 plantas) con 287(g), cercanía a detención de CoreCivic, densidad de procesamiento de carne y HB 538.",
-        "ms.cta": "Abrir tablero de Mississippi",
-        "ep.meta1": "Plan de capacitación GA",
-        "ep.meta2": "5 roles · 7 regiones",
-        "ep.h2": "Protección al Voto en GA",
-        "ep.summary": "Un plan propuesto de capacitación e infraestructura de respuesta rápida para Georgia, diseñado para contrarrestar a ICE en los lugares de votación: cinco roles voluntarios, un currículo de 90 minutos, una especificación de admisión Airtable, una rúbrica ROJO/AMARILLO/VERDE y un mapa de respuesta en siete regiones.",
+        "ms.sub": "82 condados · HB 538",
+        "ms.cta": "Abrir tablero",
+        "ep.h2": "Protección al Voto",
+        "ep.sub": "Plan de capacitación GA · 5 roles · 7 regiones",
         "ep.cta": "Abrir el plan EP",
         footer: "Análisis independiente de Rosario Palacios. Todos los datos son de solo lectura y provienen de registros públicos: lista del programa 287(g) de ICE, Censo de EE. UU. ACS de 5 años, rastreadores legislativos estatales, divulgaciones de CoreCivic, TRAC, Prison Policy Initiative, Mississippi Today, Mississippi Free Press, BBC, Associated Press y Georgia Recorder. No se recopila información de identificación personal.",
       },
@@ -168,20 +154,14 @@
         eyebrow: "Chọn một bang",
         h1: "Rủi ro thực thi nhập cư cấp quận, được lập bản đồ theo từng bang.",
         lede: "Các bảng độc lập được xây dựng cho các nhà hoạt động và tổ chức tin rằng chúng ta nên #XóaBỏICE. Mỗi bảng kết hợp sự hợp tác 287(g), cơ sở hạ tầng thực thi địa phương và mật độ dân số với chỉ thị chống nơi trú ẩn, lịch sử truy quét và dấu chân giam giữ riêng của từng bang.",
-        "ga.meta1": "159 quận",
-        "ga.meta2": "HB 1105 · 2024",
         "ga.h2": "Georgia",
-        "ga.summary": "Thêm lớp mạng giám sát ALPR / Flock và các truy vấn ICE được ghi nhận trên đầu của lệnh hợp tác cấp bang HB 1105, tham gia 287(g) và cơ sở hạ tầng thực thi của khu vực Atlanta.",
-        "ga.cta": "Mở bảng Georgia",
-        "ms.meta1": "82 quận",
-        "ms.meta2": "HB 538 · 2026",
+        "ga.sub": "159 quận · HB 1105",
+        "ga.cta": "Mở bảng",
         "ms.h2": "Mississippi",
-        "ms.summary": "Kết hợp dấu chân truy quét tháng 8/2019 tại các nhà máy gia cầm Morton, Canton, Carthage, Sebastopol, Pelahatchie và Bay Springs (680 vụ bắt giữ, 7 nhà máy) với 287(g), gần cơ sở giam giữ CoreCivic, mật độ chế biến thịt và HB 538.",
-        "ms.cta": "Mở bảng Mississippi",
-        "ep.meta1": "Kế hoạch đào tạo GA",
-        "ep.meta2": "5 vai trò · 7 khu vực",
-        "ep.h2": "Bảo vệ Bầu cử GA",
-        "ep.summary": "Kế hoạch đào tạo và hạ tầng phản ứng nhanh được đề xuất cho Georgia, nhằm bù đắp sự hiện diện của ICE tại điểm bỏ phiếu: năm vai trò tình nguyện, chương trình 90 phút, đặc tả tiếp nhận Airtable, bộ tiêu chí leo thang ĐỎ/VÀNG/XANH và bản đồ phản ứng bảy khu vực.",
+        "ms.sub": "82 quận · HB 538",
+        "ms.cta": "Mở bảng",
+        "ep.h2": "Bảo vệ Bầu cử",
+        "ep.sub": "Kế hoạch đào tạo GA · 5 vai trò · 7 khu vực",
         "ep.cta": "Mở kế hoạch EP",
         footer: "Phân tích độc lập của Rosario Palacios. Tất cả dữ liệu chỉ đọc và lấy từ hồ sơ công khai: danh sách chương trình 287(g) của ICE, Điều tra Dân số ACS 5 năm, các bộ theo dõi lập pháp cấp bang, thông tin của CoreCivic, TRAC, Prison Policy Initiative, Mississippi Today, Mississippi Free Press, BBC, Associated Press và Georgia Recorder. Không thu thập thông tin nhận dạng cá nhân.",
       },
